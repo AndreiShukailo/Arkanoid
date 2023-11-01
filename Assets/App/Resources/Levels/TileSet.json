@@ -1,0 +1,25 @@
+{ "columns":0,
+ "grid":
+    {
+     "height":1,
+     "orientation":"orthogonal",
+     "width":1
+    },
+ "margin":0,
+ "name":"TileSet",
+ "spacing":0,
+ "tilecount":1,
+ "tiledversion":"1.10.2",
+ "tileheight":50,
+ "tiles":[
+        {
+         "id":0,
+         "image":"..\/..\/Media\/Sprites\/Game\/greenBlock.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"GreenBlock"
+        }],
+ "tilewidth":104,
+ "type":"tileset",
+ "version":"1.10"
+}

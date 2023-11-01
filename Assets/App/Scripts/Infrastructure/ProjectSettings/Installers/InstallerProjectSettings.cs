@@ -7,11 +7,11 @@ namespace App.Scripts.Infrastructure.ProjectSettings.Installers
 {
     public class InstallerProjectSettings : MonoInstaller
     {
-        [SerializeField] private ConfigProjectSettings configProjectSettings;
+        [SerializeField] private ConfigProjectSettings _configProjectSettings;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            var controller = new ControllerSetupProjectSettings(configProjectSettings);
+            var controller = new ControllerSetupProjectSettings(_configProjectSettings);
 
             serviceContainer.SetService<IInitializable, ControllerSetupProjectSettings>(controller);
         }

@@ -6,10 +6,6 @@ namespace App.Scripts.Libs.Systems
     {
         private readonly List<ISystem> _systems = new();
 
-        public SystemsGroup()
-        {
-        }
-
         public SystemsGroup(IEnumerable<ISystem> systems)
         {
             AddSystems(systems);

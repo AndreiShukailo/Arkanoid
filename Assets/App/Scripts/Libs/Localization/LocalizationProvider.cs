@@ -1,6 +1,6 @@
 namespace App.Scripts.Libs.Localization
 {
-    class LocalizationProvider : ILocalizationProvider
+    public class LocalizationProvider : ILocalizationProvider
     {
         private readonly LocalizationData _localizationData;
         private readonly string _language;

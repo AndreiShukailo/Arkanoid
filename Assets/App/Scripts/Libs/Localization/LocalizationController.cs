@@ -4,28 +4,28 @@ namespace App.Scripts.Libs.Localization
 {
     public class LocalizationController
     {
+        public LocalizationProvider LocalizationProvider { get; private set; }
+
         private readonly ILocalizationParser _localizationParser;
-        private readonly LocalizationConfig _localizationConfig;
-        
+
         private LocalizationData _localizationData;
         public Action<ILocalizationProvider> OnUpdateLanguage;
 
         public LocalizationController(ILocalizationParser localizationParser, LocalizationConfig localizationConfig)
         {
             _localizationParser = localizationParser;
-            _localizationConfig = localizationConfig;
-            CreateLocalizationData();
+            CreateLocalizationData(localizationConfig.LocalizationFilePath);
         }
 
-        private void CreateLocalizationData()
+        private void CreateLocalizationData(string path)
         {
-            _localizationData = _localizationParser.CreateLocalizationData(_localizationConfig.LocalizationFilePath);
+            _localizationData = _localizationParser.CreateLocalizationData(path);
         }
 
         public void UpdateLocalization(string language)
         {
-            var localizationProvider = new LocalizationProvider(_localizationData, language);
-            OnUpdateLanguage?.Invoke(localizationProvider);
+            LocalizationProvider = new LocalizationProvider(_localizationData, language);
+            OnUpdateLanguage?.Invoke(LocalizationProvider);
         }
     }
 }
