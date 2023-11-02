@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: LevelFieldConfig
   m_EditorClassIdentifier: 
   TopPaddingInPercent: 10
-  SidePadding: 10
-  BlockSpacing: 2
+  SidePaddingInPercent: 0.87
+  BlockSpacing: 0.02
+  BlockHeight: 0.5

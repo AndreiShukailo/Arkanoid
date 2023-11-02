@@ -9,7 +9,7 @@
             _tiledMapProvider = tiledMapProvider;
         }
 
-        public int[][] CreateLevelGrid(string levelPath)
+        public LevelInfo CreateLevelGrid(string levelPath)
         {
             var tiledMap = _tiledMapProvider.CreateTiledMap(levelPath);
             var tiledLayer = tiledMap.layers[0];
@@ -19,20 +19,15 @@
             
             for (int i = 0; i < levelGrid.Length; i++)
             {
-                levelGrid[i] = new int[tiledLayer.width - 1];
-                for (int j = 0; j < tiledLayer.width - 1; j++)
+                levelGrid[i] = new int[tiledLayer.width];
+                for (int j = 0; j < tiledLayer.width; j++)
                 {
-                    int index = i * (tiledLayer.width - 1) + j;
+                    int index = i * (tiledLayer.width) + j;
                     levelGrid[i][j] = levelData[index];
                 }
             }
 
-            return levelGrid;
+            return new LevelInfo(levelGrid, tiledLayer.width);
         }
-    }
-
-    public interface ILevelParser
-    {
-        public int[][] CreateLevelGrid(string levelPath);
     }
 }
