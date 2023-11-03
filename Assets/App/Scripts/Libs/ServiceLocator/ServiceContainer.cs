@@ -6,13 +6,30 @@ namespace App.Scripts.Libs.ServiceLocator
 {
     public class ServiceContainer
     {
-        private readonly Dictionary<Type, IServiceContainer> _containers = new();
+        private readonly Dictionary<Type, IServiceContainer> _containers;
+        private readonly Dictionary<Type, IServiceContainer> _parent;
+
+        public ServiceContainer()
+        {
+            _containers = new Dictionary<Type, IServiceContainer>();
+        }
+
+        public ServiceContainer(ServiceContainer serviceContainer)
+        {
+            _containers = new Dictionary<Type, IServiceContainer>();
+            _parent = serviceContainer.GetContainers();
+        }
+
+        private Dictionary<Type, IServiceContainer> GetContainers()
+        {
+            return _containers;
+        }
 
         public void SetServiceSelf<TService>(TService value)
         {
             SetService<TService, TService>(value);
         }
-        
+
         public void SetService<TBind, TService>(TService value) where TService : TBind
         {
             var container = FindContainer<TBind>();
@@ -37,6 +54,9 @@ namespace App.Scripts.Libs.ServiceLocator
         private Container<T> FindContainer<T>()
         {
             var typeBind = typeof(T);
+            if (_parent != null)
+                if (_parent.TryGetValue(typeBind, out var parentContainer))
+                    return parentContainer as Container<T>;
             if (_containers.TryGetValue(typeBind, out var container)) return container as Container<T>;
 
             var bindContainer = new Container<T>();
@@ -45,7 +65,7 @@ namespace App.Scripts.Libs.ServiceLocator
             return bindContainer;
         }
 
-        private interface IServiceContainer
+        public interface IServiceContainer
         {
         }
 
