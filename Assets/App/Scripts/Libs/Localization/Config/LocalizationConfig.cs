@@ -5,6 +5,6 @@ namespace App.Scripts.Libs.Localization
     [Serializable]
     public class LocalizationConfig
     {
-        public string LocalizationFilePath = "Localization/ArkanoidLocalization";
+        public string LocalizationFilePath = "Localization/Languages";
     }
 }

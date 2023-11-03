@@ -5,27 +5,25 @@ using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
 using App.Scripts.Libs.AssetProvider;
 using App.Scripts.Libs.Installer;
+using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
-using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.Game.Block;
 using App.Scripts.Scenes.Game.Block.View;
 using App.Scripts.Scenes.Game.Level.Level;
 using App.Scripts.Scenes.Game.Level.LevelField.Config;
 using App.Scripts.Scenes.Game.Level.LevelField.Field;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace App.Scripts.Scenes.Game.Installers
 {
     public class GameEntryPointInstaller : MonoInstaller
     {
-        [SerializeField] private Button _button;
-        
         [SerializeField] private BlockView _blockView;
         [SerializeField] private Camera _camera;
         [SerializeField] private LevelFieldConfig _levelFieldConfig;
+        [SerializeField] private LocalizationTextContainer _localizationTextContainer;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -34,9 +32,8 @@ namespace App.Scripts.Scenes.Game.Installers
 
             serviceContainer.SetService<IInitializable, ControllerEntryPoint<StateSetupScene>>(controllerEntryPoint);
             serviceContainer.SetService<IUpdatable, ControllerEntryPoint<StateSetupScene>>(controllerEntryPoint);
-
-            var sceneLoaderController = serviceContainer.Get<SceneLoaderController>();
-            _button.onClick.AddListener(() => sceneLoaderController.ProcessLoadScene(sceneLoaderController.ScenesConfig.StartScene).Forget());
+            
+            _localizationTextContainer.Register(serviceContainer.Get<LocalizationController>());
         }
 
         private GameStateMachine BuildStateMachine(ServiceContainer serviceContainer)

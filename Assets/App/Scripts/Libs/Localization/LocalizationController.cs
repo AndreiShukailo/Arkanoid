@@ -4,28 +4,24 @@ namespace App.Scripts.Libs.Localization
 {
     public class LocalizationController
     {
-        public LocalizationProvider LocalizationProvider { get; private set; }
+        public KeyLanguageData CurrentLanguage { get; private set; }
+        public readonly LanguagesInfo LanguagesInfo;
+        private readonly LocalizationContainer _localizationContainer;
 
-        private readonly ILocalizationParser _localizationParser;
+        public Action OnUpdateLanguage;
 
-        private LocalizationData _localizationData;
-        public Action<ILocalizationProvider> OnUpdateLanguage;
-
-        public LocalizationController(ILocalizationParser localizationParser, LocalizationConfig localizationConfig)
+        public LocalizationController(IKeyLanguageProvider keyLanguageProvider,
+            ILanguageInfoProvider languageInfoProvider)
         {
-            _localizationParser = localizationParser;
-            CreateLocalizationData(localizationConfig.LocalizationFilePath);
+            LanguagesInfo = languageInfoProvider.GetLanguageInfo();
+            _localizationContainer = new LocalizationContainer(keyLanguageProvider);
+            UpdateLocalization(LanguagesInfo.Languages[1]);
         }
-
-        private void CreateLocalizationData(string path)
+        
+        public void UpdateLocalization(string languageName)
         {
-            _localizationData = _localizationParser.CreateLocalizationData(path);
-        }
-
-        public void UpdateLocalization(string language)
-        {
-            LocalizationProvider = new LocalizationProvider(_localizationData, language);
-            OnUpdateLanguage?.Invoke(LocalizationProvider);
+            CurrentLanguage = _localizationContainer.GetKeyLanguageData(languageName);
+            OnUpdateLanguage?.Invoke();
         }
     }
 }

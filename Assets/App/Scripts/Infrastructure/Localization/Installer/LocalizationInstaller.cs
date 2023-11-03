@@ -12,14 +12,16 @@ namespace App.Scripts.Infrastructure.Localization.Installer
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            serviceContainer.SetServiceSelf(CreateLocalizationController());
+            var textDataProvider = new TextDataProvider();
+            serviceContainer.SetServiceSelf(textDataProvider);
+            serviceContainer.SetServiceSelf(CreateLocalizationController(textDataProvider));
         }
 
-        private LocalizationController CreateLocalizationController()
+        private LocalizationController CreateLocalizationController(TextDataProvider textDataProvider)
         {
-            var textDataProvider = new TextDataProvider();
-            var localizationParser = new LocalizationParser(textDataProvider);
-            return new LocalizationController(localizationParser, _localizationConfig);
+            var keyLanguageDataProvider = new KeyLanguageProvider(textDataProvider,_localizationConfig);
+            var languageInfoProvider = new LanguagesInfoProvider(textDataProvider, _localizationConfig);
+            return new LocalizationController(keyLanguageDataProvider, languageInfoProvider);
         }
     }
 }
