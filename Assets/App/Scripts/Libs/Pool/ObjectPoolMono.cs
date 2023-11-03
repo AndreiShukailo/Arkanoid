@@ -9,6 +9,10 @@ namespace App.Scripts.Libs.Pool
         {
         }
 
+        public ObjectPoolMono(Func<T> spawner) : base(spawner)
+        {
+        }
+
         protected override void OnItemCreated(T item)
         {
             base.OnItemCreated(item);

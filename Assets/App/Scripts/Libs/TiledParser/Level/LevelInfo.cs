@@ -1,4 +1,4 @@
-namespace App.Scripts.Libs.TiledParser
+namespace App.Scripts.Libs.TiledParser.Level
 {
     public class LevelInfo
     {

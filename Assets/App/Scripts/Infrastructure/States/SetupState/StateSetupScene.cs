@@ -3,17 +3,17 @@ using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.TaskExtensions;
 
-namespace App.Scripts.Infrastructure.GameCore.States.SetupState
+namespace App.Scripts.Infrastructure.States.SetupState
 {
     public class StateSetupScene : GameState
     {
         private readonly IHandlerSetupScene _handlerSetup;
-        private readonly SceneLoader _sceneLoader;
+        private readonly SceneLoaderController _sceneLoaderController;
 
-        public StateSetupScene(IHandlerSetupScene handlerSetupScenes, SceneLoader sceneLoader)
+        public StateSetupScene(IHandlerSetupScene handlerSetupScenes, SceneLoaderController sceneLoaderController)
         {
             _handlerSetup = handlerSetupScenes;
-            _sceneLoader = sceneLoader;
+            _sceneLoaderController = sceneLoaderController;
         }
 
         public override void OnEnterState()
@@ -24,7 +24,7 @@ namespace App.Scripts.Infrastructure.GameCore.States.SetupState
         private async Task ProcessSetupLevel()
         {
             await _handlerSetup.Process();
-            await _sceneLoader.ProcessOpenCurrentScene();
+            await _sceneLoaderController.ProcessOpenCurrentScene();
 
             StateMachine.ChangeState<StateProcessGame>();
         }

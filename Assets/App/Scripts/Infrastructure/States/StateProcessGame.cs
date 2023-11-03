@@ -2,7 +2,7 @@ using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using UnityEngine;
 
-namespace App.Scripts.Infrastructure.GameCore.States
+namespace App.Scripts.Infrastructure.States
 {
     public class StateProcessGame : GameState
     {

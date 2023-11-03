@@ -16,6 +16,11 @@ namespace App.Scripts.Libs.Pool
             _spawner = spawner;
             Resize(initSize);
         }
+        
+        protected ObjectPool(Func<T> spawner)
+        {
+            _spawner = spawner;
+        }
 
         public void Resize(int itemCount)
         {

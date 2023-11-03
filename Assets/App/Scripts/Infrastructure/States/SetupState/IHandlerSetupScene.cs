@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace App.Scripts.Infrastructure.GameCore.States.SetupState
+namespace App.Scripts.Infrastructure.States.SetupState
 {
     public interface IHandlerSetupScene
     {

@@ -1,4 +1,6 @@
-﻿namespace App.Scripts.Libs.TiledParser.TileSetProvider
+﻿using App.Scripts.Libs.TiledParser.Data;
+
+namespace App.Scripts.Libs.TiledParser.TileSet
 {
     public interface ITileSetProvider
     {

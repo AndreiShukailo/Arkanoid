@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace App.Scripts.Infrastructure.GameCore.States.SetupState
+namespace App.Scripts.Infrastructure.States.SetupState
 {
     public class HandlerSetupSceneContainer : IHandlerSetupScene
     {

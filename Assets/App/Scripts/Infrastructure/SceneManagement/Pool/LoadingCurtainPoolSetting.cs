@@ -1,8 +1,8 @@
 ﻿using System;
+using App.Scripts.Infrastructure.SceneManagement.View;
 using App.Scripts.Libs.Pool;
-using UnityEngine;
 
-namespace App.Scripts.Infrastructure.SceneManagement
+namespace App.Scripts.Infrastructure.SceneManagement.Pool
 {
     [Serializable]
     public class LoadingCurtainPoolSetting : PoolSetting<LoadingCurtainView>

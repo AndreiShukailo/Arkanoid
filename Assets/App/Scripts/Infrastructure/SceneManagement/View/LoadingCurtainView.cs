@@ -3,7 +3,7 @@ using App.Scripts.Libs.Pool;
 using DG.Tweening;
 using UnityEngine;
 
-namespace App.Scripts.Infrastructure.SceneManagement
+namespace App.Scripts.Infrastructure.SceneManagement.View
 {
     public class LoadingCurtainView : SpawnableItemMono , ILoadingCurtain
     {
@@ -15,6 +15,7 @@ namespace App.Scripts.Infrastructure.SceneManagement
         public override void OnCreated(IObjectPool objectPool)
         {
             base.OnCreated(objectPool);
+            DontDestroyOnLoad(this);
             _canvas.worldCamera = Camera.main;
             _canvasGroup.alpha = 1f;
         }

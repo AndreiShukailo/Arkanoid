@@ -1,7 +1,7 @@
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.StateMachine;
 
-namespace App.Scripts.Infrastructure.GameCore.Controllers
+namespace App.Scripts.Infrastructure.EntryPoint
 {
     public class ControllerEntryPoint<T> : IInitializable, IUpdatable where T : GameState
     {

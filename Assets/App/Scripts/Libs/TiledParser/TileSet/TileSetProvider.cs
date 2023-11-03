@@ -1,7 +1,8 @@
 ﻿using App.Scripts.Libs.AssetProvider;
+using App.Scripts.Libs.TiledParser.Data;
 using UnityEngine;
 
-namespace App.Scripts.Libs.TiledParser.TileSetProvider
+namespace App.Scripts.Libs.TiledParser.TileSet
 {
     class TileSetProvider : ITileSetProvider
     {

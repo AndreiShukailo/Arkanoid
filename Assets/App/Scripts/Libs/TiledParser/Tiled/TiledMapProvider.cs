@@ -1,7 +1,8 @@
 ﻿using App.Scripts.Libs.AssetProvider;
+using App.Scripts.Libs.TiledParser.Data;
 using UnityEngine;
 
-namespace App.Scripts.Libs.TiledParser
+namespace App.Scripts.Libs.TiledParser.Tiled
 {
     public class TiledMapProvider : ITiledMapProvider
     {

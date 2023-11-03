@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Scripts.Libs.TiledParser
+namespace App.Scripts.Libs.TiledParser.Data
 {
     [Serializable]
     public class TiledLayer

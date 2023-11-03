@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace App.Scripts.Libs.TiledParser
+namespace App.Scripts.Libs.TiledParser.Data
 {
     [Serializable]
     public class TiledMap

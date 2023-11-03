@@ -1,4 +1,6 @@
-namespace App.Scripts.Libs.TiledParser
+using App.Scripts.Libs.TiledParser.Data;
+
+namespace App.Scripts.Libs.TiledParser.Tiled
 {
     public interface ITiledMapProvider
     {

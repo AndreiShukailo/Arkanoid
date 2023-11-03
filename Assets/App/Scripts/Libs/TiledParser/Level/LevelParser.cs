@@ -1,4 +1,6 @@
-﻿namespace App.Scripts.Libs.TiledParser
+﻿using App.Scripts.Libs.TiledParser.Tiled;
+
+namespace App.Scripts.Libs.TiledParser.Level
 {
     public class LevelParser : ILevelParser
     {
