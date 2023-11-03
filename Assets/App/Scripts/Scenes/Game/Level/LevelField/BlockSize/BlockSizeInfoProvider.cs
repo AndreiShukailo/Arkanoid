@@ -11,9 +11,9 @@
 
         public BlockSizeInfo CreateBlockSizeInfo(LevelFieldConfig levelFieldConfig, int columCount)
         {
-            var spacing = levelFieldConfig.BlockSpacing ;
-            var height = levelFieldConfig.BlockHeight;
+            var spacing = levelFieldConfig.BlockSpacing;
             var width = (_fieldInfo.FieldRect.width - (columCount + 1) * spacing) / columCount;
+            var height = width * levelFieldConfig.BlockAspect;
 
             return new BlockSizeInfo(width, height, spacing);
         }

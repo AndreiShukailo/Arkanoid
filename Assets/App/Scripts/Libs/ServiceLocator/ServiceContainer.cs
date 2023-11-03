@@ -13,7 +13,6 @@ namespace App.Scripts.Libs.ServiceLocator
             SetService<TService, TService>(value);
         }
         
-        
         public void SetService<TBind, TService>(TService value) where TService : TBind
         {
             var container = FindContainer<TBind>();
