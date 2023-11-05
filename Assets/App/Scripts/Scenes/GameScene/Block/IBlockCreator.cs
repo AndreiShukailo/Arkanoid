@@ -1,7 +1,7 @@
-﻿using App.Scripts.Scenes.Game.Block.Model;
+﻿using App.Scripts.Scenes.GameScene.Block.Model;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Game.Block
+namespace App.Scripts.Scenes.GameScene.Block
 {
     public interface IBlockCreator
     {

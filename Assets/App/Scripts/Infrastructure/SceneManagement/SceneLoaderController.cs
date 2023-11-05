@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.SceneManagement.Config;
+using App.Scripts.Infrastructure.SceneManagement.Factory;
 using App.Scripts.Infrastructure.SceneManagement.View;
 using UnityEngine.SceneManagement;
 

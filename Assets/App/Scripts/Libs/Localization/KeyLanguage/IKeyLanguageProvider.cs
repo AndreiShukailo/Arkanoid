@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.Libs.Localization
+﻿namespace App.Scripts.Libs.Localization.KeyLanguage
 {
     public interface IKeyLanguageProvider
     {

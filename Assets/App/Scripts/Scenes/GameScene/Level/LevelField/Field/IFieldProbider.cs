@@ -1,6 +1,6 @@
-﻿using App.Scripts.Scenes.Game.Level.LevelField.Config;
+﻿using App.Scripts.Scenes.GameScene.Level.LevelField.Config;
 
-namespace App.Scripts.Scenes.Game.Level.LevelField.Field
+namespace App.Scripts.Scenes.GameScene.Level.LevelField.Field
 {
     public interface IFieldProvider
     {

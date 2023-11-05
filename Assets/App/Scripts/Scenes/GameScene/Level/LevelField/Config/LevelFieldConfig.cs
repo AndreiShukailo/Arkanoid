@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace App.Scripts.Scenes.Game.Level.LevelField.Config
+namespace App.Scripts.Scenes.GameScene.Level.LevelField.Config
 {
     [CreateAssetMenu(fileName = "LevelFieldConfig", menuName = "App/Level/Level Field Config")]
     public class LevelFieldConfig : ScriptableObject

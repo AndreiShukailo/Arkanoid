@@ -1,4 +1,6 @@
 ﻿using System;
+using App.Scripts.Libs.Localization.KeyLanguage;
+using App.Scripts.Libs.Localization.Language;
 
 namespace App.Scripts.Libs.Localization
 {

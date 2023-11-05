@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using App.Scripts.Libs.AssetProvider;
+using App.Scripts.Libs.Localization.Config;
 
-namespace App.Scripts.Libs.Localization
+namespace App.Scripts.Libs.Localization.KeyLanguage
 {
     public class KeyLanguageProvider : IKeyLanguageProvider
     {

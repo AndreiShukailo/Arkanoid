@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Scripts.Libs.Localization
+namespace App.Scripts.Libs.Localization.KeyLanguage
 {
     public class KeyLanguageData
     {

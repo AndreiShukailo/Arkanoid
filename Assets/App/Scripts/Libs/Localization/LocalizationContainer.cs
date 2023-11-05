@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using App.Scripts.Libs.Localization.KeyLanguage;
 
 namespace App.Scripts.Libs.Localization
 {

@@ -1,6 +1,6 @@
-﻿using App.Scripts.Scenes.Game.Level.Level.LevelGrid;
+﻿using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid;
 
-namespace App.Scripts.Scenes.Game.Level.Level
+namespace App.Scripts.Scenes.Game.Level
 {
     public class LevelModel
     {

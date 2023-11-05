@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Scripts.Libs.Localization
+namespace App.Scripts.Libs.Localization.Config
 {
     [Serializable]
     public class LocalizationConfig

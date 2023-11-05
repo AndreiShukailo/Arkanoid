@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace App.Scripts.Scenes.Game.Level.LevelField.Field
+namespace App.Scripts.Scenes.GameScene.Level.LevelField.Field
 {
     public class FieldInfo
     {

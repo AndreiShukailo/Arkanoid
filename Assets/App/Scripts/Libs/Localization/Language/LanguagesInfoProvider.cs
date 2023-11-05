@@ -1,6 +1,7 @@
 using App.Scripts.Libs.AssetProvider;
+using App.Scripts.Libs.Localization.Config;
 
-namespace App.Scripts.Libs.Localization
+namespace App.Scripts.Libs.Localization.Language
 {
     public class LanguagesInfoProvider : ILanguageInfoProvider
     {

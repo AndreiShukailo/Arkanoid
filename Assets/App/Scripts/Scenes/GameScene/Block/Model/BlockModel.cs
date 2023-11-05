@@ -1,6 +1,6 @@
-﻿using App.Scripts.Scenes.Game.Block.View;
+﻿using App.Scripts.Scenes.GameScene.Block.View;
 
-namespace App.Scripts.Scenes.Game.Block.Model
+namespace App.Scripts.Scenes.GameScene.Block.Model
 {
     public class BlockModel : IBlockModel
     {

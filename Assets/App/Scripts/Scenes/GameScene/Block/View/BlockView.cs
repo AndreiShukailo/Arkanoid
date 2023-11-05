@@ -1,7 +1,7 @@
 ﻿using App.Scripts.Libs.Pool;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Game.Block.View
+namespace App.Scripts.Scenes.GameScene.Block.View
 {
     public class BlockView : SpawnableItemMono
     {

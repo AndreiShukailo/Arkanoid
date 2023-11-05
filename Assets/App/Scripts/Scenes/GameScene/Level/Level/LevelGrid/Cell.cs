@@ -1,7 +1,7 @@
-﻿using App.Scripts.Scenes.Game.Block.Model;
+﻿using App.Scripts.Scenes.GameScene.Block.Model;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Game.Level.Level.LevelGrid
+namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid
 {
     public class Cell
     {

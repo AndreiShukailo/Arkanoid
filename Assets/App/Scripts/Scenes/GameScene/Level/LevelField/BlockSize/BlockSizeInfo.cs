@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.Scenes.Game.Level.LevelField.BlockSize
+﻿namespace App.Scripts.Scenes.GameScene.Level.LevelField.BlockSize
 {
     public class BlockSizeInfo
     {
