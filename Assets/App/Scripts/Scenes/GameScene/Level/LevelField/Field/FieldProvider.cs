@@ -14,16 +14,17 @@ namespace App.Scripts.Scenes.GameScene.Level.LevelField.Field
 
         public FieldInfo CreateField(LevelFieldConfig levelFieldConfig)
         {
-            var rect = GetCameraRect(levelFieldConfig);
+            var cameraRect = GetCameraRect(levelFieldConfig);
 
+            var fieldRect = cameraRect;
             var orthographicSize = _camera.orthographicSize;
             var topPadding = orthographicSize * 2 * levelFieldConfig.TopPaddingInPercent / 100f;
             var sidePadding = orthographicSize * 2 * _camera.aspect * levelFieldConfig.SidePaddingInPercent / 100f;
-            rect.yMax -= topPadding;
-            rect.xMin += sidePadding;
-            rect.xMax -= sidePadding;
+            fieldRect.yMax -= topPadding;
+            fieldRect.xMin += sidePadding;
+            fieldRect.xMax -= sidePadding;
             
-            return new FieldInfo(rect);
+            return new FieldInfo(fieldRect, cameraRect);
         }
 
         private Rect GetCameraRect(LevelFieldConfig levelFieldConfig)

@@ -1,15 +1,18 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.States.SetupState;
+using App.Scripts.Scenes.GameScene.Ball;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level
 {
     public class HandlerSetupLevel : IHandlerSetupScene
     {
         private readonly ILevelCreator _levelCreator;
+        private readonly IBallCreator _ballCreator;
 
-        public HandlerSetupLevel(ILevelCreator levelCreator)
+        public HandlerSetupLevel(ILevelCreator levelCreator, IBallCreator ballCreator)
         {
             _levelCreator = levelCreator;
+            _ballCreator = ballCreator;
         }
 
         public Task Process()
@@ -21,6 +24,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level
         private void SetupLevel()
         {
             var levelModel = _levelCreator.CreateLevel(1, 1);
+            var ball = _ballCreator.CreateBall();
         }
     }
 }

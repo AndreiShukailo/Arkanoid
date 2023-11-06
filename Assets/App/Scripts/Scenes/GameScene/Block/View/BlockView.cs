@@ -8,6 +8,7 @@ namespace App.Scripts.Scenes.GameScene.Block.View
         public string BlockKey => _blockKey;
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private BoxCollider2D _boxCollider2D;
         [SerializeField] private string _blockKey;
 
         public void Construct(Vector2 size, Vector2 positions)
@@ -24,6 +25,7 @@ namespace App.Scripts.Scenes.GameScene.Block.View
         private void Resize(Vector2 size)
         {
             _spriteRenderer.size = size;
+            _boxCollider2D.size = size;
         }
     }
 }
