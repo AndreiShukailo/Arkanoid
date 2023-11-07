@@ -1,6 +1,6 @@
-﻿using App.Scripts.Infrastructure.Component;
-using App.Scripts.Scenes.GameScene.Ball.Config;
+﻿using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Factory;
+using App.Scripts.Scenes.GameScene.Ball.Model;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Ball
@@ -16,9 +16,10 @@ namespace App.Scripts.Scenes.GameScene.Ball
             _ballFactory = ballFactory;
         }
 
-        public ComponentsContainer CreateBall()
+        public BallModel CreateBall()
         {
-            var spawnContext = new BallSpawnContext(_ballConfig.StartPosition, _ballConfig.Speed * Vector2.up);
+            var spawnContext = new BallSpawnContext(_ballConfig.StartPosition,
+                _ballConfig.StartSpeed, _ballConfig.MinBounceAngle);
             return _ballFactory.Create(spawnContext);
         }
     }

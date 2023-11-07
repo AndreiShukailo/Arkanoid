@@ -19,7 +19,7 @@ namespace App.Scripts.Scenes.GameScene.Block
             _tileSet = tileSetProvider.CreateTiledTileSet(tileSetConfig);
         }
 
-        public IBlockModel Create(int blockId, Vector2 position, Vector2 size)
+        public BlockModel Create(int blockId, Vector2 position, Vector2 size)
         {
             var type = GetBlockType(blockId);
             var factory = _blocksContainer.GetFactory(type);

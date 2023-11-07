@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7182307789365649028}
   - component: {fileID: 7182307789365649031}
   - component: {fileID: -7653239252707795520}
+  - component: {fileID: -8670872242713221387}
   - component: {fileID: 7182307789365649030}
   - component: {fileID: 4668046050492155933}
   m_Layer: 0
@@ -99,9 +100,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75bf6d28bac4fdba8bd3f379d91448e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 7182307789365649031}
   _rigidbody2D: {fileID: 4668046050492155933}
-  _collider: {fileID: 7182307789365649030}
+--- !u!114 &-8670872242713221387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182307789365649024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d0ff5690f2493f9f116cc3be37cca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballView: {fileID: -7653239252707795520}
 --- !u!58 &7182307789365649030
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,5 +149,5 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 8d8fd2f71dbb1fd4f94a8e4f24c9e4c3, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4

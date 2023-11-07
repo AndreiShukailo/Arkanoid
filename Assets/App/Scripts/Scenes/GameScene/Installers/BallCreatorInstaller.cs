@@ -3,7 +3,6 @@ using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Factory;
-using App.Scripts.Scenes.GameScene.Ball.Systems;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers
@@ -15,8 +14,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             var ballFactory =
-                new BallFactory(_ballConfig.PoolSetting, 
-                    serviceContainer.Get<CheckCameraBordersSystem>());
+                new BallFactory(_ballConfig.PoolSetting);
 
             var ballCreator = new BallCreator(_ballConfig, ballFactory);
             serviceContainer.SetService<IBallCreator, BallCreator>(ballCreator);

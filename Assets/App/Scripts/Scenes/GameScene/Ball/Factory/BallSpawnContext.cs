@@ -5,12 +5,14 @@ namespace App.Scripts.Scenes.GameScene.Ball.Factory
     public class BallSpawnContext
     {
         public Vector2 Position;
-        public Vector2 Velocity;
+        public float Speed;
+        public readonly float MinBounceAngle;
 
-        public BallSpawnContext(Vector2 position, Vector2 velocity)
+        public BallSpawnContext(Vector2 position, float velocity, float minBounceAngle)
         {
             Position = position;
-            Velocity = velocity;
+            Speed = velocity;
+            MinBounceAngle = minBounceAngle;
         }
     }
 }

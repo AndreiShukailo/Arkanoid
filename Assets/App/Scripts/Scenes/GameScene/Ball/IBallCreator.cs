@@ -1,9 +1,9 @@
-﻿using App.Scripts.Infrastructure.Component;
+﻿using App.Scripts.Scenes.GameScene.Ball.Model;
 
 namespace App.Scripts.Scenes.GameScene.Ball
 {
     public interface IBallCreator
     {
-        ComponentsContainer CreateBall();
+        BallModel CreateBall();
     }
 }

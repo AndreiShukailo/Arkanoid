@@ -133,8 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 130044713}
   - component: {fileID: 130044714}
+  - component: {fileID: 130044715}
   m_Layer: 0
-  m_Name: Collider
+  m_Name: CameraBorderView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,11 +171,26 @@ EdgeCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
-  m_Points: []
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_Points:
+  - {x: -3.91, y: -6.86}
+  - {x: -3.91, y: 6.89}
+  m_AdjacentStartPoint: {x: 0.14, y: 0}
+  m_AdjacentEndPoint: {x: -1.96, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &130044715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130044712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2d4505e3dc48418dad15deb4adc4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraCollider: {fileID: 130044714}
 --- !u!1 &377381559
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +223,74 @@ Transform:
   m_Father: {fileID: 1725470757}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &400822436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400822437}
+  - component: {fileID: 400822439}
+  - component: {fileID: 400822438}
+  m_Layer: 0
+  m_Name: CameraBorderView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400822437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400822436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &400822438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400822436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2d4505e3dc48418dad15deb4adc4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraCollider: {fileID: 400822439}
+--- !u!68 &400822439
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400822436}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 3.83, y: 6.84}
+  - {x: 3.85, y: -6.8}
+  m_AdjacentStartPoint: {x: 0.14, y: 0}
+  m_AdjacentEndPoint: {x: -1.96, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &406330345
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +407,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 130044713}
+  - {fileID: 1503600819}
+  - {fileID: 400822437}
   m_Father: {fileID: 406330346}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -518,6 +604,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1503600818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503600819}
+  - component: {fileID: 1503600821}
+  - component: {fileID: 1503600820}
+  m_Layer: 0
+  m_Name: CameraBorderView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503600819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503600818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503600820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503600818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2d4505e3dc48418dad15deb4adc4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraCollider: {fileID: 1503600821}
+--- !u!68 &1503600821
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503600818}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -3.83, y: 6.84}
+  - {x: 3.87, y: 6.83}
+  m_AdjacentStartPoint: {x: 0.14, y: 0}
+  m_AdjacentEndPoint: {x: -1.96, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1516792275
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,8 +717,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
-  _cameraCollider: {fileID: 130044714}
   _levelFieldConfig: {fileID: 11400000, guid: c268760258f8c1f4aadd2b8e5b5c61d3, type: 2}
+  _cameraBordersContainer:
+    CameraBordersViews:
+    - {fileID: 130044715}
+    - {fileID: 1503600820}
+    - {fileID: 400822438}
 --- !u!1 &1613001240
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballConfig:
-    Speed: 10
+    MinBounceAngle: 10
+    StartSpeed: 3
     StartPosition: {x: 0, y: 6}
     PoolSetting:
       SpawnableItemMono: {fileID: -7653239252707795520, guid: 1d2662a59cf2b7e47951ae15fca5d4b3, type: 3}

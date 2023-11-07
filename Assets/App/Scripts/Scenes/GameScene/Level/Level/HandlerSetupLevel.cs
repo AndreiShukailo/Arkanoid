@@ -25,6 +25,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level
         {
             var levelModel = _levelCreator.CreateLevel(1, 1);
             var ball = _ballCreator.CreateBall();
+            ball.Start();
         }
     }
 }
