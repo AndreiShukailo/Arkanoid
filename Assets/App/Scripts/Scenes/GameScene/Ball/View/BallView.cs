@@ -21,7 +21,7 @@ namespace App.Scripts.Scenes.GameScene.Ball.View
 
         public void SetSpeed(float speed)
         {
-            _rigidbody2D.velocity = speed * Vector2.right;
+            _rigidbody2D.velocity = speed * Vector2.down;
         }
 
         public void AddModel(ICollidedModel collidedModel)

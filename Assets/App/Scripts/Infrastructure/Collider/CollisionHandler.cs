@@ -25,13 +25,13 @@ namespace App.Scripts.Scenes.GameScene.Ball
             var minBounceAngle = _ballView.MinBounceAngle;
             var fallNormalVector = other.contacts[0].normal;
 
-            Debug.Log("Concut");
-            
             var angle = Mathf.Atan(velocity.y / velocity.x);
             Vector3 correctVector = velocity;
             
-            if (Mathf.Abs(angle) < minBounceAngle * Mathf.Deg2Rad)
+            if (Mathf.Abs(angle) < minBounceAngle * Mathf.Deg2Rad && angle != 0)
                 correctVector = GetCorrectVector(minBounceAngle, velocity);
+            else if(angle == 0)
+                correctVector = GetCorrectVector(-minBounceAngle, velocity);
             
             if (Mathf.Abs(angle) > 90 * Mathf.Deg2Rad - minBounceAngle * Mathf.Deg2Rad)
                 correctVector = GetCorrectVector(90f - minBounceAngle, velocity);

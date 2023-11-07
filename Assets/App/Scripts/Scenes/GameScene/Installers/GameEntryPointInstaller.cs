@@ -9,6 +9,7 @@ using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Level.Level;
+using App.Scripts.Scenes.GameScene.Platform;
 
 namespace App.Scripts.Scenes.GameScene.Installers
 {
@@ -49,7 +50,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             {
                 new HandlerSetupLevel(
                     serviceContainer.Get<ILevelCreator>(),
-                    serviceContainer.Get<IBallCreator>())
+                    serviceContainer.Get<IBallCreator>(),
+                    serviceContainer.Get<IPlatformCreator>())
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 

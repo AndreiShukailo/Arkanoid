@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers
 {
-    public class PlatformInstaller : MonoInstaller
+    public class PlatformCreatorInstaller : MonoInstaller
     {
         [SerializeField] private PlatformConfig _platformConfig;
         public override void InstallBindings(ServiceContainer serviceContainer)
