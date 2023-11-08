@@ -38,6 +38,8 @@ namespace App.Scripts.Scenes.GameScene.Level.LevelField.Field
             {
                 center = cameraPosition
             };
+
+            rect.yMax -= cameraHeight * levelFieldConfig.TopUIPaddingInPercent / 100f;
             return rect;
         }
     }
