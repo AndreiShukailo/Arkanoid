@@ -21,6 +21,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
         {
             var fieldInfo = new FieldProvider(_camera)
                 .CreateField(_levelFieldConfig);
+            serviceContainer.SetServiceSelf(fieldInfo);
 
             _cameraBordersContainer.Register(fieldInfo);
 

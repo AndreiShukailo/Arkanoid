@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d442feed754d0fbe4242eb660ba5aa, type: 3}
   m_Name: LevelFieldConfig
   m_EditorClassIdentifier: 
-  TopPaddingInPercent: 10
+  TopPaddingInPercent: 14.6
   SidePaddingInPercent: 0.87
   BlockSpacing: 0.02
-  BlockHeight: 0.5
+  BlockAspect: 0.48

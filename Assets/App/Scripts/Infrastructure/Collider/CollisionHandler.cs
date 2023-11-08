@@ -44,7 +44,7 @@ namespace App.Scripts.Scenes.GameScene.Ball
         {
             float newY = Mathf.Tan(correctAngle * Mathf.Deg2Rad);
             var correctVector = new Vector3(1, newY, 0).normalized;
-            correctVector *= velocity.magnitude;
+            correctVector *= _ballView.CurrentSpeed;
             correctVector.x *= Mathf.Sign(velocity.x);
             correctVector.y *= Mathf.Sign(velocity.y);
 

@@ -18,7 +18,7 @@ namespace App.Scripts.Scenes.GameScene.Ball.Factory
         {
             var ballView = _poolProvider.ObjectPool.Spawn();
             ballView.Construct(spawnContext.Position, spawnContext.MinBounceAngle);
-            var ballModel = new BallModel(ballView, spawnContext.Speed);
+            var ballModel = new BallModel(spawnContext.PlatformModel, ballView, spawnContext.Speed);
             ballView.AddModel(ballModel);
 
             return ballModel;

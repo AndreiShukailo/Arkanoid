@@ -7,11 +7,11 @@ namespace App.Scripts.Scenes.GameScene.Input
     public class InputSystem : ISystem
     {
         public Action<Vector2> OnTouch;
-        public bool IsEnabled { get; private set; }
+        public bool IsTouching { get; private set; }
 
         private readonly Camera _camera;
-
-
+        private bool _isEnabled;
+        
         public InputSystem(Camera camera)
         {
             _camera = camera;
@@ -19,24 +19,27 @@ namespace App.Scripts.Scenes.GameScene.Input
 
         public void Init()
         {
+            _isEnabled = true;
         }
 
         public void Update(float dt)
         {
+            if(!_isEnabled) return;
+            
             if (UnityEngine.Input.GetMouseButton(0))
             {
-                IsEnabled = true;
+                IsTouching = true;
                 OnTouch?.Invoke(_camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition));
             }
             else
             {
-                IsEnabled = false;
+                IsTouching = false;
             }
-
         }
 
         public void Cleanup()
         {
+            _isEnabled = false;
         }
     }
 }

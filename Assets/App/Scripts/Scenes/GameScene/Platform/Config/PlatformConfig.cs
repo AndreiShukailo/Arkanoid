@@ -8,6 +8,6 @@ namespace App.Scripts.Scenes.GameScene.Platform.Config
     {
         public PlatformPoolSetting PlatformPoolSetting;
         public float StartSpeed = 3f;
-        public Vector2 StartPosition;
+        public float PlatformOffsetBottom = 1.66f;
     }
 }

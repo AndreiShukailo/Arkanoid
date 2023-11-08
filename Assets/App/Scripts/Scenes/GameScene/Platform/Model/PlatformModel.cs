@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.Input;
 using App.Scripts.Scenes.GameScene.Platform.View;
@@ -8,16 +9,17 @@ namespace App.Scripts.Scenes.GameScene.Platform
 {
     public class PlatformModel
     {
-        private PlatformView _platformView;
+        public bool IsMoving { get; private set; }
+        public PlatformView PlatformView { get; }
+        public Action Move;
+        
         private readonly float _speed;
         private readonly InputSystem _inputSystem;
-        
-        private bool _isMoving;
         private Vector2 _velocity;
 
         public PlatformModel(PlatformView platformView, float speed, InputSystem inputSystem)
         {
-            _platformView = platformView;
+            PlatformView = platformView;
             _speed = speed;
             _inputSystem = inputSystem;
             SubscribeOnTouches();
@@ -30,24 +32,25 @@ namespace App.Scripts.Scenes.GameScene.Platform
 
         private void OnTouch(Vector2 touchPosition)
         {
-            _velocity = new Vector2(Mathf.Clamp(touchPosition.x - _platformView.Position.x, -1, 1) * _speed, 0f);
-            if (_isMoving) return;
+            _velocity = new Vector2(Mathf.Clamp(touchPosition.x - PlatformView.Position.x, -1, 1) * _speed, 0f);
+            if (IsMoving) return;
 
             ProcessMovePlatform().Forget();
         }
 
         private async Task ProcessMovePlatform()
         {
-            _isMoving = true;
+            IsMoving = true;
             
-            while (_inputSystem.IsEnabled)
+            while (_inputSystem.IsTouching)
             {
-                _platformView.SetVelocity(_velocity);
+                PlatformView.SetVelocity(_velocity);
+                Move?.Invoke();
                 await Task.Yield();
             }
             
-            _platformView.SetVelocity(Vector2.zero);
-            _isMoving = false;
+            PlatformView.SetVelocity(Vector2.zero);
+            IsMoving = false;
         }
     }
 }

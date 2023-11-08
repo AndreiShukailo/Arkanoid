@@ -6,6 +6,7 @@ namespace App.Scripts.Scenes.GameScene.Ball.View
 {
     public class BallView : SpawnableItemMono, ICollidedItem
     {
+        public float CurrentSpeed { get; private set; }
         public Rigidbody2D Rigidbody => _rigidbody2D;
         public float MinBounceAngle { get; private set; }
 
@@ -21,7 +22,8 @@ namespace App.Scripts.Scenes.GameScene.Ball.View
 
         public void SetSpeed(float speed)
         {
-            _rigidbody2D.velocity = speed * Vector2.down;
+            CurrentSpeed = speed;
+            _rigidbody2D.velocity = speed * Vector2.up;
         }
 
         public void AddModel(ICollidedModel collidedModel)
