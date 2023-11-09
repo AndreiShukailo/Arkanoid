@@ -17,7 +17,7 @@ namespace App.Scripts.Libs.Localization
         {
             LanguagesInfo = languageInfoProvider.GetLanguageInfo();
             _localizationContainer = new LocalizationContainer(keyLanguageProvider);
-            UpdateLocalization(LanguagesInfo.Languages[1]);
+            UpdateLocalization(LanguagesInfo.DefaultLanguage);
         }
         
         public void UpdateLocalization(string languageName)

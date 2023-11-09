@@ -17,7 +17,11 @@ namespace App.Scripts.Libs.Localization.Language
         public LanguagesInfo GetLanguageInfo()
         {
             var languages = _textDataProvider.Load(_localizationConfig.LocalizationFilePath);
-            return new LanguagesInfo(languages.Split("\r\n"));
+            var lines = languages.Split("\n");
+            for (int i = 0; i < lines.Length; i++)
+                lines[i] = lines[i].Trim();
+
+            return new LanguagesInfo(lines, _localizationConfig.DefaultLanguage);
         }
     }
 }

@@ -21,7 +21,9 @@ namespace App.Scripts.Libs.Localization.KeyLanguage
             var keyLanguageText = 
                 _textDataProvider.Load(_localizationConfig.LocalizationFilePath + "/" + languageName);
 
-            var lines = keyLanguageText.Split("\r\n");
+            var lines = keyLanguageText.Split("\n");
+            for (int i = 0; i < lines.Length; i++)
+                lines[i] = lines[i].Trim();
 
             var keyWords = new Dictionary<string, string>();
             for (int i = 0; i < lines.Length; i++)
