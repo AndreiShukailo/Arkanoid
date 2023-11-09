@@ -1,28 +1,29 @@
 using App.Scripts.Libs.Pool;
+using App.Scripts.Scenes.GameScene.Block.Cracks;
 using App.Scripts.Scenes.GameScene.Block.Model;
 using App.Scripts.Scenes.GameScene.Block.View;
 
 namespace App.Scripts.Scenes.GameScene.Block.Factory
 {
-    class BlockFactory : IBlockFactory
+    public class BlockFactory : PoolFactory<BlockModel, BlockView, BlockContext>
     {
-        private readonly PoolProviderMono<BlockView> _objectPoolProvider;
+        private ICrackCreator _crackCreator;
 
-        public BlockFactory(BlockPoolSetting poolSetting)
+        public BlockFactory(PoolSetting<BlockView> poolSetting, ICrackCreator crackCreator) : base(poolSetting)
         {
-            _objectPoolProvider = new PoolProviderMono<BlockView>(poolSetting);
+            _crackCreator = crackCreator;
         }
 
-        public virtual BlockModel Create(BlockContext context)
+        public override BlockModel Create(BlockContext context)
         {
-            var blockView = _objectPoolProvider.ObjectPool.Spawn();
+            var blockView = _poolProvider.ObjectPool.Spawn();
             blockView.Construct(context.Size, context.Position);
 
-            var collidedStrategy = new BlockCollideStrategy();
+            var collidedStrategy = new SimpleBlockCollideStrategy(_crackCreator);
             var blockModel = new BlockModel(blockView, collidedStrategy);
-            blockView.AddModel(blockModel);
-
+            blockModel.SetHealth(4);
             return blockModel;
         }
+
     }
 }

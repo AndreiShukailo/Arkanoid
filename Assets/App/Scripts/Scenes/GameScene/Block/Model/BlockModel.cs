@@ -1,10 +1,15 @@
-﻿using App.Scripts.Infrastructure.Collider;
+﻿using System;
+using App.Scripts.Infrastructure.Collider;
 using App.Scripts.Scenes.GameScene.Block.View;
 
 namespace App.Scripts.Scenes.GameScene.Block.Model
 {
     public class BlockModel : ICollidedModel
     {
+        public int Health { get; private set; }
+        public Action OnRemove;
+        public BlockView BlockView => _blockView;
+        
         private readonly BlockView _blockView;
         private readonly ICollideStrategy<BlockModel> _collideStrategy;
 
@@ -15,7 +20,17 @@ namespace App.Scripts.Scenes.GameScene.Block.Model
             blockView.AddModel(this);
             collideStrategy.OnAddStrategy(this);
         }
-        
+
+        public void SetHealth(int health)
+        {
+            Health = health;
+        }
+
+        public void RemoveHealth()
+        {
+            Health--;
+        }
+
         public void OnCollide()
         {
             _collideStrategy.OnCollide();
@@ -24,6 +39,7 @@ namespace App.Scripts.Scenes.GameScene.Block.Model
         public void Remove()
         {
             _blockView.Remove();
+            OnRemove?.Invoke();
         }
     }
 }

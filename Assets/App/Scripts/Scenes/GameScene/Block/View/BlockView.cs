@@ -7,6 +7,7 @@ namespace App.Scripts.Scenes.GameScene.Block.View
     public class BlockView : SpawnableItemMono, ICollidedItem
     {
         public string BlockKey => _blockKey;
+        public SpriteRenderer SpriteRenderer => _spriteRenderer;
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BoxCollider2D _boxCollider2D;

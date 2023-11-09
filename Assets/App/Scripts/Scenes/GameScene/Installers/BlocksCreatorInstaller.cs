@@ -3,6 +3,8 @@ using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.TiledParser.TileSet;
 using App.Scripts.Scenes.GameScene.Block;
+using App.Scripts.Scenes.GameScene.Block.Cracks;
+using App.Scripts.Scenes.GameScene.Block.Cracks.Container;
 using App.Scripts.Scenes.GameScene.Block.Factory;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
 using UnityEngine;
@@ -31,7 +33,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private BlocksContainer RegisterBlocks(ServiceContainer serviceContainer)
         {
-            _blocksContainer.RegisterGroup("Simple", setting => new BlockFactory(setting));
+            _blocksContainer.RegisterGroup("Simple",
+                setting => new BlockFactory(setting, serviceContainer.Get<ICrackCreator>()));
             return _blocksContainer;
         }
     }

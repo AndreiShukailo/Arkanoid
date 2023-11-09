@@ -20,7 +20,7 @@ namespace App.Scripts.Libs.Pool
         }
     }
 
-    public class PoolSetting<T> where T : SpawnableItemMono
+    public class PoolSetting<T>
     {
         public T SpawnableItemMono;
         public Transform Container;
