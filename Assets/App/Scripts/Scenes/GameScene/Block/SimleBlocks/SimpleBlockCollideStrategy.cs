@@ -8,10 +8,12 @@ namespace App.Scripts.Scenes.GameScene.Block
     {
         private readonly ICrackCreator _crackCreator;
         private BlockModel _model;
+        private int _health;
 
-        public SimpleBlockCollideStrategy(ICrackCreator crackCreator)
+        public SimpleBlockCollideStrategy(ICrackCreator crackCreator, SimpleBlockSettings simpleBlockSettings)
         {
             _crackCreator = crackCreator;
+            _health = simpleBlockSettings.StartHealth;
         }
 
         public void OnAddStrategy(BlockModel model)
@@ -21,14 +23,14 @@ namespace App.Scripts.Scenes.GameScene.Block
 
         public void OnCollide()
         {
-            _model.RemoveHealth();
-            if (_model.Health <= 0)
+            _health-= 1;
+            if (_health <= 0)
             {
                 _model.Remove();
                 return;
             }
             
-            _crackCreator.CreateCrack(_model);
+            _crackCreator.CreateCrack(_model, _health);
         }
     }
 }

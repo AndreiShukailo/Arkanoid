@@ -6,7 +6,6 @@ namespace App.Scripts.Scenes.GameScene.Block.Model
 {
     public class BlockModel : ICollidedModel
     {
-        public int Health { get; private set; }
         public Action OnRemove;
         public BlockView BlockView => _blockView;
         
@@ -19,16 +18,6 @@ namespace App.Scripts.Scenes.GameScene.Block.Model
             _collideStrategy = collideStrategy;
             blockView.AddModel(this);
             collideStrategy.OnAddStrategy(this);
-        }
-
-        public void SetHealth(int health)
-        {
-            Health = health;
-        }
-
-        public void RemoveHealth()
-        {
-            Health--;
         }
 
         public void OnCollide()

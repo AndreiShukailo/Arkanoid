@@ -12,9 +12,9 @@ namespace App.Scripts.Scenes.GameScene.Block.Cracks
             _crackContainer = crackContainer;
         }
 
-        public void CreateCrack(BlockModel blockModel)
+        public void CreateCrack(BlockModel blockModel, int health)
         {
-            var factory = _crackContainer.GetCrackFactory(blockModel.Health);
+            var factory = _crackContainer.GetCrackFactory(health);
             factory.Create(blockModel);
         }
     }
