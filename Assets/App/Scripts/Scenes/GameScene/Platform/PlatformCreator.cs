@@ -2,6 +2,7 @@
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using App.Scripts.Scenes.GameScene.Platform.Config;
 using App.Scripts.Scenes.GameScene.Platform.Factory;
+using App.Scripts.Scenes.GameScene.Platform.Model;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Platform

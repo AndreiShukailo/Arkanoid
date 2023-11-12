@@ -1,19 +1,24 @@
 ﻿using App.Scripts.Infrastructure.Collider;
-using App.Scripts.Scenes.GameScene.Block.Cracks;
 using App.Scripts.Scenes.GameScene.Block.Model;
+using App.Scripts.Scenes.GameScene.Block.SimleBlocks.Cracks;
+using App.Scripts.Scenes.GameScene.Block.SimleBlocks.Cracks.Model;
 
-namespace App.Scripts.Scenes.GameScene.Block
+namespace App.Scripts.Scenes.GameScene.Block.SimleBlocks
 {
     public class SimpleBlockCollideStrategy : ICollideStrategy<BlockModel>
     {
         private readonly ICrackCreator _crackCreator;
+        private readonly float _healthOnCollide;
+        
         private BlockModel _model;
-        private int _health;
+        private float _health;
+        private CracksModel _currentCrack;
 
         public SimpleBlockCollideStrategy(ICrackCreator crackCreator, SimpleBlockSettings simpleBlockSettings)
         {
             _crackCreator = crackCreator;
-            _health = simpleBlockSettings.StartHealth;
+            _health = 1f;
+            _healthOnCollide = _health / simpleBlockSettings.StartHealth;
         }
 
         public void OnAddStrategy(BlockModel model)
@@ -23,14 +28,20 @@ namespace App.Scripts.Scenes.GameScene.Block
 
         public void OnCollide()
         {
-            _health-= 1;
+            _health -= _healthOnCollide;
             if (_health <= 0)
             {
                 _model.Remove();
                 return;
             }
-            
-            _crackCreator.CreateCrack(_model, _health);
+
+            SwitchCrack();
+        }
+
+        private void SwitchCrack()
+        {
+            _currentCrack?.Remove();
+            _currentCrack = _crackCreator.CreateCrack(_model, _health);
         }
     }
 }

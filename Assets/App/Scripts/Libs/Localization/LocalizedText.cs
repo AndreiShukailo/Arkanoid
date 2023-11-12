@@ -7,12 +7,12 @@ namespace App.Scripts.Libs.Localization
     {
         [SerializeField] private TMP_Text _text;
         [SerializeField] private string _key;
-        
-        private LocalizationController _localizationController;
+
+        public LocalizationController LocalizationController { get; private set; }
 
         public void Construct(LocalizationController localizationController)
         {
-            _localizationController = localizationController;
+            LocalizationController = localizationController;
             SubscribeOnLocalizationUpdates();
         }
 
@@ -24,17 +24,18 @@ namespace App.Scripts.Libs.Localization
         private void SubscribeOnLocalizationUpdates()
         {
             OnUpdateLanguage();
-            _localizationController.OnUpdateLanguage += OnUpdateLanguage;
+            LocalizationController.OnUpdateLanguage += OnUpdateLanguage;
         }
 
         private void OnUpdateLanguage()
         {
-            _text.text = _localizationController.CurrentLanguage.GetWord(_key);
+            _text.text = LocalizationController.CurrentLanguage.GetWord(_key);
         }
 
         private void OnDestroy()
         {
-            _localizationController.OnUpdateLanguage -= OnUpdateLanguage;
+            if(LocalizationController == null) return;
+            LocalizationController.OnUpdateLanguage -= OnUpdateLanguage;
         }
     }
 }

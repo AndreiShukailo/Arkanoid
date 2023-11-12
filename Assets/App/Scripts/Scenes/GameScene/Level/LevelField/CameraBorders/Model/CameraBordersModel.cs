@@ -1,8 +1,8 @@
-﻿
-using App.Scripts.Infrastructure.Collider;
+﻿using App.Scripts.Infrastructure.Collider;
+using App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders.View;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Level.LevelField.Field.Model
+namespace App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders.Model
 {
     public class CameraBordersModel : ICollidedModel
     {

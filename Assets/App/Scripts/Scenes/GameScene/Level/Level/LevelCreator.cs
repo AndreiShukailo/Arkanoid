@@ -1,5 +1,4 @@
 using App.Scripts.Libs.TiledParser.Level;
-using App.Scripts.Scenes.Game.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level

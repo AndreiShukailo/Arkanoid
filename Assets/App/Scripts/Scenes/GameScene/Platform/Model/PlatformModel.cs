@@ -5,7 +5,7 @@ using App.Scripts.Scenes.GameScene.Input;
 using App.Scripts.Scenes.GameScene.Platform.View;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Platform
+namespace App.Scripts.Scenes.GameScene.Platform.Model
 {
     public class PlatformModel
     {
@@ -23,6 +23,12 @@ namespace App.Scripts.Scenes.GameScene.Platform
             _speed = speed;
             _inputSystem = inputSystem;
             SubscribeOnTouches();
+        }
+
+        public void Remove()
+        {
+            _inputSystem.OnTouch -= OnTouch;
+            PlatformView.Remove();
         }
 
         private void SubscribeOnTouches()

@@ -8,7 +8,7 @@ using App.Scripts.Scenes.GameScene.Block.Model;
 using App.Scripts.Scenes.GameScene.Block.View;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Block
+namespace App.Scripts.Scenes.GameScene.Block.Container
 {
     public abstract class BlocksGroup : MonoBehaviour
     {

@@ -40,6 +40,7 @@ namespace App.Scripts.Scenes.GameScene.Input
         public void Cleanup()
         {
             _isEnabled = false;
+            IsTouching = false;
         }
     }
 }

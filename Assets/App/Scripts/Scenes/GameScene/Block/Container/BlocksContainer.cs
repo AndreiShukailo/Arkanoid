@@ -7,7 +7,7 @@ using App.Scripts.Scenes.GameScene.Block.Factory;
 using App.Scripts.Scenes.GameScene.Block.Model;
 using App.Scripts.Scenes.GameScene.Block.View;
 
-namespace App.Scripts.Scenes.GameScene.Block
+namespace App.Scripts.Scenes.GameScene.Block.Container
 {
     [Serializable]
     public class BlocksContainer

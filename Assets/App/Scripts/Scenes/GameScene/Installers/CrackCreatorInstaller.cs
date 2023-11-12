@@ -1,7 +1,7 @@
 ﻿using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
-using App.Scripts.Scenes.GameScene.Block.Cracks;
-using App.Scripts.Scenes.GameScene.Block.Cracks.Container;
+using App.Scripts.Scenes.GameScene.Block.SimleBlocks.Cracks;
+using App.Scripts.Scenes.GameScene.Block.SimleBlocks.Cracks.Container;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers

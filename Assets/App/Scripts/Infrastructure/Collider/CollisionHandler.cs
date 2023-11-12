@@ -1,8 +1,7 @@
-﻿using App.Scripts.Infrastructure.Collider;
-using App.Scripts.Scenes.GameScene.Ball.View;
+﻿using App.Scripts.Scenes.GameScene.Ball.View;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Ball
+namespace App.Scripts.Infrastructure.Collider
 {
     public class CollisionHandler : MonoBehaviour
     {

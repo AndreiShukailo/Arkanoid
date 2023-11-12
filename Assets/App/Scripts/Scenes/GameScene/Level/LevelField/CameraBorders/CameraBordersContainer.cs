@@ -1,8 +1,10 @@
 ﻿using System;
-using App.Scripts.Scenes.GameScene.Level.LevelField.Field.Model;
+using App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders.Model;
+using App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders.View;
+using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Level.LevelField.Field
+namespace App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders
 {
     [Serializable]
     public class CameraBordersContainer

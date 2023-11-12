@@ -3,6 +3,7 @@ using App.Scripts.Infrastructure.Collider;
 using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.Ball.View;
 using App.Scripts.Scenes.GameScene.Platform;
+using App.Scripts.Scenes.GameScene.Platform.Model;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Ball.Model
@@ -46,6 +47,11 @@ namespace App.Scripts.Scenes.GameScene.Ball.Model
             }
 
             _ballView.SetSpeed(_speed);
+        }
+
+        public void Remove()
+        {
+            _ballView.Remove();
         }
     }
 }

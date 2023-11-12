@@ -4,7 +4,7 @@ using App.Scripts.Scenes.GameScene.Block.View;
 
 namespace App.Scripts.Scenes.GameScene.Block.Factory
 {
-    public class BlockFactory<TSetting> : PoolFactory<BlockModel, BlockView, BlockContext>
+    public class BlockFactory<TSetting> : PoolFactory<BlockModel, BlockView, BlockContext> where TSetting : PoolSetting<BlockView>
     {
         private readonly CollideStrategyFactory<TSetting> _collideStrategyFactory;
         private readonly TSetting _setting;

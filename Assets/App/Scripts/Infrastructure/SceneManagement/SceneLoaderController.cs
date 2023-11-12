@@ -12,6 +12,7 @@ namespace App.Scripts.Infrastructure.SceneManagement
 
         private readonly LoadingCurtainViewFactory _loadingCurtainViewFactory;
         private LoadingCurtainView _loadingCurtainView;
+        private SceneInfo _nextScene;
 
         public SceneLoaderController(ScenesConfig scenesConfig)
         {
@@ -25,11 +26,17 @@ namespace App.Scripts.Infrastructure.SceneManagement
             await _loadingCurtainView.ProcessHide();
         }
 
-        public async Task ProcessLoadScene(SceneInfo sceneInfo)
+        public async Task ProcessLoadScene()
         {
             _loadingCurtainView = CreateCurtain();
             await _loadingCurtainView.ProcessShow();
-            await LoadSceneAsync(sceneInfo);
+            await LoadSceneAsync(_nextScene);
+            _nextScene = null;
+        }
+
+        public void SetNextScene(SceneInfo sceneInfo)
+        {
+            _nextScene = sceneInfo;
         }
 
         private async Task LoadSceneAsync(SceneInfo sceneInfo)

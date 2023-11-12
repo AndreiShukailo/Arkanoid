@@ -1,1 +1,3 @@
-﻿SampleScene.Text;новй текст
+﻿Start.PlayButton;ИГРАТЬ
+Start.LanguageButton;ЯЗЫК
+PopUp.Language.Label;ЯЗЫК

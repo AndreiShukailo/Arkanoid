@@ -9,7 +9,7 @@
  "margin":0,
  "name":"TileSet",
  "spacing":0,
- "tilecount":2,
+ "tilecount":5,
  "tiledversion":"1.10.2",
  "tileheight":50,
  "tiles":[
@@ -26,6 +26,31 @@
          "imageheight":50,
          "imagewidth":104,
          "type":"YellowBlock"
+        }, 
+        {
+         "id":2,
+         "image":"..\/..\/Media\/Sprites\/Game\/blueBlock.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"BlueBlock"
+        }, 
+        {
+         "height":50,
+         "id":3,
+         "image":"..\/..\/Media\/Sprites\/Game\/ironBlock.png",
+         "imageheight":64,
+         "imagewidth":118,
+         "type":"IronBlock",
+         "width":104,
+         "x":7,
+         "y":6
+        }, 
+        {
+         "id":4,
+         "image":"..\/..\/Media\/Sprites\/Game\/redBlock.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"RedBlock"
         }],
  "tilewidth":104,
  "type":"tileset",

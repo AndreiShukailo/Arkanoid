@@ -25,4 +25,16 @@ namespace App.Scripts.Libs.Pool
 
         public abstract TModel Create();
     }
+    
+    public abstract class PoolFactory<TView> : IFactory<TView> where TView : SpawnableItemMono
+    {
+        protected PoolProviderMono<TView> _poolProvider;
+
+        protected PoolFactory(PoolSetting<TView> poolSetting)
+        {
+            _poolProvider = new PoolProviderMono<TView>(poolSetting);
+        }
+
+        public abstract TView Create();
+    }
 }

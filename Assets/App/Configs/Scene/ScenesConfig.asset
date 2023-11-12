@@ -21,4 +21,4 @@ MonoBehaviour:
   PoolSetting:
     SpawnableItemMono: {fileID: -2487371963847601013, guid: dc8c02fd386331643aa8d43d641326f6, type: 3}
     Container: {fileID: 0}
-    StartSize: 0
+    StartSize: 1

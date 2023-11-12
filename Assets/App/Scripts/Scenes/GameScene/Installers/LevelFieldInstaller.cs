@@ -5,6 +5,7 @@ using App.Scripts.Scenes.GameScene.Block;
 using App.Scripts.Scenes.GameScene.Input;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
 using App.Scripts.Scenes.GameScene.Level.LevelField.BlockSize;
+using App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Config;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using UnityEngine;

@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &826086714532222899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5694693107526133648}
+  - component: {fileID: 7111859422711664776}
+  m_Layer: 0
+  m_Name: PopUpControllerInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5694693107526133648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826086714532222899}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517355694737270521}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7111859422711664776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826086714532222899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8753574586e447be90f3208c5b9fc151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4702378820899026007
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizationConfig:
+    DefaultLanguage: Russian
     LocalizationFilePath: Localization/Languages
 --- !u!1 &5157350656260731608
 GameObject:
@@ -123,6 +168,7 @@ Transform:
   - {fileID: 1129995523014269251}
   - {fileID: 5157350656260731615}
   - {fileID: 7305608624606401409}
+  - {fileID: 5694693107526133648}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -142,6 +188,7 @@ MonoBehaviour:
   - {fileID: 447175123194600465}
   - {fileID: 5157350656260731614}
   - {fileID: 8139097772600270878}
+  - {fileID: 7111859422711664776}
 --- !u!1 &7547114507897277319
 GameObject:
   m_ObjectHideFlags: 0

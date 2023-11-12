@@ -1,7 +1,7 @@
 ﻿using App.Scripts.Infrastructure.Collider;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Level.LevelField
+namespace App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders.View
 {
     public class CameraBordersView : MonoBehaviour, ICollidedItem
     {
