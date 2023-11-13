@@ -1,3 +1,4 @@
-﻿Start.PlayButton;ИГРАТЬ
-Start.LanguageButton;ЯЗЫК
-PopUp.Language.Label;ЯЗЫК
+﻿Start.PlayButton;Играть
+Language;Язык
+LanguageName.Russian;Русский
+LanguageName.English;Английский

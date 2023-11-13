@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 517355694737270521}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7111859422711664776
 MonoBehaviour:
@@ -44,6 +44,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8753574586e447be90f3208c5b9fc151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1855863696090354002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7029259029227223979}
+  - component: {fileID: 6134264259236913096}
+  - component: {fileID: 1724758677393415151}
+  m_Layer: 0
+  m_Name: ButtonManagerInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7029259029227223979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855863696090354002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517355694737270521}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6134264259236913096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855863696090354002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a19fec0e33348acbe77cd770e10a40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonsViewContainer: {fileID: 1724758677393415151}
+--- !u!114 &1724758677393415151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855863696090354002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55c702e5e6c4db19b7d0088864b2fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonsPoolSetting:
+  - SpawnableItemMono: {fileID: 263180109325769883, guid: 91cb9cc16f4520c4c94c7950df71c2d7, type: 3}
+    Container: {fileID: 0}
+    StartSize: 0
+  - SpawnableItemMono: {fileID: 263180109325769883, guid: a039fb486b8d3194a8fdb412f978b4d9, type: 3}
+    Container: {fileID: 0}
+    StartSize: 0
+  - SpawnableItemMono: {fileID: 5025292496756927908, guid: 874d6a897efdace49a71e36dfc544c29, type: 3}
+    Container: {fileID: 0}
+    StartSize: 0
+  _parrent: {fileID: 2310339840552302561, guid: 482c8940254e0244f885ecb853541f04, type: 3}
 --- !u!1 &4702378820899026007
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +143,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 517355694737270521}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8139097772600270878
 MonoBehaviour:
@@ -121,7 +190,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 517355694737270521}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5157350656260731614
 MonoBehaviour:
@@ -166,9 +235,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1129995523014269251}
-  - {fileID: 5157350656260731615}
   - {fileID: 7305608624606401409}
   - {fileID: 5694693107526133648}
+  - {fileID: 7029259029227223979}
+  - {fileID: 5157350656260731615}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -186,9 +256,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Installers:
   - {fileID: 447175123194600465}
-  - {fileID: 5157350656260731614}
   - {fileID: 8139097772600270878}
+  - {fileID: 6134264259236913096}
   - {fileID: 7111859422711664776}
+  - {fileID: 5157350656260731614}
 --- !u!1 &7547114507897277319
 GameObject:
   m_ObjectHideFlags: 0

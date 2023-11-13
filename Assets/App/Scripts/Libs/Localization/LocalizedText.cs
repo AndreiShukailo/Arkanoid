@@ -19,6 +19,7 @@ namespace App.Scripts.Libs.Localization
         public void AddKey(string key)
         {
             _key = key;
+            OnUpdateLanguage();
         }
 
         private void SubscribeOnLocalizationUpdates()
@@ -29,7 +30,7 @@ namespace App.Scripts.Libs.Localization
 
         private void OnUpdateLanguage()
         {
-            _text.text = LocalizationController.CurrentLanguage.GetWord(_key);
+            _text.text = LocalizationController?.CurrentLanguage.GetWord(_key);
         }
 
         private void OnDestroy()

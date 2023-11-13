@@ -38,6 +38,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             gameStateMachine.AddState(CreateReloadLevelState(serviceContainer));
             gameStateMachine.AddState(CreateLoadSceneState(serviceContainer));
 
+            serviceContainer.Get<CommandChangeState>().AddStateMachine(gameStateMachine);
+
             return gameStateMachine;
         }
 
@@ -52,9 +54,6 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private GameState CreateProcessState(ServiceContainer serviceContainer)
         {
-            serviceContainer.SetService<ISystem, CheckLooseBallSystem>(
-                new CheckLooseBallSystem(serviceContainer.Get<LevelController>()));
-
             var systems = serviceContainer.GetServices<ISystem>();
             var gameSystems = new SystemsGroup(systems);
 
@@ -64,11 +63,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
         private StateSetupScene CreateSetupState(ServiceContainer serviceContainer, GameStateMachine gameStateMachine)
         {
             var sceneLoader = serviceContainer.Get<SceneLoaderController>();
-            var levelController = new LevelController(serviceContainer.Get<BallContainer>(), gameStateMachine);
-            serviceContainer.SetServiceSelf(levelController);
 
             var handlerSetupLevel = new HandlerSetupLevel(
-                levelController,
+                serviceContainer.Get<LevelController>(),
                 serviceContainer.Get<ILevelCreator>(),
                 serviceContainer.Get<IBallCreator>(),
                 serviceContainer.Get<IPlatformCreator>());

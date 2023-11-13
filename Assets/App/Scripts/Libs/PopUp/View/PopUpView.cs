@@ -1,15 +1,22 @@
 ﻿using System.Threading.Tasks;
+using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.Pool;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace App.Scripts.Libs.PopUp.View
 {
     public class PopUpView : SpawnableItemMono
     {
         public string PopUpKey => _popUpKey;
+        public Transform Content => _content;
+
         [SerializeField] private string _popUpKey;
+        
+        [SerializeField] private Transform _content;
+        [SerializeField] private Image _block;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private LocalizedText _lable;
 
@@ -27,12 +34,15 @@ namespace App.Scripts.Libs.PopUp.View
             _rectTransform.anchoredPosition =
                 new Vector2(0, GetYPosition());
             _startPosition = _rectTransform.anchoredPosition;
+            _block.raycastTarget = true;
         }
 
-        public override void OnSpawned()
+        public override void OnDespawned()
         {
-            base.OnSpawned();
-            _parent.gameObject.SetActive(true);
+            base.OnDespawned();
+            var buttons = _content.GetComponentsInChildren<ButtonView>();
+            foreach (var button in buttons)
+                button.Remove();
         }
 
         public void SetLocalization(LocalizationController localizationController)
@@ -43,13 +53,16 @@ namespace App.Scripts.Libs.PopUp.View
 
         public async Task ProcessShow()
         {
+            _parent.gameObject.SetActive(true);
             _animation = DOTween.Sequence();
             _animation.Append(_rectTransform.DOAnchorPosY(0f, _showDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
+            _block.raycastTarget = false;
         }
 
         public async Task ProcessHide()
         {
+            _block.raycastTarget = true;
             _animation = DOTween.Sequence();
             _animation.Append(_rectTransform.DOAnchorPosY(_startPosition.y, _hideDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();

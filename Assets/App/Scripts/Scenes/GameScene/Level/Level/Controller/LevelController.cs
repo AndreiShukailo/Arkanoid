@@ -1,4 +1,4 @@
-﻿using App.Scripts.Libs.StateMachine;
+﻿using App.Scripts.Infrastructure.States;
 using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Model;
 using App.Scripts.Scenes.GameScene.GameStates;
@@ -11,12 +11,14 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
         public PlatformModel PlatformModel { get; private set; }
         public LevelModel LevelModel { get; private set; }
         public BallContainer BallContainer { get; private set; }
-        private readonly GameStateMachine _gameStateMachine;
+        
+        private readonly CommandChangeState _commandChangeState;
 
-        public LevelController(BallContainer ballContainer, GameStateMachine gameStateMachine)
+
+        public LevelController(BallContainer ballContainer, CommandChangeState commandChangeState)
         {
+            _commandChangeState = commandChangeState;
             BallContainer = ballContainer;
-            _gameStateMachine = gameStateMachine;
         }
 
         public void SetupLevel(LevelModel levelModel, PlatformModel platformModel, BallModel ballModel)
@@ -28,7 +30,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 
         public void Loose()
         {
-            _gameStateMachine.ChangeState<ReloadLevelState>();
+            _commandChangeState.ChangeState<ReloadLevelState>();
         }
     }
 }

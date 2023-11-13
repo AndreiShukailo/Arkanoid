@@ -1,3 +1,4 @@
-﻿Start.PlayButton;PLAY
-Start.LanguageButton;LANGUAGE
-PopUp.Language.Label;LANGUAGE
+﻿Start.PlayButton;Play
+Language;Language
+LanguageName.English;English
+LanguageName.Russian;Russian

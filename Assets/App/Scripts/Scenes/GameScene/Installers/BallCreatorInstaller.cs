@@ -18,9 +18,6 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
             var ballCreator = new BallCreator(_ballConfig, ballFactory);
             serviceContainer.SetService<IBallCreator, BallCreator>(ballCreator);
-
-            var ballContainer = new BallContainer();
-            serviceContainer.SetServiceSelf(ballContainer);
         }
     }
 }

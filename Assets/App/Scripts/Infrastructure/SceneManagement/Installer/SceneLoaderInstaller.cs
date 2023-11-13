@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Infrastructure.SceneManagement.Config;
+using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using UnityEngine;
@@ -11,7 +12,10 @@ namespace App.Scripts.Infrastructure.SceneManagement.Installer
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            var sceneLoader = new SceneLoaderController(_scenesConfig);
+            var commandChangeState = new CommandChangeState();
+            serviceContainer.SetServiceSelf(commandChangeState);
+            
+            var sceneLoader = new SceneLoaderController(_scenesConfig, commandChangeState);
             serviceContainer.SetServiceSelf(sceneLoader);
         }
     }

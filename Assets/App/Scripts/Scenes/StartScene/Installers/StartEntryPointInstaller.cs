@@ -27,10 +27,12 @@ namespace App.Scripts.Scenes.StartScene.Installers
         {
             var gameStateMachine = new GameStateMachine();
 
-            gameStateMachine.AddState(CreateSetupState(serviceContainer, gameStateMachine));
+            gameStateMachine.AddState(CreateSetupState(serviceContainer));
             gameStateMachine.AddState(CreateProcessState(serviceContainer));
             gameStateMachine.AddState(CreteLanguagePopupState(serviceContainer));
             gameStateMachine.AddState(CreateLoadSceneState(serviceContainer));
+
+            serviceContainer.Get<CommandChangeState>().AddStateMachine(gameStateMachine);
 
             return gameStateMachine;
         }
@@ -49,13 +51,16 @@ namespace App.Scripts.Scenes.StartScene.Installers
             return loadSceneState;
         }
 
-        private StateSetupScene CreateSetupState(ServiceContainer serviceContainer, GameStateMachine gameStateMachine)
+        private StateSetupScene CreateSetupState(ServiceContainer serviceContainer)
         {
             var sceneLoader = serviceContainer.Get<SceneLoaderController>();
 
             var handlers = new List<IHandlerSetupScene>()
             {
-                new HandlerSetupButtons(serviceContainer.Get<ButtonsContainer>(), gameStateMachine, sceneLoader)
+                new HandlerSetupButtons(serviceContainer.Get<ButtonsContainer>(),
+                    sceneLoader,
+                    serviceContainer.Get<CommandChangeState>()
+                )
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 
