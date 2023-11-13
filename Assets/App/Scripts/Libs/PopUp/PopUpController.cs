@@ -22,6 +22,7 @@ namespace App.Scripts.Libs.PopUp
             var factory = _popUpContainer.GetPopup(key);
             var popup = factory.Create();
             await popup.ProcessShow();
+            _currentPopup = popup;
         }
 
         public async Task HidePopup()
@@ -29,6 +30,7 @@ namespace App.Scripts.Libs.PopUp
             if (_currentPopup == null) return;
 
             await _currentPopup.ProcessHide();
+            _currentPopup = null;
         }
 
         public void AddPopup(string key, PopUpFactory popUpFactory)
@@ -37,9 +39,9 @@ namespace App.Scripts.Libs.PopUp
             _popUpContainer.AddPopUp(key, popUpFactory);
         }
 
-        public void RemovePopups(params string[] keys)
+        public void RemovePopups()
         {
-            _popUpContainer.RemovePopups(keys);
+            _popUpContainer.RemovePopups();
         }
     }
 }

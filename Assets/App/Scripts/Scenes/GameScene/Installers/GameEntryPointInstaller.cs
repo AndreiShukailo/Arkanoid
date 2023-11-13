@@ -4,6 +4,7 @@ using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
 using App.Scripts.Libs.Installer;
+using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
@@ -42,8 +43,10 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private LoadSceneState CreateLoadSceneState(ServiceContainer serviceContainer)
         {
-            var loadSceneState = new LoadSceneState(serviceContainer.Get<SceneLoaderController>());
-            
+            var loadSceneState = new LoadSceneState(
+                serviceContainer.Get<SceneLoaderController>(),
+                serviceContainer.Get<PopUpController>());
+
             return loadSceneState;
         }
 
@@ -51,7 +54,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
         {
             serviceContainer.SetService<ISystem, CheckLooseBallSystem>(
                 new CheckLooseBallSystem(serviceContainer.Get<LevelController>()));
-            
+
             var systems = serviceContainer.GetServices<ISystem>();
             var gameSystems = new SystemsGroup(systems);
 
@@ -63,7 +66,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var sceneLoader = serviceContainer.Get<SceneLoaderController>();
             var levelController = new LevelController(serviceContainer.Get<BallContainer>(), gameStateMachine);
             serviceContainer.SetServiceSelf(levelController);
-            
+
             var handlerSetupLevel = new HandlerSetupLevel(
                 levelController,
                 serviceContainer.Get<ILevelCreator>(),
@@ -71,7 +74,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 serviceContainer.Get<IPlatformCreator>());
 
             serviceContainer.SetServiceSelf(handlerSetupLevel);
-            
+
             var handlers = new List<IHandlerSetupScene>
             {
                 handlerSetupLevel

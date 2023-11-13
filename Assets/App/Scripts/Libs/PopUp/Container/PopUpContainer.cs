@@ -17,10 +17,9 @@ namespace App.Scripts.Libs.PopUp.Container
             _popupContainer[key] = popUpFactory;
         }
 
-        public void RemovePopups(params string[] keys)
+        public void RemovePopups()
         {
-            for (int i = 0; i < keys.Length; i++)
-                _popupContainer.Remove(keys[i]);
+            _popupContainer.Clear();
         }
     }
 }

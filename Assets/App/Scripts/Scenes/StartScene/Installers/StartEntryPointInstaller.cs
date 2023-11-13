@@ -42,7 +42,9 @@ namespace App.Scripts.Scenes.StartScene.Installers
 
         private LoadSceneState CreateLoadSceneState(ServiceContainer serviceContainer)
         {
-            var loadSceneState = new LoadSceneState(serviceContainer.Get<SceneLoaderController>());
+            var loadSceneState = new LoadSceneState(
+                serviceContainer.Get<SceneLoaderController>(),
+                serviceContainer.Get<PopUpController>());
 
             return loadSceneState;
         }

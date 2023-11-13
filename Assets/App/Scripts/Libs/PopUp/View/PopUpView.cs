@@ -14,10 +14,11 @@ namespace App.Scripts.Libs.PopUp.View
         [SerializeField] private LocalizedText _lable;
 
         private float _showDuration = 0.5f;
-        private float _hideDuration = 0.2f;
+        private float _hideDuration = 0.3f;
 
         private RectTransform _parent;
         private Sequence _animation;
+        private Vector2 _startPosition;
 
         public override void OnCreated(IObjectPool objectPool)
         {
@@ -25,6 +26,7 @@ namespace App.Scripts.Libs.PopUp.View
             _parent = _rectTransform.parent as RectTransform;
             _rectTransform.anchoredPosition =
                 new Vector2(0, GetYPosition());
+            _startPosition = _rectTransform.anchoredPosition;
         }
 
         public override void OnSpawned()
@@ -42,15 +44,14 @@ namespace App.Scripts.Libs.PopUp.View
         public async Task ProcessShow()
         {
             _animation = DOTween.Sequence();
-            _animation.Append(_rectTransform.DOMoveY(0f, _showDuration)).SetUpdate(true);
+            _animation.Append(_rectTransform.DOAnchorPosY(0f, _showDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
         }
 
         public async Task ProcessHide()
         {
             _animation = DOTween.Sequence();
-            var endY = GetYPosition();
-            _animation.Append(_rectTransform.DOMoveY(endY, _hideDuration)).SetUpdate(true);;
+            _animation.Append(_rectTransform.DOAnchorPosY(_startPosition.y, _hideDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
             _parent.gameObject.SetActive(false);
             Remove();
