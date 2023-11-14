@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace App.Scripts.Infrastructure.Buttons
+namespace App.Scripts.Infrastructure.Buttons.View
 {
     public abstract class ButtonAnimationBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {

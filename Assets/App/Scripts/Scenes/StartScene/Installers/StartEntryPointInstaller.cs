@@ -8,7 +8,8 @@ using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
-using App.Scripts.Scenes.StartScene.States;
+using App.Scripts.Scenes.StartScene.Buttons;
+using App.Scripts.Scenes.StartScene.StartStates;
 
 namespace App.Scripts.Scenes.StartScene.Installers
 {

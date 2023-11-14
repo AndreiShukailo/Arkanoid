@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using App.Scripts.Infrastructure.Buttons;
+using App.Scripts.Infrastructure.Buttons.View;
 using App.Scripts.Libs.Localization;
 
-namespace App.Scripts.Scenes.StartScene
+namespace App.Scripts.Scenes.StartScene.Buttons
 {
     [Serializable]
     public class ButtonsContainer

@@ -4,7 +4,7 @@ using App.Scripts.Libs.Pool;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace App.Scripts.Infrastructure.Buttons
+namespace App.Scripts.Infrastructure.Buttons.View
 {
     public class ButtonView : SpawnableItemMono
     {

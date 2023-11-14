@@ -2,9 +2,9 @@
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
-using App.Scripts.Scenes.StartScene.States;
+using App.Scripts.Scenes.StartScene.StartStates;
 
-namespace App.Scripts.Scenes.StartScene
+namespace App.Scripts.Scenes.StartScene.Buttons
 {
     public class HandlerSetupButtons : IHandlerSetupScene
     {

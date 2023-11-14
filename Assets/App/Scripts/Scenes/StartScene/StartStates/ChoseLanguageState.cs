@@ -2,7 +2,7 @@
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.TaskExtensions;
 
-namespace App.Scripts.Scenes.StartScene.States
+namespace App.Scripts.Scenes.StartScene.StartStates
 {
     public class ChoseLanguageState : GameState
     {

@@ -1,4 +1,6 @@
-﻿namespace App.Scripts.Infrastructure.Buttons
+﻿using App.Scripts.Infrastructure.Buttons.View;
+
+namespace App.Scripts.Infrastructure.Buttons
 {
     public class ButtonManager
     {

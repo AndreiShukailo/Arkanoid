@@ -1,6 +1,6 @@
 ﻿using DG.Tweening;
 
-namespace App.Scripts.Infrastructure.Buttons
+namespace App.Scripts.Infrastructure.Buttons.View
 {
         public class ButtonAnimation : ButtonAnimationBase
         {

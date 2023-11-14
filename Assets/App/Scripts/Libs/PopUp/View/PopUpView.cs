@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.Buttons;
+using App.Scripts.Infrastructure.Buttons.View;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.Pool;
 using DG.Tweening;

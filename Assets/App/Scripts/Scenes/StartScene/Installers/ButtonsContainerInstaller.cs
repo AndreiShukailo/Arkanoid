@@ -1,6 +1,7 @@
 ﻿using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.ServiceLocator;
+using App.Scripts.Scenes.StartScene.Buttons;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.StartScene.Installers
