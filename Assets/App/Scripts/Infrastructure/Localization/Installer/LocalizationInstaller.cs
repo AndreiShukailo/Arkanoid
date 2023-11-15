@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
+using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.AssetProvider;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
@@ -16,6 +17,8 @@ namespace App.Scripts.Infrastructure.Localization.Installer
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
+            var commandChangeState = new CommandChangeState();
+            serviceContainer.SetServiceSelf(commandChangeState);
             var textDataProvider = new TextDataProvider();
             serviceContainer.SetServiceSelf(textDataProvider);
             var saveLoadService = new SaveLoadService();

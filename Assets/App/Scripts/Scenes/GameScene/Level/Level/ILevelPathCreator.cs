@@ -1,7 +1,9 @@
-﻿namespace App.Scripts.Scenes.GameScene.Level.Level
+﻿using App.Scripts.Infrastructure.SaveLoad;
+
+namespace App.Scripts.Scenes.GameScene.Level.Level
 {
     public interface ILevelPathCreator
     {
-        string CreatePath(int packId, int levelId);
+        string CreatePath(PackInfo packInfo);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
-using App.Scripts.Infrastructure.LevelsManagement;
+using App.Scripts.Infrastructure.PackManagement;
+using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View;
 
-namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View
+namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.Factory
 {
     public class PackViewContext
     {

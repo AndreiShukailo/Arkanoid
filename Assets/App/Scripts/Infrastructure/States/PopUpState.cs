@@ -1,26 +1,28 @@
 ﻿using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.TaskExtensions;
+using UnityEngine;
 
-namespace App.Scripts.Scenes.StartScene.StartStates
+namespace App.Scripts.Infrastructure.States
 {
-    public class ChoseLanguageState : GameState
+    public class PopUpState : GameState
     {
-        private const string PopupName = "Language"; 
         private readonly PopUpController _popUpController;
 
-        public ChoseLanguageState(PopUpController popUpController)
+        public PopUpState(PopUpController popUpController)
         {
             _popUpController = popUpController;
         }
 
         public override void OnEnterState()
         {
-            _popUpController.ShowPopup(PopupName).Forget();
+            Time.timeScale = 0;
+            _popUpController.ProcessShow(_popUpController.CurrentPopupKey).Forget();
         }
 
         public override void OnExitState()
         {
+            Time.timeScale = 1;
             _popUpController.HidePopup().Forget();
         }
     }

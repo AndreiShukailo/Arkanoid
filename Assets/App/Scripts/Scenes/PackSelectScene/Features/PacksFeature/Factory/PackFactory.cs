@@ -1,9 +1,10 @@
 ﻿using App.Scripts.Libs.Factory;
 using App.Scripts.Libs.Localization;
+using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View
+namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.Factory
 {
     public class PackFactory : IFactory<PackView, PackViewContext>
     {

@@ -1,8 +1,9 @@
-﻿using App.Scripts.Libs.Installer;
+﻿using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using UnityEngine;
 
-namespace App.Scripts.Infrastructure.Buttons
+namespace App.Scripts.Infrastructure.Buttons.Installer
 {
     public class ButtonManagerInstaller : MonoInstaller
     {

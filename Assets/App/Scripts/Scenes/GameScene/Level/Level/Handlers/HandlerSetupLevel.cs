@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.States.SetupState;
-using App.Scripts.Scenes.GameScene.Ball;
+using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
-using App.Scripts.Scenes.GameScene.Platform;
+using App.Scripts.Scenes.GameScene.Level.PackInfoFeature;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
 {
@@ -10,15 +11,18 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
     {
         private readonly LevelController _levelController;
         private readonly ILevelCreator _levelCreator;
-        private readonly IBallCreator _ballCreator;
-        private readonly IPlatformCreator _platformCreator;
+        private readonly PackController _packController;
+        private readonly PackInfoController _packInfoController;
+        private readonly HealthController _healthController;
 
-        public HandlerSetupLevel(LevelController levelController, ILevelCreator levelCreator, IBallCreator ballCreator, IPlatformCreator platformCreator)
+        public HandlerSetupLevel(LevelController levelController, ILevelCreator levelCreator,
+            PackController packController, PackInfoController packInfoController, HealthController healthController)
         {
             _levelController = levelController;
             _levelCreator = levelCreator;
-            _ballCreator = ballCreator;
-            _platformCreator = platformCreator;
+            _packController = packController;
+            _packInfoController = packInfoController;
+            _healthController = healthController;
         }
 
         public Task Process()
@@ -29,10 +33,14 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
 
         private void SetupLevel()
         {
-            var levelModel = _levelCreator.CreateLevel(1, 1);
-            var platform = _platformCreator.CreatePlatform();
-            var ball = _ballCreator.CreateBall(platform);
-            _levelController.SetupLevel(levelModel, platform, ball);
+            if (_packController.CurrentPack == null)
+                _packController.SetLastPack();
+            
+            _packInfoController.UpdatePackInfo();
+            _healthController.ReloadHealth();
+
+            var levelModel = _levelCreator.CreateLevel(_packController.CurrentPack);
+            _levelController.SetupLevel(levelModel);
         }
     }
 }

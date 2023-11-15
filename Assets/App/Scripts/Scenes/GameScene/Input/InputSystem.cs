@@ -1,5 +1,6 @@
 ﻿using System;
 using App.Scripts.Libs.Systems;
+using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Input
@@ -10,11 +11,13 @@ namespace App.Scripts.Scenes.GameScene.Input
         public bool IsTouching { get; private set; }
 
         private readonly Camera _camera;
+        private readonly FieldInfo _fieldInfo;
         private bool _isEnabled;
-        
-        public InputSystem(Camera camera)
+
+        public InputSystem(Camera camera, FieldInfo fieldInfo)
         {
             _camera = camera;
+            _fieldInfo = fieldInfo;
         }
 
         public void Init()
@@ -24,16 +27,19 @@ namespace App.Scripts.Scenes.GameScene.Input
 
         public void Update(float dt)
         {
-            if(!_isEnabled) return;
+            if (!_isEnabled) return;
+
+            IsTouching = false;
             
             if (UnityEngine.Input.GetMouseButton(0))
             {
+                var mousePosition = _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+
+                if (mousePosition.y >= _fieldInfo.FieldRect.yMax)
+                    return;
+
                 IsTouching = true;
-                OnTouch?.Invoke(_camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition));
-            }
-            else
-            {
-                IsTouching = false;
+                OnTouch?.Invoke(mousePosition);
             }
         }
 

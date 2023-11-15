@@ -2,7 +2,7 @@
 using App.Scripts.Infrastructure.Buttons.Factory;
 using UnityEngine;
 
-namespace App.Scripts.Infrastructure.Buttons
+namespace App.Scripts.Infrastructure.Buttons.Container
 {
     public class ButtonsViewContainer : MonoBehaviour
     {

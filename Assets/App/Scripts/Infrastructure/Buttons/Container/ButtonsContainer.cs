@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using App.Scripts.Infrastructure.Buttons.View;
 using App.Scripts.Libs.Localization;
 
-namespace App.Scripts.Scenes.StartScene.Buttons
+namespace App.Scripts.Infrastructure.Buttons.Container
 {
     [Serializable]
     public class ButtonsContainer

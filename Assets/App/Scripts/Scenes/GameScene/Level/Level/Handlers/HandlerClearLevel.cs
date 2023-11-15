@@ -27,9 +27,6 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
                 cells[i][j].Block?.Remove();
                 await Task.Yield();
             }
-            
-            _levelController.PlatformModel.Remove();
-            await Task.Yield();
         }
     }
 }

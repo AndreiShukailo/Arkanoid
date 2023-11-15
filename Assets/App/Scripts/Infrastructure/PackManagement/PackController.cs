@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Infrastructure.LevelsManagement;
+using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
 
 namespace App.Scripts.Infrastructure.PackManagement
@@ -32,14 +32,15 @@ namespace App.Scripts.Infrastructure.PackManagement
 
         public void NextLevel()
         {
-            if (CurrentPack.LastLevel <= GetPack(CurrentPack.PackId).LevelsCount)
+            if (CurrentPack.LastLevel < GetPack(CurrentPack.PackId).LevelsCount)
             {
                 CurrentPack.LastLevel++;
             }
             else if(CurrentPack == _playerProgress.LastPack)
             {
+                CurrentPack.LastLevel = 1;
                 _playerProgress.CompletedPacks.Add(CurrentPack);
-                _playerProgress.LastPack = new PackInfo(CurrentPack.PackId, CurrentPack.LastLevel);
+                _playerProgress.LastPack = new PackInfo(CurrentPack.PackId + 1 , 1);
                 CurrentPack = _playerProgress.LastPack;
             }
             else

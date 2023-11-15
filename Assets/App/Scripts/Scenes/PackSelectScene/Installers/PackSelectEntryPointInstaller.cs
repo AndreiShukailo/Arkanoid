@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Infrastructure.Buttons;
+using App.Scripts.Infrastructure.Buttons.Container;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
@@ -11,9 +12,8 @@ using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.PackSelectScene.Features.ButtonsFeature;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature;
-using App.Scripts.Scenes.StartScene.Buttons;
 
-namespace App.Scripts.Scenes.StartScene.Installers
+namespace App.Scripts.Scenes.PackSelectScene.Installers
 {
     public class PackSelectEntryPointInstaller : MonoInstaller
     {
@@ -57,8 +57,7 @@ namespace App.Scripts.Scenes.StartScene.Installers
                 new HandlerCreatePacks(serviceContainer.Get<PacksCreator>()),
                 new HandlerSetupButtonsPackSelectedScene(
                     serviceContainer.Get<ButtonsContainer>(),
-                    sceneLoader,
-                    serviceContainer.Get<CommandChangeState>())
+                    sceneLoader)
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 

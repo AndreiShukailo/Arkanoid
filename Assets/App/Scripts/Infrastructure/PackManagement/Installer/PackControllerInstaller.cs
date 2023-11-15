@@ -1,10 +1,12 @@
-﻿using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
+﻿using App.Scripts.Infrastructure.PackManagement.Config;
+using App.Scripts.Infrastructure.PackManagement.Parser;
+using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
 using App.Scripts.Libs.AssetProvider;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using UnityEngine;
 
-namespace App.Scripts.Infrastructure.PackManagement
+namespace App.Scripts.Infrastructure.PackManagement.Installer
 {
     public class PackControllerInstaller : MonoInstaller
     {

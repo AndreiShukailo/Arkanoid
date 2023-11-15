@@ -12,10 +12,9 @@ namespace App.Scripts.Infrastructure.SceneManagement.Installer
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            var commandChangeState = new CommandChangeState();
-            serviceContainer.SetServiceSelf(commandChangeState);
-            
-            var sceneLoader = new SceneLoaderController(_scenesConfig, commandChangeState);
+            var sceneLoader = new SceneLoaderController(
+                _scenesConfig, 
+                serviceContainer.Get<CommandChangeState>());
             serviceContainer.SetServiceSelf(sceneLoader);
         }
     }

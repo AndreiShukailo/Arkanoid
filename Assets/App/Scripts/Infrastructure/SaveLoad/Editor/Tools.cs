@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Editor
+namespace App.Scripts.Infrastructure.SaveLoad.Editor
 {
     public class Tools
     {

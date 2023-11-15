@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace App.Scripts.Infrastructure.SaveLoad.SaveLoadService
+namespace App.Scripts.Infrastructure.SaveLoad
 {
     [Serializable]
     public class PlayerProgress : Progress

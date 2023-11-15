@@ -1,7 +1,9 @@
-﻿namespace App.Scripts.Scenes.GameScene.Level.Level
+﻿using App.Scripts.Infrastructure.SaveLoad;
+
+namespace App.Scripts.Scenes.GameScene.Level.Level
 {
     public interface ILevelCreator
     {
-        LevelModel CreateLevel(int packId, int levelId);
+        LevelModel CreateLevel(PackInfo packInfo);
     }
 }

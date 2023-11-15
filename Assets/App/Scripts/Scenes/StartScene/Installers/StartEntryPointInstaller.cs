@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Infrastructure.Buttons;
+using App.Scripts.Infrastructure.Buttons.Container;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
@@ -10,7 +11,6 @@ using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.StartScene.Buttons;
-using App.Scripts.Scenes.StartScene.StartStates;
 
 namespace App.Scripts.Scenes.StartScene.Installers
 {
@@ -31,7 +31,7 @@ namespace App.Scripts.Scenes.StartScene.Installers
 
             gameStateMachine.AddState(CreateSetupState(serviceContainer));
             gameStateMachine.AddState(CreateProcessState(serviceContainer));
-            gameStateMachine.AddState(CreteLanguagePopupState(serviceContainer));
+            gameStateMachine.AddState(CretePopupState(serviceContainer));
             gameStateMachine.AddState(CreateLoadSceneState(serviceContainer));
 
             serviceContainer.Get<CommandChangeState>().AddStateMachine(gameStateMachine);
@@ -39,9 +39,9 @@ namespace App.Scripts.Scenes.StartScene.Installers
             return gameStateMachine;
         }
 
-        private GameState CreteLanguagePopupState(ServiceContainer serviceContainer)
+        private GameState CretePopupState(ServiceContainer serviceContainer)
         {
-            return new ChoseLanguageState(serviceContainer.Get<PopUpController>());
+            return new PopUpState(serviceContainer.Get<PopUpController>());
         }
 
         private LoadSceneState CreateLoadSceneState(ServiceContainer serviceContainer)
@@ -61,7 +61,7 @@ namespace App.Scripts.Scenes.StartScene.Installers
             {
                 new HandlerSetupButtonsStartScene(serviceContainer.Get<ButtonsContainer>(),
                     sceneLoader,
-                    serviceContainer.Get<CommandChangeState>()
+                    serviceContainer.Get<PopUpController>()
                 )
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);

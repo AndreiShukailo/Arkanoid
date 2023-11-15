@@ -27,7 +27,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             _cameraBordersContainer.Register(fieldInfo);
 
             CreateGridBuilder(serviceContainer, fieldInfo);
-            CreateInputSystem(serviceContainer);
+            CreateInputSystem(serviceContainer, fieldInfo);
         }
 
         private void CreateGridBuilder(ServiceContainer serviceContainer, FieldInfo fieldInfo)
@@ -41,9 +41,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.SetService<ILevelGridBuilder, LevelGridBuilder>(gridBuilder);
         }
 
-        private void CreateInputSystem(ServiceContainer serviceContainer)
+        private void CreateInputSystem(ServiceContainer serviceContainer, FieldInfo fieldInfo)
         {
-            var inputSystem = new InputSystem(_camera);
+            var inputSystem = new InputSystem(_camera, fieldInfo);
             serviceContainer.SetServiceSelf(inputSystem);
             serviceContainer.SetService<ISystem, InputSystem>(inputSystem);
         }

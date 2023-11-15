@@ -1,7 +1,7 @@
 ﻿using System;
 using App.Scripts.Infrastructure.Buttons.View;
 
-namespace App.Scripts.Scenes.StartScene.Buttons
+namespace App.Scripts.Infrastructure.Buttons.Container
 {
     [Serializable]
     public class KeyButton

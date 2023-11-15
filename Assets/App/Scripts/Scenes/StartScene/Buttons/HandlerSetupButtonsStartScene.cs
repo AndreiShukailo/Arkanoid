@@ -1,15 +1,20 @@
-﻿using App.Scripts.Infrastructure.SceneManagement;
+﻿using App.Scripts.Infrastructure.Buttons;
+using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
-using App.Scripts.Scenes.StartScene.StartStates;
+using App.Scripts.Libs.PopUp;
 
 namespace App.Scripts.Scenes.StartScene.Buttons
 {
     class HandlerSetupButtonsStartScene : HandlerSetupButtons
     {
+        private readonly PopUpController _popUpController;
+
         public HandlerSetupButtonsStartScene(ButtonsContainer buttonsContainer,
-            SceneLoaderController sceneLoaderController, CommandChangeState commandChangeState) : base(buttonsContainer,
-            sceneLoaderController, commandChangeState)
+            SceneLoaderController sceneLoaderController, PopUpController popUpController) : base(buttonsContainer,
+            sceneLoaderController)
         {
+            _popUpController = popUpController;
         }
         
         protected override void InstallButtons()
@@ -25,7 +30,7 @@ namespace App.Scripts.Scenes.StartScene.Buttons
 
         private void OwenLanguagePopup()
         {
-            _commandChangeState.ChangeState<ChoseLanguageState>();
+            _popUpController.ShowPopup("Language");
         }
     }
 }

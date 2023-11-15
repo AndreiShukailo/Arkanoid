@@ -4,10 +4,11 @@ using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature;
+using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.Factory;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.StartScene.Installers
+namespace App.Scripts.Scenes.PackSelectScene.Installers
 {
     public class PacksCreatorInstaller : MonoInstaller
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Infrastructure.LevelsManagement;
+using App.Scripts.Infrastructure.PackManagement.Config;
 
-namespace App.Scripts.Infrastructure.PackManagement
+namespace App.Scripts.Infrastructure.PackManagement.Parser
 {
     public interface IPackParser
     {

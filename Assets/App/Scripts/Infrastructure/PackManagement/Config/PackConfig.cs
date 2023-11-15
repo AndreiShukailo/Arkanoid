@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Scripts.Infrastructure.PackManagement
+namespace App.Scripts.Infrastructure.PackManagement.Config
 {
     [Serializable]
     public class PackConfig
