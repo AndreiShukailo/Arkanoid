@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
@@ -9,7 +10,6 @@ using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.GameScene.Ball;
-using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.GameStates;
 using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
@@ -78,7 +78,10 @@ namespace App.Scripts.Scenes.GameScene.Installers
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 
-            return new StateSetupScene(handlerSetupSceneContainer, sceneLoader);
+            return new StateSetupScene(
+                handlerSetupSceneContainer, 
+                sceneLoader,
+                serviceContainer.Get<ButtonManager>());
         }
 
         private ReloadLevelState CreateReloadLevelState(ServiceContainer serviceContainer)

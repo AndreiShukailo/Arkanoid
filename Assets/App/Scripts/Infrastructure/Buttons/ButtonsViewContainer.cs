@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Infrastructure.Buttons.Factory;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace App.Scripts.Infrastructure.Buttons
 {
@@ -10,16 +9,22 @@ namespace App.Scripts.Infrastructure.Buttons
         [SerializeField] private List<ButtonPoolSetting> _buttonsPoolSetting;
         [SerializeField] private Canvas _parrent;
         private Dictionary<string, ButtonFactory> _keyButton = new ();
+        private Canvas _container;
 
         public void Register()
         {
-            var container = CreateContainer();
+            _container = CreateContainer();
 
             foreach (var poolSetting in _buttonsPoolSetting)
             {
-                poolSetting.Container = container;
+                poolSetting.Container = _container.transform;
                 _keyButton[poolSetting.SpawnableItemMono.ButtonId] = new ButtonFactory(poolSetting);
             }
+        }
+
+        public void UpdateCamera()
+        {
+            _container.worldCamera = Camera.main;
         }
 
         public ButtonFactory GetFactory(string key)
@@ -27,12 +32,11 @@ namespace App.Scripts.Infrastructure.Buttons
             return _keyButton[key];
         }
 
-        private Transform CreateContainer()
+        private Canvas CreateContainer()
         {
             var parent = Instantiate(_parrent);
-            parent.worldCamera = Camera.main;
             DontDestroyOnLoad(parent);
-            return parent.transform;
+            return parent;
         }
     }
 }

@@ -16,5 +16,10 @@ namespace App.Scripts.Infrastructure.Buttons
         {
             return _buttonsViewContainer.GetFactory(key).Create();
         }
+        
+        public void UpdateCamera()
+        {
+            _buttonsViewContainer.UpdateCamera();
+        }
     }
 }

@@ -276,6 +276,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65243602}
   m_CullTransparentMesh: 1
+--- !u!1 &94253494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 94253495}
+  - component: {fileID: 94253496}
+  m_Layer: 0
+  m_Name: ButtonsContainerInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &94253495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94253494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613001242}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &94253496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94253494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b6f13dfca640769d993f195d82b517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonsContainer:
+    _buttons:
+    - Key: BackStart
+      ButtonView: {fileID: 525133200}
 --- !u!1001 &240879357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1100,7 +1148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 84.89995, y: -0.00016021729}
+  m_AnchoredPosition: {x: 84.8999, y: -0.00016021729}
   m_SizeDelta: {x: 0, y: -61.57}
   m_Pivot: {x: 0.000000040978193, y: 0.5000027}
 --- !u!114 &881485972
@@ -1542,6 +1590,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1961365214}
+  - {fileID: 94253495}
   - {fileID: 1626346301}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1560,6 +1609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Installers:
   - {fileID: 1961365215}
+  - {fileID: 94253496}
   - {fileID: 1626346302}
 --- !u!1 &1626346300
 GameObject:
@@ -1591,7 +1641,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1613001242}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1626346302
 MonoBehaviour:

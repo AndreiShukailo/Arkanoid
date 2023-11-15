@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
@@ -8,7 +9,9 @@ using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
+using App.Scripts.Scenes.PackSelectScene.Features.ButtonsFeature;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature;
+using App.Scripts.Scenes.StartScene.Buttons;
 
 namespace App.Scripts.Scenes.StartScene.Installers
 {
@@ -51,11 +54,18 @@ namespace App.Scripts.Scenes.StartScene.Installers
 
             var handlers = new List<IHandlerSetupScene>()
             {
-                new HandlerCreatePacks(serviceContainer.Get<PacksCreator>())
+                new HandlerCreatePacks(serviceContainer.Get<PacksCreator>()),
+                new HandlerSetupButtonsPackSelectedScene(
+                    serviceContainer.Get<ButtonsContainer>(),
+                    sceneLoader,
+                    serviceContainer.Get<CommandChangeState>())
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 
-            return new StateSetupScene(handlerSetupSceneContainer, sceneLoader);
+            return new StateSetupScene(
+                handlerSetupSceneContainer,
+                sceneLoader,
+                serviceContainer.Get<ButtonManager>());
         }
 
         private GameState CreateProcessState(ServiceContainer serviceContainer)

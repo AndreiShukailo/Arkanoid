@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.StateMachine;
@@ -25,8 +26,8 @@ namespace App.Scripts.Infrastructure.States
         private async Task ProcessCloseScene()
         {
             await _popUpController.HidePopup();
-            await _sceneLoaderController.ProcessLoadScene();
             _popUpController.RemovePopups();
+            await _sceneLoaderController.ProcessLoadScene();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
@@ -58,14 +59,17 @@ namespace App.Scripts.Scenes.StartScene.Installers
 
             var handlers = new List<IHandlerSetupScene>()
             {
-                new HandlerSetupButtons(serviceContainer.Get<ButtonsContainer>(),
+                new HandlerSetupButtonsStartScene(serviceContainer.Get<ButtonsContainer>(),
                     sceneLoader,
                     serviceContainer.Get<CommandChangeState>()
                 )
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 
-            return new StateSetupScene(handlerSetupSceneContainer, sceneLoader);
+            return new StateSetupScene(
+                handlerSetupSceneContainer,
+                sceneLoader,
+                serviceContainer.Get<ButtonManager>());
         }
 
         private GameState CreateProcessState(ServiceContainer serviceContainer)
