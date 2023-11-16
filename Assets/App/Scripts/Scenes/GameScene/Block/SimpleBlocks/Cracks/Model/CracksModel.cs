@@ -15,7 +15,7 @@ namespace App.Scripts.Scenes.GameScene.Block.SimleBlocks.Cracks.Model
             _blockModel.OnRemove += Remove;
         }
 
-        public void Remove()
+        public void Remove(BlockModel blockModel)
         {
             _crackView.Remove();
             _blockModel.OnRemove -= Remove;

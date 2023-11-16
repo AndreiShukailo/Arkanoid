@@ -39,7 +39,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
             _packInfoController.UpdatePackInfo();
             _healthController.ReloadHealth();
 
-            var levelModel = _levelCreator.CreateLevel(_packController.CurrentPack);
+            var levelModel = _levelCreator.CreateLevel(_packController.CurrentPack, _levelController);
             _levelController.SetupLevel(levelModel);
         }
     }

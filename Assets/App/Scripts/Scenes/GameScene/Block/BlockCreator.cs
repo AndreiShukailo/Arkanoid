@@ -3,6 +3,7 @@ using App.Scripts.Libs.TiledParser.TileSet;
 using App.Scripts.Scenes.GameScene.Block.Container;
 using App.Scripts.Scenes.GameScene.Block.Factory;
 using App.Scripts.Scenes.GameScene.Block.Model;
+using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
 using UnityEngine;
 
@@ -20,11 +21,11 @@ namespace App.Scripts.Scenes.GameScene.Block
             _tileSet = tileSetProvider.CreateTiledTileSet(tileSetConfig);
         }
 
-        public BlockModel Create(int blockId, Vector2 position, Vector2 size)
+        public BlockModel Create(LevelModel levelModel,int blockId, Vector2 position, Vector2 size)
         {
             var type = GetBlockType(blockId);
             var factory = _blocksContainer.GetFactory(type);
-            return factory.Create(new BlockContext(position, size));
+            return factory.Create(new BlockContext(levelModel, position, size));
         }
 
         private string GetBlockType(int id)

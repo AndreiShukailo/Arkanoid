@@ -20,13 +20,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
 
         private async Task ClearLevelModel()
         {
-            var cells = _levelController.LevelModel.LevelGrid.Cells;
-            for (int i = 0; i < cells.Length; i++)
-            for (int j = 0; j < cells[i].Length; j++)
-            {
-                cells[i][j].Block?.Remove();
-                await Task.Yield();
-            }
+            await _levelController.CleanupLevel();
         }
     }
 }

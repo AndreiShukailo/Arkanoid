@@ -1,6 +1,7 @@
 using App.Scripts.Libs.Pool;
 using App.Scripts.Scenes.GameScene.Block.Model;
 using App.Scripts.Scenes.GameScene.Block.View;
+using App.Scripts.Scenes.GameScene.Level.Level;
 
 namespace App.Scripts.Scenes.GameScene.Block.Factory
 {
@@ -21,7 +22,7 @@ namespace App.Scripts.Scenes.GameScene.Block.Factory
             var blockView = _poolProvider.ObjectPool.Spawn();
             blockView.Construct(context.Size, context.Position);
             var collideStrategy = _collideStrategyFactory.Create(_setting);
-            var blockModel = new BlockModel(blockView, collideStrategy);
+            var blockModel = new BlockModel(blockView, collideStrategy, context.LevelModel);
             return blockModel;
         }
     }

@@ -1,5 +1,6 @@
 using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Libs.TiledParser.Level;
+using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level
@@ -17,11 +18,11 @@ namespace App.Scripts.Scenes.GameScene.Level.Level
             _levelPathCreator = levelPathCreator;
         }
 
-        public LevelModel CreateLevel(PackInfo packInfo)
+        public LevelModel CreateLevel(PackInfo packInfo, LevelController levelController)
         {
             var path = _levelPathCreator.CreatePath(packInfo);
             var levelInfo = _levelParser.CreateLevelGrid(path);
-            return new LevelModel(_levelGridBuilder.BuildGrid(levelInfo));
+            return new LevelModel(_levelGridBuilder.BuildGrid(levelInfo, levelController));
         }
     }
 }

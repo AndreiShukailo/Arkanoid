@@ -40,7 +40,7 @@ namespace App.Scripts.Scenes.GameScene.Block.SimleBlocks
 
         private void SwitchCrack()
         {
-            _currentCrack?.Remove();
+            _currentCrack?.Remove(_model);
             _currentCrack = _crackCreator.CreateCrack(_model, _health);
         }
     }

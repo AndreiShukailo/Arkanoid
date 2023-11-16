@@ -1,5 +1,7 @@
 ﻿using App.Scripts.Libs.TiledParser.Level;
 using App.Scripts.Scenes.GameScene.Block;
+using App.Scripts.Scenes.GameScene.Block.Model;
+using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.LevelField.BlockSize;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using UnityEngine;
@@ -8,6 +10,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder
 {
     class LevelGridBuilder : ILevelGridBuilder
     {
+        private const string IronBlockKey = "IronBlock";
         private readonly IBlockSizeInfoProvider _blockSizeInfoProvider;
         private readonly IBlockCreator _blockCreator;
         private readonly FieldInfo _fieldInfo;
@@ -20,7 +23,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder
             _fieldInfo = fieldInfo;
         }
 
-        public Grid BuildGrid(LevelInfo levelInfo)
+        public Grid BuildGrid(LevelInfo levelInfo, LevelController levelController)
         {
             var blockSizeInfo = _blockSizeInfoProvider.CreateBlockSizeInfo(levelInfo.Width);
             var spacing = blockSizeInfo.Spacing;
@@ -43,15 +46,24 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder
                 {
                     if (j != 0)
                         lastPositionHorizontal = AddHorizontalPosition(lastPositionHorizontal, blockSize, spacing);
-
+                    
                     cells[i][j] = blocksId[i][j] != 0
                         ? new Cell(new Vector2Int(i, j),
-                            _blockCreator.Create(blocksId[i][j], lastPositionHorizontal, blockSize))
+                            CreateBlock(blocksId[i][j], lastPositionHorizontal, blockSize, levelController))
                         : new Cell(new Vector2Int(i, j));
                 }
             }
 
             return new Grid(cells);
+        }
+
+        private BlockModel CreateBlock(int id, Vector2 position, Vector2 size, LevelController levelController)
+        {
+            var blockModel = _blockCreator.Create(levelController.LevelModel, id, position, size);
+            if(blockModel.BlockView.BlockKey == IronBlockKey) return blockModel;
+            levelController.SubscribeOnBlock(blockModel);
+
+            return blockModel;
         }
 
         private Vector2 CreateFirstBlockPosition(Vector2 blockSize, float spacing)

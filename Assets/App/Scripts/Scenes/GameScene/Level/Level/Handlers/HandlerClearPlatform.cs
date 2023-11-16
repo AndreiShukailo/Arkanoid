@@ -15,8 +15,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
 
         public Task Process()
         {
-            _levelController.BallContainer.Cleanup();
-            _levelController.PlatformModel.Remove();
+            _levelController.CleanupPlatform();
             return Task.CompletedTask;
         }
     }
