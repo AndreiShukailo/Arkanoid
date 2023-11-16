@@ -11,13 +11,13 @@ namespace App.Scripts.Scenes.GameScene.Platform
     {
         private readonly PlatformConfig _platformConfig;
         private readonly FieldInfo _fieldInfo;
-        private readonly InputSystem _inputSystem;
+        private readonly PlatformFactory _factory;
 
         public PlatformCreator(PlatformConfig platformConfig, FieldInfo fieldInfo, InputSystem inputSystem)
         {
             _platformConfig = platformConfig;
             _fieldInfo = fieldInfo;
-            _inputSystem = inputSystem;
+            _factory = new PlatformFactory(_platformConfig.PlatformPoolSetting, inputSystem);
         }
 
         public PlatformModel CreatePlatform()
@@ -25,9 +25,8 @@ namespace App.Scripts.Scenes.GameScene.Platform
             var platformStartPosition =
                 new Vector2(0, _fieldInfo.CameraBorders.yMin + _platformConfig.PlatformOffsetBottom);
             var spawnContext = new PlatformSpawnContext(platformStartPosition, _platformConfig.StartSpeed);
-            var factory = new PlatformFactory(_platformConfig.PlatformPoolSetting, _inputSystem);
 
-            return factory.Create(spawnContext);
+            return _factory.Create(spawnContext);
         }
     }
 }
