@@ -567,7 +567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 116.600464, y: -0.00016021729}
+  m_AnchoredPosition: {x: 116.60048, y: -0.00016021729}
   m_SizeDelta: {x: 0, y: -61.57}
   m_Pivot: {x: 0.000000040978193, y: 0.5000027}
 --- !u!114 &161483740
@@ -1907,6 +1907,10 @@ MonoBehaviour:
   _packInfoView: {fileID: 1854242459}
   _menuPupUpPoolSetting:
     SpawnableItemMono: {fileID: 6155601757048691621, guid: 6b7be8d73571c7f4584af7cc2c31a04a, type: 3}
+    Container: {fileID: 2091094349}
+    StartSize: 1
+  _losePopUpPoolSetting:
+    SpawnableItemMono: {fileID: 6155601757048691621, guid: 696edb159b6bc164eaeb7996570f57c7, type: 3}
     Container: {fileID: 2091094349}
     StartSize: 1
 --- !u!1 &1026842660

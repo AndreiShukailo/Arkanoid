@@ -2,6 +2,7 @@
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.AssetProvider;
 using App.Scripts.Libs.Installer;
+using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Libs.TiledParser.Level;
@@ -53,7 +54,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var levelController = new LevelController(
                 new BallContainer(), 
                 serviceContainer.Get<HealthController>(),
-                serviceContainer.Get<CommandChangeState>());
+                serviceContainer.Get<CommandChangeState>(), 
+                serviceContainer.Get<PopUpController>());
 
             return levelController;
         }
