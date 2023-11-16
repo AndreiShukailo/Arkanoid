@@ -14,13 +14,14 @@ using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
+using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers
 {
     public class LevelInstaller : MonoInstaller
     {
-        [SerializeField] private int _startHealthCount = 3;
+        [SerializeField] private int _startHealthCount = 4;
         [SerializeField] private LevelsConfig _levelsConfig;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
@@ -32,7 +33,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var levelController = CreateLevelController(serviceContainer);
             serviceContainer.SetServiceSelf(levelController);
 
-            var checkLooseBallSystem = CreateLooseBallSystem(levelController);
+            var checkLooseBallSystem = CreateLooseBallSystem(serviceContainer, levelController);
             serviceContainer.SetService<ISystem, CheckLooseBallSystem>(checkLooseBallSystem);
         }
 
@@ -60,9 +61,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
             return levelController;
         }
 
-        private CheckLooseBallSystem CreateLooseBallSystem(LevelController levelController)
+        private CheckLooseBallSystem CreateLooseBallSystem(ServiceContainer serviceContainer, LevelController levelController)
         {
-            return new CheckLooseBallSystem(levelController);
+            return new CheckLooseBallSystem(levelController, serviceContainer.Get<FieldInfo>());
         }
     }
 }
