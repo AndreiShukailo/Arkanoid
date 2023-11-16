@@ -1,5 +1,4 @@
-﻿using System;
-using App.Scripts.Libs.Pool;
+﻿using App.Scripts.Libs.Pool;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Platform.View

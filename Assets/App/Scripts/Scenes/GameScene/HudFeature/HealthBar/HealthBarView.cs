@@ -19,7 +19,7 @@ namespace App.Scripts.Scenes.GameScene.HudFeature.HealthBar
 
         private void UpdateHealth()
         {
-            var deactiveHealth = _healthItems.Count - _healthController.Health;
+            var deactiveHealth = _healthItems.Count + 1 - _healthController.Health;
 
             foreach (var healthItem in _healthItems)
             {
@@ -32,7 +32,7 @@ namespace App.Scripts.Scenes.GameScene.HudFeature.HealthBar
 
         private void CreateHealthItems(HealthItemFactory healthItemFactory)
         {
-            for (int i = 0; i < _healthController.Health; i++)
+            for (int i = 1; i < _healthController.Health; i++)
             {
                 _healthItems.Add(healthItemFactory.Create());
             }
