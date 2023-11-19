@@ -17,7 +17,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level
 
         public string CreatePath(PackInfo packInfo)
         {
-            return $"{_levelsConfig.LevelsPath}/{_packController.GetPack(packInfo.PackId).Key}/{packInfo.LastLevel}";
+            return $"{_levelsConfig.LevelsPath}/{_packController.GetPack(packInfo).Key}/{packInfo.LastLevel}";
         }
     }
 }

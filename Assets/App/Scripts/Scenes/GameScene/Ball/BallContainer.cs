@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Scenes.GameScene.Ball.Model;
+using App.Scripts.Libs.Components;
 
 namespace App.Scripts.Scenes.GameScene.Ball
 {
     public class BallContainer
     {
-        public readonly List<BallModel> Balls = new ();
+        public readonly List<ComponentContainer> Balls = new ();
 
-        public void AddBall(BallModel ballModel)
+        public void AddBall(ComponentContainer ballModel)
         {
             Balls.Add(ballModel);
         }
 
-        public void RemoveBall(BallModel ballModel)
+        public void RemoveBall(ComponentContainer ballModel)
         {
             Balls.Remove(ballModel);
             ballModel.Remove();

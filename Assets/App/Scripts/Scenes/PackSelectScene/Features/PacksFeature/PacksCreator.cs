@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SaveLoad;
-using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.Factory;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View;
@@ -34,7 +33,7 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
 
             foreach (var pack in _packController.GetAllPacks())
             {
-                if (_packController.GetPack(lastPack.PackId) == pack)
+                if (_packController.GetPack(lastPack) == pack && !IsCompleted(completedPacks, pack, out var packInfo1))
                 {
                     CreatePack(pack, "Last", lastPack.LastLevel - 1, lastPack);
                     continue;
@@ -42,7 +41,7 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
 
                 if (IsCompleted(completedPacks, pack, out var packInfo))
                 {
-                    CreatePack(pack, "Completed", packInfo.LastLevel - 1, packInfo);
+                    CreatePack(pack, "Completed", pack.LevelsCount, packInfo);
                     continue;
                 }
 
@@ -52,7 +51,7 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
 
         private bool IsCompleted(List<PackInfo> packInfos, Pack pack, out PackInfo packInfo)
         {
-            foreach (var item in packInfos.Where(item => _packController.GetPack(item.PackId) == pack))
+            foreach (var item in packInfos.Where(item => _packController.GetPack(item) == pack))
             {
                 packInfo = item;
                 return true;
@@ -67,11 +66,11 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
             _packFactory.Create(new PackViewContext(
                 _packViewContainer.Get(packViewKey),
                 pack,
-                GetOnButtonClickAction(pack, packInfo),
+                GetOnButtonClickAction(packInfo),
                 levelsCount));
         }
 
-        private Action GetOnButtonClickAction(Pack pack, PackInfo packInfo = null)
+        private Action GetOnButtonClickAction(PackInfo packInfo = null)
         {
             if (packInfo == null) return () => { };
 

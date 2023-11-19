@@ -1,6 +1,9 @@
-﻿using App.Scripts.Libs.Installer;
+﻿using App.Scripts.Libs.Components;
+using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.Systems;
+using App.Scripts.Scenes.GameScene.Ball;
+using App.Scripts.Scenes.GameScene.Ball.Components;
 using App.Scripts.Scenes.GameScene.Block;
 using App.Scripts.Scenes.GameScene.Input;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
@@ -8,6 +11,8 @@ using App.Scripts.Scenes.GameScene.Level.LevelField.BlockSize;
 using App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Config;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
+using App.Scripts.Scenes.GameScene.Platform.Components;
+using App.Scripts.Scenes.GameScene.Platform.Systems;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers
@@ -24,7 +29,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 .CreateField(_levelFieldConfig);
             serviceContainer.SetServiceSelf(fieldInfo);
 
-            _cameraBordersContainer.Register(fieldInfo);
+            _cameraBordersContainer.Register(
+                fieldInfo,
+                new CameraBordersFactory(serviceContainer.Get<SystemsContainer>()));
 
             CreateGridBuilder(serviceContainer, fieldInfo);
             CreateInputSystem(serviceContainer, fieldInfo);
@@ -44,8 +51,17 @@ namespace App.Scripts.Scenes.GameScene.Installers
         private void CreateInputSystem(ServiceContainer serviceContainer, FieldInfo fieldInfo)
         {
             var inputSystem = new InputSystem(_camera, fieldInfo);
-            serviceContainer.SetServiceSelf(inputSystem);
             serviceContainer.SetService<ISystem, InputSystem>(inputSystem);
+
+            var controlMoveSystem = new ControlMoveSystem(inputSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<ControlMovementComponent, ControlMoveSystem>(controlMoveSystem);
+            serviceContainer.SetService<ISystem, ControlMoveSystem>(controlMoveSystem);
+            
+            var movingWithPlatformSystem = new MovingWithPlatformSystem(inputSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<MovingWithPlatformComponent, MovingWithPlatformSystem>(movingWithPlatformSystem);
+            serviceContainer.SetService<ISystem, MovingWithPlatformSystem>(movingWithPlatformSystem);
         }
     }
 }

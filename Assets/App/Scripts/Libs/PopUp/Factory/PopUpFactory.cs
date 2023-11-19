@@ -4,16 +4,12 @@ using App.Scripts.Libs.PopUp.View;
 
 namespace App.Scripts.Libs.PopUp.Factory
 {
-    public abstract class PopUpFactory : PoolFactory<PopUpView>
+    public class PopUpFactory : PoolFactory<PopUpView>
     {
         private LocalizationController _localizationController;
 
-        protected PopUpFactory(PoolSetting<PopUpView> poolSetting) : base(
+        public PopUpFactory(PoolSetting<PopUpView> poolSetting, LocalizationController localizationController) : base(
             poolSetting)
-        {
-        }
-
-        public void AddLocalization(LocalizationController localizationController)
         {
             _localizationController = localizationController;
         }
@@ -22,9 +18,8 @@ namespace App.Scripts.Libs.PopUp.Factory
         {
             var view = _poolProvider.ObjectPool.Spawn();
             view.SetLocalization(_localizationController);
-            return BuildPopup(view, _localizationController);
-        }
 
-        protected abstract PopUpView BuildPopup(PopUpView popUpView, LocalizationController localizationController);
+            return view;
+        }
     }
 }

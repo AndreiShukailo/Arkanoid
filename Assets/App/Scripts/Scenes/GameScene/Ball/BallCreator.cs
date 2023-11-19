@@ -1,29 +1,26 @@
-﻿using App.Scripts.Scenes.GameScene.Ball.Config;
+﻿using App.Scripts.Libs.Components;
+using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Factory;
-using App.Scripts.Scenes.GameScene.Ball.Model;
-using App.Scripts.Scenes.GameScene.Platform;
-using App.Scripts.Scenes.GameScene.Platform.Model;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Ball
 {
-    class BallCreator : IBallCreator
+    public class BallCreator : IBallCreator
     {
         private readonly BallConfig _ballConfig;
         private readonly BallFactory _ballFactory;
 
-        public BallCreator(BallConfig ballConfig, BallFactory ballFactory)
+        public BallCreator(BallConfig ballConfig, SystemsContainer systemsContainer)
         {
             _ballConfig = ballConfig;
-            _ballFactory = ballFactory;
+            _ballFactory = new BallFactory(ballConfig.PoolSetting, systemsContainer);
         }
 
-        public BallModel CreateBall(PlatformModel platformModel)
+        public ComponentContainer CreateBall(ComponentContainer platform)
         {
-            var ballPosition = new Vector2(0, platformModel.PlatformView.Position.y + _ballConfig.BallBottomOffset);
+            var ballPosition = new Vector2(0, platform.transform.position.y + _ballConfig.BallBottomOffset);
 
-            var spawnContext = new BallSpawnContext(platformModel, ballPosition,
-                _ballConfig.StartSpeed, _ballConfig.MinBounceAngle);
+            var spawnContext = new BallSpawnContext(platform, ballPosition);
             return _ballFactory.Create(spawnContext);
         }
     }

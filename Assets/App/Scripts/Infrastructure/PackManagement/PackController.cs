@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
 
@@ -32,33 +33,43 @@ namespace App.Scripts.Infrastructure.PackManagement
 
         public void NextLevel()
         {
-            if (CurrentPack.LastLevel < GetPack(CurrentPack.PackId).LevelsCount)
+            PackInfo currentPack = null;
+            if (CurrentPack.LastLevel < GetPack(CurrentPack).LevelsCount)
             {
                 CurrentPack.LastLevel++;
             }
-            else if(CurrentPack == _playerProgress.LastPack)
-            {
-                CurrentPack.LastLevel = 1;
-                _playerProgress.CompletedPacks.Add(CurrentPack);
-                _playerProgress.LastPack = new PackInfo(CurrentPack.PackId + 1 , 1);
-                CurrentPack = _playerProgress.LastPack;
-            }
             else
             {
-                CurrentPack = null;
+                if (CurrentPackIsLast())
+                {
+                    _playerProgress.CompletedPacks.Add(CurrentPack);
+                    if (CurrentPack.PackId < _packContainer.PackCount)
+                    {
+                        _playerProgress.LastPack = new PackInfo(CurrentPack.PackId + 1, 1);
+                        currentPack = _playerProgress.LastPack;
+                    }
+                }
+
+                CurrentPack.LastLevel = 1;
+                CurrentPack = currentPack;
             }
 
             _saveLoadService.Save(_playerProgress);
         }
 
-        public Pack GetPack(int key)
+        public Pack GetPack(PackInfo packInfo)
         {
-            return _packContainer.GetPack(key);
+            return _packContainer.GetPack(packInfo.PackId);
         }
 
         public IEnumerable<Pack> GetAllPacks()
         {
             return _packContainer.GetAll();
+        }
+
+        private bool CurrentPackIsLast()
+        {
+            return CurrentPack == _playerProgress.LastPack;
         }
 
         private PlayerProgress GetCurrentPlayerProgress()

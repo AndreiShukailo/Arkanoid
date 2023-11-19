@@ -1,9 +1,8 @@
+using App.Scripts.Libs.Components;
 using App.Scripts.Libs.TiledParser.Data;
 using App.Scripts.Libs.TiledParser.TileSet;
 using App.Scripts.Scenes.GameScene.Block.Container;
 using App.Scripts.Scenes.GameScene.Block.Factory;
-using App.Scripts.Scenes.GameScene.Block.Model;
-using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
 using UnityEngine;
 
@@ -21,11 +20,12 @@ namespace App.Scripts.Scenes.GameScene.Block
             _tileSet = tileSetProvider.CreateTiledTileSet(tileSetConfig);
         }
 
-        public BlockModel Create(LevelModel levelModel,int blockId, Vector2 position, Vector2 size)
+        public CellComponent Create(int blockId, Vector2Int gridPosition, Vector2 position, Vector2 size)
         {
+            if (blockId == 0) return null;
             var type = GetBlockType(blockId);
             var factory = _blocksContainer.GetFactory(type);
-            return factory.Create(new BlockContext(levelModel, position, size));
+            return factory.Create(new BlockContext(gridPosition, position, size)).Get<CellComponent>();
         }
 
         private string GetBlockType(int id)

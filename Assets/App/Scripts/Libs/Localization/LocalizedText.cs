@@ -5,6 +5,7 @@ namespace App.Scripts.Libs.Localization
 {
     public class LocalizedText : MonoBehaviour
     {
+        public TMP_Text Text => _text;
         [SerializeField] private TMP_Text _text;
         [SerializeField] private string _key;
 

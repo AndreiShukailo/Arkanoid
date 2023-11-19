@@ -1,6 +1,5 @@
 ﻿using System;
-using App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders.Model;
-using App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders.View;
+using App.Scripts.Libs.Components;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using UnityEngine;
 
@@ -9,15 +8,15 @@ namespace App.Scripts.Scenes.GameScene.Level.LevelField.CameraBorders
     [Serializable]
     public class CameraBordersContainer
     {
-        public CameraBordersView[] CameraBordersViews;
+        public ComponentContainer[] CameraBorders;
 
-        public void Register(FieldInfo fieldInfo)
+        public void Register(FieldInfo fieldInfo, CameraBordersFactory cameraBordersFactory)
         {
             var corners = GetRectCorners(fieldInfo.CameraBorders);
-            for (int i = 0; i < CameraBordersViews.Length; i++)
+            for (var i = 0; i < CameraBorders.Length; i++)
             {
-                var cameraBorderModel = new CameraBordersModel(CameraBordersViews[i]);
-                cameraBorderModel.CreateCollider(corners[i][0], corners[i][1]);
+                var componentContainer = cameraBordersFactory.Create(CameraBorders[i]);
+                componentContainer.Get<BorderViewComponent>().Construct(corners[i][0], corners[i][1]);
             }
         }
 

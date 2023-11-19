@@ -1,28 +1,27 @@
-﻿using App.Scripts.Libs.Factory;
+﻿using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Pool;
-using App.Scripts.Scenes.GameScene.Input;
-using App.Scripts.Scenes.GameScene.Platform.Model;
-using App.Scripts.Scenes.GameScene.Platform.View;
+using App.Scripts.Scenes.GameScene.Platform.Components;
 
 namespace App.Scripts.Scenes.GameScene.Platform.Factory
 {
-    public class PlatformFactory : IFactory<PlatformModel, PlatformSpawnContext>
+    public class PlatformFactory : PoolFactory<ComponentContainer, PlatformSpawnContext>
     {
-        private readonly PoolProviderMono<PlatformView> _poolProvider;
-        private InputSystem _input;
+        private readonly SystemsContainer _systemsContainer;
 
-        public PlatformFactory(PoolSetting<PlatformView> poolSetting, InputSystem inputSystem)
+        public PlatformFactory(PoolSetting<ComponentContainer> poolSetting, SystemsContainer systemsContainer) : base(poolSetting)
         {
-            _poolProvider = new PoolProviderMono<PlatformView>(poolSetting);
-            _input = inputSystem;
+            _systemsContainer = systemsContainer;
         }
 
-        public PlatformModel Create(PlatformSpawnContext context)
+        public override ComponentContainer Create(PlatformSpawnContext value)
         {
-            var platformView = _poolProvider.ObjectPool.Spawn();
-            platformView.Construct(context.Position);
+            var componentContainer = _poolProvider.ObjectPool.Spawn();
+            componentContainer.transform.position = value.Position;
+            componentContainer.Register(_systemsContainer);
+            componentContainer.AddToSystem<MovingComponent>();
+            componentContainer.AddToSystem<ControlMovementComponent>();
 
-            return new PlatformModel(platformView, context.StartSpeed, _input);
+            return componentContainer;
         }
     }
 }

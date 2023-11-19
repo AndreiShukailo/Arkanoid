@@ -1,57 +1,48 @@
-﻿using System.Threading.Tasks;
-using App.Scripts.Infrastructure.States;
-using App.Scripts.Libs.Localization;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using App.Scripts.Libs.PopUp.Container;
-using App.Scripts.Libs.PopUp.Factory;
 using App.Scripts.Libs.PopUp.View;
 
 namespace App.Scripts.Libs.PopUp
 {
     public class PopUpController
     {
-        public string CurrentPopupKey { get; private set; }
+        private readonly PopUpContainer _popUpContainer;
+        private readonly Dictionary<Type, PopUpView> _openedPopUps = new ();
         
-        private readonly LocalizationController _localizationController;
-        private readonly CommandChangeState _commandChangeState;
-        private readonly PopUpContainer _popUpContainer = new();
-        private PopUpView _currentPopup;
-
-        public PopUpController(LocalizationController localizationController, CommandChangeState commandChangeState)
+        public PopUpController(PopUpContainer popUpContainer)
         {
-            _localizationController = localizationController;
-            _commandChangeState = commandChangeState;
+            _popUpContainer = popUpContainer;
         }
 
-        public void ShowPopup(string key)
+        public TPopUpView Show<TPopUpView>() where TPopUpView : PopUpView
         {
-            CurrentPopupKey = key;
-            _commandChangeState.ChangeState<PopUpState>();
-        }
-
-        public async Task ProcessShow(string key)
-        {
-            var factory = _popUpContainer.GetPopup(key);
+            var factory = _popUpContainer.GetPopup<TPopUpView>();
             var popup = factory.Create();
-            await popup.ProcessShow();
-            _currentPopup = popup;
+            _openedPopUps.Add(typeof(TPopUpView), popup);
+            
+            return popup as TPopUpView;
         }
 
-        public async Task HidePopup()
+        public async Task Hide<TPopUpView>() where TPopUpView : PopUpView
         {
-            if (_currentPopup == null) return;
-
-            await _currentPopup.ProcessHide();
-            _currentPopup = null;
+            var popUpType = typeof(TPopUpView);
+            await _openedPopUps[popUpType].ProcessHide();
+            _openedPopUps.Remove(popUpType);
         }
 
-        public void AddPopup(string key, PopUpFactory popUpFactory)
+        public async Task HideAllPopups()
         {
-            popUpFactory.AddLocalization(_localizationController);
-            _popUpContainer.AddPopUp(key, popUpFactory);
-        }
+            var tasks = new Task[_openedPopUps.Count];
+            var counter = 0;
+            foreach (var popup in _openedPopUps.Values)
+            {
+                tasks[counter] = popup.ProcessHide();
+                counter++;
+            }
 
-        public void RemovePopups()
-        {
+            await Task.WhenAll(tasks);
             _popUpContainer.RemovePopups();
         }
     }

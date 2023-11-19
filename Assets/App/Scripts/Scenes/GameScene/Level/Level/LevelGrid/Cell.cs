@@ -1,22 +1,19 @@
-﻿using App.Scripts.Scenes.GameScene.Block.Model;
-using UnityEngine;
+﻿using App.Scripts.Libs.Components;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid
 {
     public class Cell
     {
-        public Vector2Int Position { get; private set; }
-        public BlockModel Block { get; private set; }
+        public CellComponent CellComponent { get; private set; }
 
-        public Cell(Vector2Int position)
+        public Cell(CellComponent cellComponent)
         {
-            Position = position;
+            CellComponent = cellComponent;
         }
-        
-        public Cell(Vector2Int position, BlockModel block)
+
+        public void RemoveCellComponent()
         {
-            Position = position;
-            Block = block;
+            CellComponent = null;
         }
     }
 }

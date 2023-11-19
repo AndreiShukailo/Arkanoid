@@ -1,29 +1,32 @@
+using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Pool;
-using App.Scripts.Scenes.GameScene.Block.Model;
-using App.Scripts.Scenes.GameScene.Block.View;
-using App.Scripts.Scenes.GameScene.Level.Level;
 
 namespace App.Scripts.Scenes.GameScene.Block.Factory
 {
-    public class BlockFactory<TSetting> : PoolFactory<BlockModel, BlockView, BlockContext> where TSetting : PoolSetting<BlockView>
+    public class BlockFactory: PoolFactory<ComponentContainer, BlockContext>
     {
-        private readonly CollideStrategyFactory<TSetting> _collideStrategyFactory;
-        private readonly TSetting _setting;
+        private readonly SystemsContainer _systemsContainer;
 
-        public BlockFactory(PoolSetting<BlockView> poolSetting, CollideStrategyFactory<TSetting> collideStrategyFactory, TSetting setting)
-            : base(poolSetting)
+        public BlockFactory(PoolSetting<ComponentContainer> poolSetting, SystemsContainer systemsContainer) : base(poolSetting)
         {
-            _collideStrategyFactory = collideStrategyFactory;
-            _setting = setting;
+            _systemsContainer = systemsContainer;
         }
 
-        public override BlockModel Create(BlockContext context)
+        public override ComponentContainer Create(BlockContext blockContext)
         {
-            var blockView = _poolProvider.ObjectPool.Spawn();
-            blockView.Construct(context.Size, context.Position);
-            var collideStrategy = _collideStrategyFactory.Create(_setting);
-            var blockModel = new BlockModel(blockView, collideStrategy, context.LevelModel);
-            return blockModel;
+            var componentContainer = _poolProvider.ObjectPool.Spawn();
+            componentContainer.transform.position = blockContext.Position;
+            componentContainer.Register(_systemsContainer);
+            componentContainer.Get<ControlSizeComponent>().Construct(blockContext.Size);
+            componentContainer.Get<CellComponent>().Construct(blockContext.GridPosition);
+
+            BuildComponentContainer(componentContainer);
+            
+            return componentContainer;
+        }
+
+        protected virtual void BuildComponentContainer(ComponentContainer componentContainer)
+        {
         }
     }
 }

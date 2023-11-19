@@ -1,7 +1,9 @@
 ﻿using App.Scripts.Infrastructure.Buttons;
-using App.Scripts.Infrastructure.States;
+using App.Scripts.Infrastructure.Buttons.Container;
 using App.Scripts.Libs.Installer;
+using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
+using App.Scripts.Libs.PopUp.Container;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Scenes.StartScene.Language.PopUp;
 using UnityEngine;
@@ -14,14 +16,14 @@ namespace App.Scripts.Scenes.StartScene.Installers
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            var languagePopupFactory =
-                new LanguagePopupFactory(
-                    _poolSetting, 
-                    serviceContainer.Get<ButtonManager>(),
-                    serviceContainer.Get<CommandChangeState>());
-
-            var popupController = serviceContainer.Get<PopUpController>();
-            popupController.AddPopup(_poolSetting.SpawnableItemMono.PopUpKey, languagePopupFactory);
+            var popUpContainer = serviceContainer.Get<PopUpContainer>();
+            popUpContainer.AddPopUp<LanguagePopUp>(_poolSetting);
+            var languagePopUpController = new LanguagePopupController(
+                serviceContainer.Get<ButtonManager>(),
+                serviceContainer.Get<PopUpController>(),
+                serviceContainer.Get<LocalizationController>(),
+                serviceContainer.Get<ButtonsContainer>());
+            serviceContainer.SetServiceSelf(languagePopUpController);
         }
     }
 }

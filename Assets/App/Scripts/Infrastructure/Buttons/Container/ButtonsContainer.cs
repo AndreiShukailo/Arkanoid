@@ -20,18 +20,12 @@ namespace App.Scripts.Infrastructure.Buttons.Container
                 view.SetLocalization(localizationController);
                 _keyButtons[button.Key] = view;
             }
-
         }
 
-        public void SubscribeButton(string key, Action action)
-        {
+        public void SubscribeButton(string key, Action action) =>
             _keyButtons[key].Subscribe(action);
-        }
 
-        public void SetInteractable(bool interactable)
-        {
-            foreach (var button in _buttons)
-                button.ButtonView.SetInteractable(interactable);
-        }
+        public void UnsubscribeButton(string key) =>
+            _keyButtons[key].Unsubscribe();
     }
 }

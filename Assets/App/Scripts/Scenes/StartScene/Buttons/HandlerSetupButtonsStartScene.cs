@@ -1,36 +1,49 @@
 ﻿using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SceneManagement;
-using App.Scripts.Infrastructure.States;
-using App.Scripts.Libs.PopUp;
+using App.Scripts.Scenes.StartScene.Language.PopUp;
 
 namespace App.Scripts.Scenes.StartScene.Buttons
 {
     class HandlerSetupButtonsStartScene : HandlerSetupButtons
     {
-        private readonly PopUpController _popUpController;
+        private readonly LanguagePopupController _languagePopupController;
+        private readonly PackController _packController;
 
         public HandlerSetupButtonsStartScene(ButtonsContainer buttonsContainer,
-            SceneLoaderController sceneLoaderController, PopUpController popUpController) : base(buttonsContainer,
+            SceneLoaderController sceneLoaderController, LanguagePopupController languagePopupController,
+            PackController packController) : base(buttonsContainer,
             sceneLoaderController)
         {
-            _popUpController = popUpController;
+            _languagePopupController = languagePopupController;
+            _packController = packController;
         }
-        
+
         protected override void InstallButtons()
         {
-            _buttonsContainer.SubscribeButton("Play", ProcessLoadGameScene);
-            _buttonsContainer.SubscribeButton("Language", OwenLanguagePopup);
+            _buttonsContainer.SubscribeButton("Play", OpenGame);
+            _buttonsContainer.SubscribeButton("Language", OpenLanguagePopup);
         }
 
-        private void ProcessLoadGameScene()
+        private void OpenGame()
         {
-            _sceneLoaderController.SetNextScene(_sceneLoaderController.ScenesConfig.GameScene);
+            if (PlayerFirsInGame())
+            {
+                _sceneLoaderController.SetNextScene(_sceneLoaderController.ScenesConfig.GameScene);
+                return;
+            }
+
+            _sceneLoaderController.SetNextScene(_sceneLoaderController.ScenesConfig.PackSelectedScene);
         }
 
-        private void OwenLanguagePopup()
+        private void OpenLanguagePopup() =>
+            _languagePopupController.ShowPopUp();
+
+        private bool PlayerFirsInGame()
         {
-            _popUpController.ShowPopup("Language");
+            return _packController.PlayerProgress.CompletedPacks.Count == 0 &&
+                   _packController.PlayerProgress.LastPack.LastLevel == 1;
         }
     }
 }

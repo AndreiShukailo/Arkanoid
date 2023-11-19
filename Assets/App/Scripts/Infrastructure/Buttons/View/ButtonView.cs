@@ -28,7 +28,6 @@ namespace App.Scripts.Infrastructure.Buttons.View
             _parent = transform.parent;
         }
         
-        
         public override void OnDespawned()
         {
             base.OnDespawned();
@@ -38,23 +37,16 @@ namespace App.Scripts.Infrastructure.Buttons.View
 
         public void SetLocalization(LocalizationController localizationController, string key = null)
         {
-            if (key != null)
-                _localizedText.AddKey(key);
-            
+            if (_localizedText == null) return;
+            if (key != null) _localizedText.AddKey(key);
             if (_localizedText.LocalizationController != null) return;
             _localizedText.Construct(localizationController);
-            
         }
 
         public void Subscribe(Action onClick) =>
             _button.onClick.AddListener(() => onClick?.Invoke());
 
-        public void SetInteractable(bool interactable)
-        {
-            _button.interactable = interactable;
-        }
-
-        private void Unsubscribe() =>
+        public void Unsubscribe() =>
             _button.onClick.RemoveAllListeners();
     }
 }

@@ -7,11 +7,13 @@ namespace App.Scripts.Infrastructure.PackManagement
 {
     public class PackContainer
     {
+        public readonly int PackCount;
         private Dictionary<int, Pack> _packs;
 
         public PackContainer(IPackParser packParser, PackConfig packConfig)
         {
             _packs = packParser.GetPacks(packConfig);
+            PackCount = _packs.Values.Count;
         }
 
         public Pack GetPack(int id)

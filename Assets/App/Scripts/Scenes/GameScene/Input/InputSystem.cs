@@ -7,8 +7,8 @@ namespace App.Scripts.Scenes.GameScene.Input
 {
     public class InputSystem : ISystem
     {
-        public Action<Vector2> OnTouch;
         public bool IsTouching { get; private set; }
+        public Vector2 TouchPosition { get; private set; }
 
         private readonly Camera _camera;
         private readonly FieldInfo _fieldInfo;
@@ -28,19 +28,17 @@ namespace App.Scripts.Scenes.GameScene.Input
         public void Update(float dt)
         {
             if (!_isEnabled) return;
-
+            
             IsTouching = false;
             
-            if (UnityEngine.Input.GetMouseButton(0))
-            {
-                var mousePosition = _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+            if (!UnityEngine.Input.GetMouseButton(0)) return;
+            
+            var mousePosition = _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+            if (mousePosition.y >= _fieldInfo.FieldRect.yMax)
+                return;
 
-                if (mousePosition.y >= _fieldInfo.FieldRect.yMax)
-                    return;
-
-                IsTouching = true;
-                OnTouch?.Invoke(mousePosition);
-            }
+            IsTouching = true;
+            TouchPosition = mousePosition;
         }
 
         public void Cleanup()

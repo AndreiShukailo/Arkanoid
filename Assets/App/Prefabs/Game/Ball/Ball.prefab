@@ -10,10 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7182307789365649028}
   - component: {fileID: 7182307789365649031}
-  - component: {fileID: -7653239252707795520}
-  - component: {fileID: -8670872242713221387}
   - component: {fileID: 7182307789365649030}
   - component: {fileID: 4668046050492155933}
+  - component: {fileID: 7917756334170325595}
+  - component: {fileID: 6214060330389227446}
+  - component: {fileID: 7478875743314430611}
+  - component: {fileID: 4628557926010301150}
+  - component: {fileID: 824786532962932472}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -88,32 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7653239252707795520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7182307789365649024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e75bf6d28bac4fdba8bd3f379d91448e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody2D: {fileID: 4668046050492155933}
---- !u!114 &-8670872242713221387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7182307789365649024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41d0ff5690f2493f9f116cc3be37cca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ballView: {fileID: -7653239252707795520}
 --- !u!58 &7182307789365649030
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +128,74 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &7917756334170325595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182307789365649024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b263b6203a9c4dc9948ab37259dc10c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: Ball
+  _components:
+  - {fileID: 6214060330389227446}
+  - {fileID: 7478875743314430611}
+  - {fileID: 4628557926010301150}
+  - {fileID: 824786532962932472}
+--- !u!114 &6214060330389227446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182307789365649024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86103dc70e7463b84a591eef1bb7e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startSpeed: 5
+  _rigidbody2D: {fileID: 4668046050492155933}
+--- !u!114 &7478875743314430611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182307789365649024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d8fc41faf24f289a7ffb4653d53779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4628557926010301150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182307789365649024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44343c171fd4db78620e9fa23e183d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minBounceAngle: 15
+  _rigidbody: {fileID: 4668046050492155933}
+--- !u!114 &824786532962932472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182307789365649024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04143a748bda49b68930bc71a912a47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsTouch: 0

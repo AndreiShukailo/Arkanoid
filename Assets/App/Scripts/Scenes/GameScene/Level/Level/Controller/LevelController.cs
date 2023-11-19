@@ -1,50 +1,58 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.States;
-using App.Scripts.Libs.PopUp;
+using App.Scripts.Libs.Components;
 using App.Scripts.Scenes.GameScene.Ball;
-using App.Scripts.Scenes.GameScene.Ball.Model;
-using App.Scripts.Scenes.GameScene.Block.Model;
 using App.Scripts.Scenes.GameScene.GameStates;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
-using App.Scripts.Scenes.GameScene.Platform.Model;
-using UnityEngine;
+using App.Scripts.Scenes.GameScene.Level.PackInfoFeature;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 {
     public class LevelController
     {
         public LevelModel LevelModel { get; private set; }
+        
         public readonly BallContainer BallContainer;
-
         private readonly HealthController _healthController;
         private readonly CommandChangeState _commandChangeState;
-        private readonly PopUpController _popUpController;
-        
-        private PlatformModel _platformModel;
-        private int _blocksCount;
-        private bool _isCleanup;
+        private readonly LevelProgressInfoController _levelProgressInfoController;
+
+        private ComponentContainer _platform;
+        private int _startBlocksCount;
 
         public LevelController(BallContainer ballContainer, HealthController healthController,
-            CommandChangeState commandChangeState, PopUpController popUpController)
+            CommandChangeState commandChangeState, LevelProgressInfoController levelProgressInfoController)
         {
             _healthController = healthController;
             _commandChangeState = commandChangeState;
-            _popUpController = popUpController;
+            _levelProgressInfoController = levelProgressInfoController;
             BallContainer = ballContainer;
         }
 
         public void SetupLevel(LevelModel levelModel)
         {
             LevelModel = levelModel;
+            _startBlocksCount = LevelModel.LevelGrid.BlockCount;
+            _levelProgressInfoController.UpdatePackInfo();
+            UpdateLevelProgress();
+            _healthController.ReloadHealth();
         }
 
-        public void SetupPlatform(PlatformModel platformModel, BallModel ballModel)
+        public void SetupPlatform(ComponentContainer platform, ComponentContainer ball)
         {
-            _platformModel = platformModel;
-            BallContainer.AddBall(ballModel);
+            _platform = platform;
+            BallContainer.AddBall(ball);
         }
 
-        public void Loose()
+        public void UpdateLevelProgress()
+        {
+            var levelProgress = (float)LevelModel.LevelGrid.BlockCount / _startBlocksCount;
+            _levelProgressInfoController.UpdateLevelProgress(levelProgress);
+            if(levelProgress > 0) return;
+            _commandChangeState.ChangeState<VictoryState>();
+        }
+
+        public void Lose()
         {
             _healthController.RemoveHealth();
 
@@ -54,47 +62,27 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
                 return;
             }
 
-            _popUpController.ShowPopup("Lose");
-        }
-
-        public void SubscribeOnBlock(BlockModel blockModel)
-        {
-            blockModel.OnRemove += OnBlockRemove;
-            _blocksCount++;
-        }
-
-        private void OnBlockRemove(BlockModel blockModel)
-        {
-            blockModel.OnRemove -= OnBlockRemove;
-            blockModel = null;
-            _blocksCount--;
-
-            if (_blocksCount > 0 || _isCleanup) return;
-            
-            
-            _commandChangeState.ChangeState<ReloadLevelState>();
-            Debug.Log("Victory");
+            _commandChangeState.ChangeState<LoseState>();
         }
 
         public async Task CleanupLevel()
         {
-            _isCleanup = true;
             var cells = LevelModel.LevelGrid.Cells;
             for (int i = 0; i < cells.Length; i++)
             for (int j = 0; j < cells[i].Length; j++)
             {
-                cells[i][j].Block?.Remove();
+                if(cells[i][j].CellComponent == null) continue;
+                cells[i][j].CellComponent.ComponentContainer.Remove();
                 await Task.Yield();
             }
-
-            _isCleanup = false;
+            
             LevelModel = null;
         }
 
         public void CleanupPlatform()
         {
             BallContainer.Cleanup();
-            _platformModel.Remove();
+            _platform.Remove();
         }
     }
 }

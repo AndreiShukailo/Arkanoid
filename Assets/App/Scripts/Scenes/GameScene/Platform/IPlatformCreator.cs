@@ -1,9 +1,9 @@
-﻿using App.Scripts.Scenes.GameScene.Platform.Model;
+﻿using App.Scripts.Libs.Components;
 
 namespace App.Scripts.Scenes.GameScene.Platform
 {
     public interface IPlatformCreator
     {
-        PlatformModel CreatePlatform();
+        ComponentContainer CreatePlatform();
     }
 }

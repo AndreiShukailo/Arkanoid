@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using App.Scripts.Infrastructure;
 using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
 using App.Scripts.Infrastructure.EntryPoint;
+using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
@@ -11,6 +13,7 @@ using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.StartScene.Buttons;
+using App.Scripts.Scenes.StartScene.Language.PopUp;
 
 namespace App.Scripts.Scenes.StartScene.Installers
 {
@@ -31,17 +34,11 @@ namespace App.Scripts.Scenes.StartScene.Installers
 
             gameStateMachine.AddState(CreateSetupState(serviceContainer));
             gameStateMachine.AddState(CreateProcessState(serviceContainer));
-            gameStateMachine.AddState(CretePopupState(serviceContainer));
             gameStateMachine.AddState(CreateLoadSceneState(serviceContainer));
 
             serviceContainer.Get<CommandChangeState>().AddStateMachine(gameStateMachine);
 
             return gameStateMachine;
-        }
-
-        private GameState CretePopupState(ServiceContainer serviceContainer)
-        {
-            return new PopUpState(serviceContainer.Get<PopUpController>());
         }
 
         private LoadSceneState CreateLoadSceneState(ServiceContainer serviceContainer)
@@ -61,8 +58,8 @@ namespace App.Scripts.Scenes.StartScene.Installers
             {
                 new HandlerSetupButtonsStartScene(serviceContainer.Get<ButtonsContainer>(),
                     sceneLoader,
-                    serviceContainer.Get<PopUpController>()
-                )
+                    serviceContainer.Get<LanguagePopupController>(),
+                    serviceContainer.Get<PackController>())
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 

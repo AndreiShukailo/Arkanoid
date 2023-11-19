@@ -22,7 +22,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level
         {
             var path = _levelPathCreator.CreatePath(packInfo);
             var levelInfo = _levelParser.CreateLevelGrid(path);
-            return new LevelModel(_levelGridBuilder.BuildGrid(levelInfo, levelController));
+            return new LevelModel(_levelGridBuilder.BuildGrid(levelInfo));
         }
     }
 }

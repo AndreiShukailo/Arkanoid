@@ -1,5 +1,5 @@
-﻿using App.Scripts.Libs.Systems;
-using App.Scripts.Scenes.GameScene.Ball.Model;
+﻿using App.Scripts.Libs.Components;
+using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 
@@ -31,14 +31,14 @@ namespace App.Scripts.Scenes.GameScene.Ball.Systems
         {
         }
 
-        private void CheckBall(BallModel ballModel, BallContainer ballContainer)
+        private void CheckBall(ComponentContainer componentContainer, BallContainer ballContainer)
         {
-            if (ballModel.BallView.transform.position.y <
+            if (componentContainer.transform.position.y <
                 _fieldInfo.CameraBorders.yMin)
-                ballContainer.RemoveBall(ballModel);
+                ballContainer.RemoveBall(componentContainer);
 
             if (ballContainer.Balls.Count == 0)
-                _levelController.Loose();
+                _levelController.Lose();
         }
     }
 }

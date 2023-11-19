@@ -6,7 +6,9 @@ Menu;Меню
 Back;Назад
 Restart;Рестарт
 Continue;Продолжить
-Lose;Вы проиграли
+Lose;Вы проиграли!
+Victory;Вы выиграли!
+Next;Далее
 NotFound;Не найдена
 Galaxy;Галактика
 Sigara;Сигара

@@ -1,22 +1,17 @@
-using App.Scripts.Scenes.GameScene.Platform;
-using App.Scripts.Scenes.GameScene.Platform.Model;
+using App.Scripts.Libs.Components;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Ball.Factory
 {
     public class BallSpawnContext
     {
-        public PlatformModel PlatformModel;
+        public readonly ComponentContainer Platform;
         public Vector2 Position;
-        public float Speed;
-        public readonly float MinBounceAngle;
 
-        public BallSpawnContext(PlatformModel platformModel, Vector2 position, float velocity, float minBounceAngle)
+        public BallSpawnContext(ComponentContainer platform, Vector2 position)
         {
-            PlatformModel = platformModel;
+            Platform = platform;
             Position = position;
-            Speed = velocity;
-            MinBounceAngle = minBounceAngle;
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
-using UnityEngine;
+using App.Scripts.Scenes.GameScene.Block.Container;
 
 namespace App.Scripts.Scenes.GameScene.Platform.Config
 {
     [Serializable]
     public class PlatformConfig
     {
-        [Header("Pool")]
-        public PlatformPoolSetting PlatformPoolSetting;
-        public float StartSpeed = 3f;
+        public ComponentContainerPoolSetting PlatformPoolSetting;
         public float PlatformOffsetBottom = 1.66f;
     }
 }

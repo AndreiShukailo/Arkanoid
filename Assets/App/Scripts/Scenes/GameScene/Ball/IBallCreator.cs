@@ -1,11 +1,9 @@
-﻿using App.Scripts.Scenes.GameScene.Ball.Model;
-using App.Scripts.Scenes.GameScene.Platform;
-using App.Scripts.Scenes.GameScene.Platform.Model;
+﻿using App.Scripts.Libs.Components;
 
 namespace App.Scripts.Scenes.GameScene.Ball
 {
     public interface IBallCreator
     {
-        BallModel CreateBall(PlatformModel platformModel);
+        ComponentContainer CreateBall(ComponentContainer platform);
     }
 }

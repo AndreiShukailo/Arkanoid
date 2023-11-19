@@ -1,29 +1,26 @@
 ﻿using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
 using App.Scripts.Infrastructure.SceneManagement;
-using App.Scripts.Libs.PopUp;
+using App.Scripts.Infrastructure.States;
+using App.Scripts.Scenes.GameScene.GameStates;
 
 namespace App.Scripts.Scenes.GameScene.Level
 {
     public class HandlerSetupButtonsGameScene : HandlerSetupButtons
     {
-        private readonly PopUpController _popUpController;
+        private readonly CommandChangeState _commandChangeState;
 
         public HandlerSetupButtonsGameScene(ButtonsContainer buttonsContainer,
-            SceneLoaderController sceneLoaderController, PopUpController popUpController) : base(buttonsContainer,
+            SceneLoaderController sceneLoaderController, CommandChangeState commandChangeState) : base(buttonsContainer,
             sceneLoaderController)
         {
-            _popUpController = popUpController;
+            _commandChangeState = commandChangeState;
         }
 
-        protected override void InstallButtons()
-        {
+        protected override void InstallButtons() =>
             _buttonsContainer.SubscribeButton("Menu", OnMenuButtonClick);
-        }
 
-        private void OnMenuButtonClick()
-        {
-            _popUpController.ShowPopup("Menu");
-        }
+        private void OnMenuButtonClick() =>
+            _commandChangeState.ChangeState<MenuState>();
     }
 }

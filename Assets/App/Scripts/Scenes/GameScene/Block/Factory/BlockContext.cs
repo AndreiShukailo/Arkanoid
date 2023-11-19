@@ -5,13 +5,13 @@ namespace App.Scripts.Scenes.GameScene.Block.Factory
 {
     public class BlockContext
     {
-        public readonly LevelModel LevelModel;
+        public readonly Vector2Int GridPosition;
         public readonly Vector2 Position;
         public readonly Vector2 Size;
 
-        public BlockContext(LevelModel levelModel, Vector2 position, Vector2 size)
+        public BlockContext(Vector2Int gridPosition, Vector2 position, Vector2 size)
         {
-            LevelModel = levelModel;
+            GridPosition = gridPosition;
             Position = position;
             Size = size;
         }

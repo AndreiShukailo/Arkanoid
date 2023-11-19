@@ -9,17 +9,14 @@ using UnityEngine.UI;
 
 namespace App.Scripts.Libs.PopUp.View
 {
-    public class PopUpView : SpawnableItemMono
+    public abstract class PopUpView : SpawnableItemMono
     {
-        public string PopUpKey => _popUpKey;
         public Transform Content => _content;
-
-        [SerializeField] private string _popUpKey;
         
-        [SerializeField] private Transform _content;
-        [SerializeField] private Image _block;
-        [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private LocalizedText _lable;
+        [SerializeField] protected Transform _content;
+        [SerializeField] protected Image _block;
+        [SerializeField] protected RectTransform _rectTransform;
+        [SerializeField] protected LocalizedText _lable;
 
         private float _showDuration = 0.5f;
         private float _hideDuration = 0.3f;
@@ -46,7 +43,7 @@ namespace App.Scripts.Libs.PopUp.View
                 button.Remove();
         }
 
-        public void SetLocalization(LocalizationController localizationController)
+        public virtual void SetLocalization(LocalizationController localizationController)
         {
             if (_lable.LocalizationController != null) return;
             _lable.Construct(localizationController);

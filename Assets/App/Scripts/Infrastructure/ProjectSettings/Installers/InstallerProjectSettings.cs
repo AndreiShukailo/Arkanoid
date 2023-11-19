@@ -12,6 +12,8 @@ namespace App.Scripts.Infrastructure.ProjectSettings.Installers
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             var controller = new ControllerSetupProjectSettings(_configProjectSettings);
+            var timeManager = new TimeManager();
+            serviceContainer.SetServiceSelf(timeManager);
 
             serviceContainer.SetService<IInitializable, ControllerSetupProjectSettings>(controller);
         }
