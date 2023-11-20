@@ -59,16 +59,19 @@ namespace App.Scripts.Scenes.GameScene.Installers
         {
             var state = new LoseState(serviceContainer.Get<LosePopUpController>(),
                 serviceContainer.Get<TimeManager>());
-            
+
             return state;
         }
 
         private GameState CreateVictoryState(ServiceContainer serviceContainer)
         {
+            var packController = serviceContainer.Get<PackController>();
+            var localization = serviceContainer.Get<LocalizationController>();
+            var victoryPopUpController = serviceContainer.Get<VictoryPopUpController>();
+
             var state = new VictoryState(
-                serviceContainer.Get<PackController>(), 
-                serviceContainer.Get<VictoryPopUpController>(),
-                serviceContainer.Get<LocalizationController>(),
+                new HandlerProcessVictory(packController, victoryPopUpController, localization),
+                victoryPopUpController,
                 serviceContainer.Get<TimeManager>());
             return state;
         }
