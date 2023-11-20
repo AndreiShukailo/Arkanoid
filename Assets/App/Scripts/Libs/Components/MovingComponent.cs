@@ -6,6 +6,7 @@ namespace App.Scripts.Libs.Components
     {
         public float CurrentSpeed { get; private set; }
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
+        public float StartSpeed => _startSpeed;
         
         [SerializeField] private float _startSpeed;
         [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -14,6 +15,11 @@ namespace App.Scripts.Libs.Components
         {
             base.OnAdd();
             CurrentSpeed = _startSpeed;
+        }
+
+        public void SetSpeed(float speed)
+        {
+            CurrentSpeed = speed;
         }
     }
 }

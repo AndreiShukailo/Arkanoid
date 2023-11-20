@@ -26,6 +26,7 @@ namespace App.Scripts.Scenes.GameScene.Ball.Factory
             componentContainer.Get<MovingWithPlatformComponent>()
                 .Construct(spawnContext.Platform.Get<ControlMovementComponent>());
             componentContainer.AddToSystem<MovingWithPlatformComponent>();
+            componentContainer.AddToSystem<SpeedComplicationComponent>();
 
             return componentContainer;
         }

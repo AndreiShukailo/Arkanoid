@@ -2,6 +2,8 @@
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.Systems;
+using App.Scripts.Scenes.GameScene.Ball.Components;
+using App.Scripts.Scenes.GameScene.Ball.Systems;
 
 namespace App.Scripts.Scenes.GameScene.Installers
 {
@@ -27,6 +29,11 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var movingSystem = new MovingSystem();
             systemsContainer.AddSystem<MovingComponent, MovingSystem>(movingSystem);
             serviceContainer.SetService<ISystem, MovingSystem>(movingSystem);
+            
+            var speedComplicationSystem = new SpeedComplicationSystem();
+            systemsContainer.AddSystem<SpeedComplicationComponent, SpeedComplicationSystem>(speedComplicationSystem);
+            serviceContainer.SetService<ISystem, SpeedComplicationSystem>(speedComplicationSystem);
+            serviceContainer.SetServiceSelf(speedComplicationSystem);
         }
     }
 }

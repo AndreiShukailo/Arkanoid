@@ -2,6 +2,7 @@
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.Components;
 using App.Scripts.Scenes.GameScene.Ball;
+using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.GameStates;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.PackInfoFeature;
@@ -11,21 +12,24 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
     public class LevelController
     {
         public LevelModel LevelModel { get; private set; }
-        
+
         public readonly BallContainer BallContainer;
         private readonly HealthController _healthController;
         private readonly CommandChangeState _commandChangeState;
         private readonly LevelProgressInfoController _levelProgressInfoController;
+        private readonly SpeedComplicationSystem _speedComplicationSystem;
 
         private ComponentContainer _platform;
         private int _startBlocksCount;
 
         public LevelController(BallContainer ballContainer, HealthController healthController,
-            CommandChangeState commandChangeState, LevelProgressInfoController levelProgressInfoController)
+            CommandChangeState commandChangeState, LevelProgressInfoController levelProgressInfoController,
+            SpeedComplicationSystem speedComplicationSystem)
         {
             _healthController = healthController;
             _commandChangeState = commandChangeState;
             _levelProgressInfoController = levelProgressInfoController;
+            _speedComplicationSystem = speedComplicationSystem;
             BallContainer = ballContainer;
         }
 
@@ -48,7 +52,8 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
         {
             var levelProgress = (float)LevelModel.LevelGrid.BlockCount / _startBlocksCount;
             _levelProgressInfoController.UpdateLevelProgress(levelProgress);
-            if(levelProgress > 0) return;
+            _speedComplicationSystem.Complicate(levelProgress);
+            if (levelProgress > 0) return;
             _commandChangeState.ChangeState<VictoryState>();
         }
 
@@ -71,11 +76,11 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
             for (int i = 0; i < cells.Length; i++)
             for (int j = 0; j < cells[i].Length; j++)
             {
-                if(cells[i][j].CellComponent == null) continue;
+                if (cells[i][j].CellComponent == null) continue;
                 cells[i][j].CellComponent.ComponentContainer.Remove();
                 await Task.Yield();
             }
-            
+
             LevelModel = null;
         }
 

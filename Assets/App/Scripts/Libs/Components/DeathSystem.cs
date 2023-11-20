@@ -1,10 +1,12 @@
-﻿using App.Scripts.Scenes.GameScene.Level.Level.Controller;
+﻿using App.Scripts.Scenes.GameScene.Ball.Systems;
+using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 
 namespace App.Scripts.Libs.Components
 {
     public class DeathSystem : ComponentSystem<DeathComponent>
     {
         private readonly LevelController _levelController;
+        private readonly SpeedComplicationSystem _speedComplicationSystem;
 
         public DeathSystem(LevelController levelController)
         {

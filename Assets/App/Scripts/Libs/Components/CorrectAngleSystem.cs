@@ -12,7 +12,7 @@ namespace App.Scripts.Libs.Components
             component.ClearCollision();
         }
 
-        public void CorrectAngle(CorretionAngleComponent component)
+        private void CorrectAngle(CorretionAngleComponent component)
         {
             var collision = component.Collision2D;
             var velocity = collision.relativeVelocity * -1f;

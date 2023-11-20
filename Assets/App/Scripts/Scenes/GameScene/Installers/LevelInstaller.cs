@@ -1,12 +1,8 @@
-﻿using App.Scripts.Infrastructure;
-using App.Scripts.Infrastructure.Buttons;
-using App.Scripts.Infrastructure.PackManagement;
+﻿using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.AssetProvider;
 using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Installer;
-using App.Scripts.Libs.PopUp;
-using App.Scripts.Libs.PopUp.Container;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Libs.TiledParser.Level;
@@ -23,7 +19,6 @@ using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using App.Scripts.Scenes.GameScene.Level.PackInfoFeature;
 using App.Scripts.Scenes.GameScene.Platform;
 using App.Scripts.Scenes.GameScene.Platform.Config;
-using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers
@@ -77,7 +72,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 new BallContainer(), 
                 serviceContainer.Get<HealthController>(),
                 serviceContainer.Get<CommandChangeState>(),
-                serviceContainer.Get<LevelProgressInfoController>());
+                serviceContainer.Get<LevelProgressInfoController>(),
+                serviceContainer.Get<SpeedComplicationSystem>());
 
             return levelController;
         }
