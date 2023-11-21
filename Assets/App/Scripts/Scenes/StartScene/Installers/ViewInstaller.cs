@@ -1,5 +1,6 @@
 ﻿using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace App.Scripts.Scenes.StartScene.Installers
 {
-    public class LanguagePopInstaller : MonoInstaller
+    public class ViewInstaller : MonoInstaller
     {
         [SerializeField] private LanguagePopupPoolSetting _poolSetting;
 

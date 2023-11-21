@@ -9,7 +9,8 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View
 {
     public class PackView : MonoBehaviour
     {
-        public string Key; 
+        public string Key;
+        public ButtonView ButtonView => _buttonView;
         [SerializeField] private ButtonView _buttonView;
         [SerializeField] protected LocalizedText _galaxyNameText;
         [SerializeField] private LocalizedText _galaxyText;

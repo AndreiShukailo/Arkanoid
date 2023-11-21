@@ -30,10 +30,14 @@ namespace App.Scripts.Infrastructure.SceneManagement
             await _loadingCurtainView.ProcessHide();
         }
 
-        public async Task ProcessLoadScene()
+        public async Task ProcessShowCurtain()
         {
             _loadingCurtainView = CreateCurtain();
             await _loadingCurtainView.ProcessShow();
+        }
+
+        public async Task LoadScene()
+        {
             await LoadSceneAsync(_nextScene);
             _nextScene = null;
         }

@@ -1,29 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using App.Scripts.Infrastructure.Buttons.View;
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SaveLoad;
-using App.Scripts.Infrastructure.SceneManagement;
+using App.Scripts.Infrastructure.States;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.Factory;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View;
+using App.Scripts.Scenes.PackSelectScene.PackSelectedStates;
 
 namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
 {
     public class PacksCreator
     {
+        private const string LastPackViewKey = "Last";
+        private const string ComletedPackKey = "Completed";
+        private const string BlockedPackKey = "Blocked";
         private readonly PackController _packController;
         private readonly PackFactory _packFactory;
         private readonly PackViewContainer _packViewContainer;
-        private readonly SceneLoaderController _sceneLoaderController;
+        private readonly CommandChangeState _commandChangeState;
+        private List<ButtonView> _packButtons = new();
 
         public PacksCreator(PackController packController, PackFactory packFactory, PackViewContainer packViewContainer,
-            SceneLoaderController sceneLoaderController)
+            CommandChangeState commandChangeState)
         {
             _packController = packController;
             _packFactory = packFactory;
             _packViewContainer = packViewContainer;
-            _sceneLoaderController = sceneLoaderController;
+            _commandChangeState = commandChangeState;
             _packViewContainer.Register();
+        }
+
+        public void Cleanup()
+        {
+            foreach (var packButton in _packButtons)
+            {
+                if(packButton == null) return;
+                packButton.Unsubscribe();
+            }
         }
 
         public void CreatePacks()
@@ -35,17 +50,17 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
             {
                 if (_packController.GetPack(lastPack) == pack && !IsCompleted(completedPacks, pack, out var packInfo1))
                 {
-                    CreatePack(pack, "Last", lastPack.LastLevel - 1, lastPack);
+                    CreatePack(pack, LastPackViewKey, lastPack.LastLevel - 1, lastPack);
                     continue;
                 }
 
                 if (IsCompleted(completedPacks, pack, out var packInfo))
                 {
-                    CreatePack(pack, "Completed", pack.LevelsCount, packInfo);
+                    CreatePack(pack, ComletedPackKey, pack.LevelsCount, packInfo);
                     continue;
                 }
 
-                CreatePack(pack, "Blocked", 0);
+                CreatePack(pack, BlockedPackKey, 0);
             }
         }
 
@@ -63,11 +78,12 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
 
         private void CreatePack(Pack pack, string packViewKey, int levelsCount, PackInfo packInfo = null)
         {
-            _packFactory.Create(new PackViewContext(
+            var packView = _packFactory.Create(new PackViewContext(
                 _packViewContainer.Get(packViewKey),
                 pack,
                 GetOnButtonClickAction(packInfo),
                 levelsCount));
+            _packButtons.Add(packView.ButtonView);
         }
 
         private Action GetOnButtonClickAction(PackInfo packInfo = null)
@@ -76,8 +92,8 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
 
             return () =>
             {
-                _packController.SetPack(packInfo);
-                _sceneLoaderController.SetNextScene(_sceneLoaderController.ScenesConfig.GameScene);
+                if (!_packController.SetPack(packInfo)) return;
+                _commandChangeState.ChangeState<TransitOnGameSceneState>();
             };
         }
     }

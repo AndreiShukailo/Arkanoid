@@ -2,6 +2,8 @@
 using App.Scripts.Infrastructure;
 using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.EnergyFeature;
+using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SceneManagement;
@@ -65,12 +67,13 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private GameState CreateVictoryState(ServiceContainer serviceContainer)
         {
-            var packController = serviceContainer.Get<PackController>();
-            var localization = serviceContainer.Get<LocalizationController>();
             var victoryPopUpController = serviceContainer.Get<VictoryPopUpController>();
 
             var state = new VictoryState(
-                new HandlerProcessVictory(packController, victoryPopUpController, localization),
+                new HandlerProcessVictory(serviceContainer.Get<PackController>(),
+                    victoryPopUpController,
+                    serviceContainer.Get<LocalizationController>(),
+                    serviceContainer.Get<EnergyViewController>()),
                 victoryPopUpController,
                 serviceContainer.Get<TimeManager>());
             return state;
@@ -89,7 +92,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
         {
             var loadSceneState = new LoadSceneState(
                 serviceContainer.Get<SceneLoaderController>(),
-                serviceContainer.Get<PopUpController>());
+                serviceContainer.Get<PopUpController>(),
+                serviceContainer.Get<EnergyViewController>());
 
             return loadSceneState;
         }

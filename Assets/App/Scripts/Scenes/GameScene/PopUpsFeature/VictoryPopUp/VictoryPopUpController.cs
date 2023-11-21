@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.Buttons;
+using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
+using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.GameStates;
 
 namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
@@ -18,20 +20,26 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
         private readonly CommandChangeState _commandChangeState;
         private readonly PopUpController _popUpController;
         private readonly SceneLoaderController _sceneLoaderController;
+        private readonly EnergyViewController _energyViewController;
+        private readonly CommandSpendEnergy _commandSpendEnergy;
         private VictoryPopUp _victoryPopUp;
 
         public VictoryPopUpController(ButtonManager buttonManager, CommandChangeState commandChangeState,
-            PopUpController popUpController, SceneLoaderController sceneLoaderController)
+            PopUpController popUpController, SceneLoaderController sceneLoaderController,
+            EnergyViewController energyViewController, CommandSpendEnergy commandSpendEnergy)
         {
             _buttonManager = buttonManager;
             _commandChangeState = commandChangeState;
             _popUpController = popUpController;
             _sceneLoaderController = sceneLoaderController;
+            _energyViewController = energyViewController;
+            _commandSpendEnergy = commandSpendEnergy;
         }
 
         public async Task ShowPopUp(LocalizationController localizationController, PackInfo packInfo, Pack pack)
         {
             _victoryPopUp = _popUpController.Show<VictoryPopUp>();
+            _energyViewController.CreateEnergy(_victoryPopUp.EnergyContainer);
             _victoryPopUp.Construct(localizationController, packInfo, pack);
 
             await _victoryPopUp.ProcessShow();
@@ -58,13 +66,14 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
         public async Task HidePopUp()
         {
             await _popUpController.Hide<VictoryPopUp>();
+            _energyViewController.Remove();
         }
 
         private void OnNextButtonClick(PackInfo packInfo)
         {
             if (packInfo != null)
             {
-                _commandChangeState.ChangeState<ReloadLevelState>();
+                _commandSpendEnergy.ProcessSpendEnergy(_victoryPopUp).Forget();
                 return;
             }
 

@@ -6,6 +6,7 @@ namespace App.Scripts.Infrastructure.Buttons.Container
 {
     public class ButtonsViewContainer : MonoBehaviour
     {
+        public Canvas Container => _container;
         [SerializeField] private List<ButtonPoolSetting> _buttonsPoolSetting;
         [SerializeField] private Canvas _parrent;
         private Dictionary<string, ButtonFactory> _keyButton = new ();

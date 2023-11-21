@@ -6,6 +6,8 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.ButtonsFeature
 {
     public class HandlerSetupButtonsPackSelectedScene : HandlerSetupButtons
     {
+        private const string BackButtonKey = "BackStart";
+
         public HandlerSetupButtonsPackSelectedScene(ButtonsContainer buttonsContainer,
             SceneLoaderController sceneLoaderController) : base(buttonsContainer,
             sceneLoaderController)
@@ -14,7 +16,12 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.ButtonsFeature
 
         protected override void InstallButtons()
         {
-            _buttonsContainer.SubscribeButton("BackStart", ProcessLoadGameScene);
+            _buttonsContainer.SubscribeButton(BackButtonKey, ProcessLoadGameScene);
+        }
+
+        public void UnSubscribe()
+        {
+            _buttonsContainer.UnsubscribeButton(BackButtonKey);
         }
 
         private void ProcessLoadGameScene()

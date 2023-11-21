@@ -14,7 +14,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
 {
     public class VictoryPopUp : PopUpView
     {
-        [SerializeField] private VictoryEffectView _victoryEffect;
+        [SerializeField] private RotatedEffectView RotatedEffect;
         [SerializeField] private Image _packLogo;
         [SerializeField] private TMP_Text _levelCount;
         [SerializeField] private TMP_Text _currentLevel;
@@ -23,7 +23,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
 
         public void Construct(LocalizationController localizationController, PackInfo packInfo, Pack pack)
         {
-            _victoryEffect.StartAnimation();
+            RotatedEffect.StartAnimation();
             InstallPack(localizationController, packInfo, pack);
         }
 
@@ -53,17 +53,18 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
 
         public async Task ChangePack(LocalizationController localizationController, PackInfo packInfo, Pack pack)
         {
-            var hideLogo = AnimateGraphic(_packLogo, 0);
-            var hidePackCount = AnimateGraphic(_levelCount, 0);
-            var hideLevelCount = AnimateGraphic(_currentLevel, 0);
-            var hideGalaxyName = AnimateGraphic(_galaxyName.Text, 0);
-            await Task.WhenAll(hideLogo, hidePackCount, hideLevelCount, hideGalaxyName);
+            await AnimateLevelInfo(0);
             InstallPack(localizationController, packInfo, pack);
-            var showLogo = AnimateGraphic(_packLogo, 1);
-            var showPackCount = AnimateGraphic(_levelCount, 1);
-            var showLevelCount = AnimateGraphic(_currentLevel, 1);
-            var showGalaxyName = AnimateGraphic(_galaxyName.Text, 1);
-            await Task.WhenAll(showLogo, showPackCount, showLevelCount, showGalaxyName);
+            await AnimateLevelInfo(1);
+        }
+
+        private async Task AnimateLevelInfo(int targetAlfa)
+        {
+            var logo = AnimateGraphic(_packLogo, targetAlfa);
+            var packCount = AnimateGraphic(_levelCount, targetAlfa);
+            var levelCount = AnimateGraphic(_currentLevel, targetAlfa);
+            var galaxyName = AnimateGraphic(_galaxyName.Text, targetAlfa);
+            await Task.WhenAll(logo, packCount, levelCount, galaxyName);
         }
 
         private void InstallPack(LocalizationController localizationController, PackInfo packInfo, Pack pack)
@@ -90,7 +91,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
 
         private void OnDisable()
         {
-            _victoryEffect.StopAnimation();
+            RotatedEffect.StopAnimation();
         }
     }
 }

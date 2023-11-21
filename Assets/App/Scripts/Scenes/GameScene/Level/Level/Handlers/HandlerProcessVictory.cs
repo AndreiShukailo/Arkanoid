@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Infrastructure.States.SetupState;
@@ -12,13 +13,15 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
         private readonly PackController _packController;
         private readonly VictoryPopUpController _victoryPopUpController;
         private readonly LocalizationController _localizationController;
+        private readonly EnergyViewController _energyViewController;
 
         public HandlerProcessVictory(PackController packController, VictoryPopUpController victoryPopUpController,
-            LocalizationController localizationController)
+            LocalizationController localizationController, EnergyViewController energyViewController)
         {
             _packController = packController;
             _victoryPopUpController = victoryPopUpController;
             _localizationController = localizationController;
+            _energyViewController = energyViewController;
         }
 
         public async Task Process()
@@ -32,6 +35,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
             await Task.WhenAll(show);
             await SetDelay();
             await _victoryPopUpController.ChangePackCount(packInfo);
+            await _energyViewController.UpdateEnergy();
             await SetDelay();
 
             if (_packController.CurrentPack != null && packInfo.PackId != _packController.CurrentPack.PackId)

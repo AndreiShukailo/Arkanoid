@@ -1,5 +1,8 @@
-﻿using App.Scripts.Infrastructure.PackManagement;
+﻿using App.Scripts.Infrastructure.EnergyFeature;
+using App.Scripts.Infrastructure.EnergyFeature.View;
+using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SceneManagement;
+using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.ServiceLocator;
@@ -14,6 +17,7 @@ namespace App.Scripts.Scenes.PackSelectScene.Installers
     {
         [SerializeField] private PackViewContainer _packContainer;
         [SerializeField] private Transform _content;
+        [SerializeField] private EnergyContainer _energyContainer;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -21,9 +25,10 @@ namespace App.Scripts.Scenes.PackSelectScene.Installers
                 serviceContainer.Get<PackController>(),
                 new PackFactory(serviceContainer.Get<LocalizationController>(), _content),
                 _packContainer,
-                serviceContainer.Get<SceneLoaderController>());
+                serviceContainer.Get<CommandChangeState>());
 
             serviceContainer.SetServiceSelf(packCreator);
+            serviceContainer.SetServiceSelf(_energyContainer);
         }
     }
 }

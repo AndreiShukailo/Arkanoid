@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Infrastructure;
 using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.EnergyFeature;
+using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
@@ -11,8 +12,10 @@ using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
+using App.Scripts.Scenes.PackSelectScene.Features;
 using App.Scripts.Scenes.PackSelectScene.Features.ButtonsFeature;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature;
+using App.Scripts.Scenes.PackSelectScene.PackSelectedStates;
 
 namespace App.Scripts.Scenes.PackSelectScene.Installers
 {
@@ -31,6 +34,7 @@ namespace App.Scripts.Scenes.PackSelectScene.Installers
         {
             var gameStateMachine = new GameStateMachine();
 
+            gameStateMachine.AddState(CreateTransitState(serviceContainer));
             gameStateMachine.AddState(CreateSetupState(serviceContainer));
             gameStateMachine.AddState(CreateProcessState(serviceContainer));
             gameStateMachine.AddState(CreateLoadSceneState(serviceContainer));
@@ -40,11 +44,26 @@ namespace App.Scripts.Scenes.PackSelectScene.Installers
             return gameStateMachine;
         }
 
+        private GameState CreateTransitState(ServiceContainer serviceContainer)
+        {
+            var handlerSetupButtons = new HandlerSetupButtonsPackSelectedScene(
+                serviceContainer.Get<ButtonsContainer>(),
+                serviceContainer.Get<SceneLoaderController>());
+            serviceContainer.SetServiceSelf(handlerSetupButtons);
+
+            return new TransitOnGameSceneState(
+                serviceContainer.Get<EnergyViewController>(),
+                serviceContainer.Get<SceneLoaderController>(),
+                handlerSetupButtons,
+                serviceContainer.Get<PacksCreator>());
+        }
+
         private LoadSceneState CreateLoadSceneState(ServiceContainer serviceContainer)
         {
             var loadSceneState = new LoadSceneState(
                 serviceContainer.Get<SceneLoaderController>(),
-                serviceContainer.Get<PopUpController>());
+                serviceContainer.Get<PopUpController>(),
+                serviceContainer.Get<EnergyViewController>());
 
             return loadSceneState;
         }
@@ -56,9 +75,10 @@ namespace App.Scripts.Scenes.PackSelectScene.Installers
             var handlers = new List<IHandlerSetupScene>()
             {
                 new HandlerCreatePacks(serviceContainer.Get<PacksCreator>()),
-                new HandlerSetupButtonsPackSelectedScene(
-                    serviceContainer.Get<ButtonsContainer>(),
-                    sceneLoader)
+                serviceContainer.Get<HandlerSetupButtonsPackSelectedScene>(),
+                new HandlerSetupEnergy(
+                    serviceContainer.Get<EnergyViewController>(),
+                    serviceContainer.Get<EnergyContainer>())
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 

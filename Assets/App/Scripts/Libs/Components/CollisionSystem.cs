@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace App.Scripts.Libs.Components
+﻿namespace App.Scripts.Libs.Components
 {
     public class CollisionSystem : ComponentSystem<CollisionHandlerComponent>
     {

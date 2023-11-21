@@ -11,8 +11,10 @@ namespace App.Scripts.Libs.PopUp.View
 {
     public abstract class PopUpView : SpawnableItemMono
     {
+        public Transform EnergyContainer => _energyContainer;
         public Transform Content => _content;
         
+        [SerializeField] protected Transform _energyContainer;
         [SerializeField] protected Transform _content;
         [SerializeField] protected Image _block;
         [SerializeField] protected RectTransform _rectTransform;
@@ -55,17 +57,22 @@ namespace App.Scripts.Libs.PopUp.View
             _animation = DOTween.Sequence();
             _animation.Append(_rectTransform.DOAnchorPosY(0f, _showDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
-            _block.raycastTarget = false;
+            SetBlock(false);
         }
 
         public async Task ProcessHide()
         {
-            _block.raycastTarget = true;
+            SetBlock(true);
             _animation = DOTween.Sequence();
             _animation.Append(_rectTransform.DOAnchorPosY(_startPosition.y, _hideDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
             _parent.gameObject.SetActive(false);
             Remove();
+        }
+
+        public void SetBlock(bool isBlock)
+        {
+            _block.raycastTarget = isBlock;
         }
 
         private float GetYPosition()

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.Buttons.Container;
 using App.Scripts.Infrastructure.SceneManagement;
-using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
 
 namespace App.Scripts.Infrastructure.Buttons

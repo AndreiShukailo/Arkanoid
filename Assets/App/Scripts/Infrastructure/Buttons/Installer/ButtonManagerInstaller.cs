@@ -15,6 +15,7 @@ namespace App.Scripts.Infrastructure.Buttons.Installer
             var buttonManager =
                 new ButtonManager(_buttonsViewContainer, serviceContainer.Get<LocalizationController>());
             serviceContainer.SetServiceSelf(buttonManager);
+            serviceContainer.SetServiceSelf(_buttonsViewContainer);
         }
     }
 }

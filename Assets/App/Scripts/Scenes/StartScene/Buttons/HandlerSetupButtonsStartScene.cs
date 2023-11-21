@@ -28,7 +28,7 @@ namespace App.Scripts.Scenes.StartScene.Buttons
 
         private void OpenGame()
         {
-            if (PlayerFirsInGame())
+            if (_packController.IsFirst)
             {
                 _sceneLoaderController.SetNextScene(_sceneLoaderController.ScenesConfig.GameScene);
                 return;
@@ -39,11 +39,5 @@ namespace App.Scripts.Scenes.StartScene.Buttons
 
         private void OpenLanguagePopup() =>
             _languagePopupController.ShowPopUp();
-
-        private bool PlayerFirsInGame()
-        {
-            return _packController.PlayerProgress.CompletedPacks.Count == 0 &&
-                   _packController.PlayerProgress.LastPack.LastLevel == 1;
-        }
     }
 }

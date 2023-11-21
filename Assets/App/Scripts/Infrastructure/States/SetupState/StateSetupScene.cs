@@ -26,9 +26,9 @@ namespace App.Scripts.Infrastructure.States.SetupState
 
         private async Task ProcessSetupLevel()
         {
+            _buttonManager.UpdateCamera();
             await _handlerSetup.Process();
             await _sceneLoaderController.ProcessOpenCurrentScene();
-            _buttonManager.UpdateCamera();
             
             StateMachine.ChangeState<StateProcessGame>();
         }

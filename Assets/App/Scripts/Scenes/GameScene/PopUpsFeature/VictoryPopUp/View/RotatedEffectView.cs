@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp.View
 {
-    public class VictoryEffectView : MonoBehaviour
+    public class RotatedEffectView : MonoBehaviour
     {
         [SerializeField] private GameObject _victoryEffetc;
         [SerializeField] private float _rotationSpeed = 3f;

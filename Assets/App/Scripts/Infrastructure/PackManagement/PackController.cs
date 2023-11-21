@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
 
@@ -9,14 +9,17 @@ namespace App.Scripts.Infrastructure.PackManagement
     {
         public PackInfo CurrentPack { get; private set; }
         public PlayerProgress PlayerProgress => _playerProgress;
+        public bool IsFirst { get; private set; }
 
         private readonly SaveLoadService _saveLoadService;
         private readonly PackContainer _packContainer;
+        private readonly EnergyController _energyController;
         private readonly PlayerProgress _playerProgress;
 
-        public PackController(SaveLoadService saveLoadService, PackContainer packContainer)
+        public PackController(SaveLoadService saveLoadService, PackContainer packContainer, EnergyController energyController)
         {
             _packContainer = packContainer;
+            _energyController = energyController;
             _saveLoadService = saveLoadService;
             _playerProgress = GetCurrentPlayerProgress();
         }
@@ -24,15 +27,19 @@ namespace App.Scripts.Infrastructure.PackManagement
         public void SetLastPack()
         {
             CurrentPack = _playerProgress.LastPack;
+            IsFirst = false;
         }
 
-        public void SetPack(PackInfo packInfo)
+        public bool SetPack(PackInfo packInfo)
         {
+            if (!_energyController.StartLevel()) return false; 
             CurrentPack = packInfo;
+            return true;
         }
 
         public void NextLevel()
         {
+            _energyController.VictoryLevel();
             PackInfo currentPack = null;
             if (CurrentPack.LastLevel < GetPack(CurrentPack).LevelsCount)
             {
@@ -74,7 +81,12 @@ namespace App.Scripts.Infrastructure.PackManagement
 
         private PlayerProgress GetCurrentPlayerProgress()
         {
-            return _saveLoadService.Load<PlayerProgress>() ?? new PlayerProgress();
+            var pack = _saveLoadService.Load<PlayerProgress>();
+            if (pack != null) return pack;
+            IsFirst = true;
+            pack = new PlayerProgress();
+
+            return pack;
         }
     }
 }

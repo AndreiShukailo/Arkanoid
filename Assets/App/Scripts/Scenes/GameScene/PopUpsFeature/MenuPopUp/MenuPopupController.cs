@@ -1,10 +1,13 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.Buttons;
+using App.Scripts.Infrastructure.EnergyFeature;
+using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.GameStates;
+using App.Scripts.Scenes.GameScene.PopUpsFeature;
 
 namespace App.Scripts.Scenes.StartScene.Language.PopUp
 {
@@ -20,27 +23,35 @@ namespace App.Scripts.Scenes.StartScene.Language.PopUp
         private readonly CommandChangeState _commandChangeState;
         private readonly SceneLoaderController _sceneLoaderController;
         private readonly PopUpController _popUpController;
+        private readonly EnergyViewController _energyViewController;
+        private readonly CommandSpendEnergy _commandSpendEnergy;
+        private MenuPopUp _popView;
 
         public MenuPopupController(ButtonManager buttonManager,
             CommandChangeState commandChangeState, SceneLoaderController sceneLoaderController,
-            PopUpController popUpController)
+            PopUpController popUpController, EnergyViewController energyViewController,
+            CommandSpendEnergy commandSpendEnergy)
         {
             _buttonManager = buttonManager;
             _commandChangeState = commandChangeState;
             _sceneLoaderController = sceneLoaderController;
             _popUpController = popUpController;
+            _energyViewController = energyViewController;
+            _commandSpendEnergy = commandSpendEnergy;
         }
 
         public void ShowPopUp()
         {
-            var popUp = _popUpController.Show<MenuPopUp>();
-            BuildButtons(popUp);
-            popUp.ProcessShow().Forget();
+            _popView = _popUpController.Show<MenuPopUp>();
+            _energyViewController.CreateEnergy(_popView.EnergyContainer);
+            BuildButtons(_popView);
+            _popView.ProcessShow().Forget();
         }
 
         public async Task HidePopUp()
         {
             await _popUpController.Hide<MenuPopUp>();
+            _energyViewController.Remove();
         }
 
         private void BuildButtons(MenuPopUp menuPopUp)
@@ -50,8 +61,10 @@ namespace App.Scripts.Scenes.StartScene.Language.PopUp
             _buttonManager.BuildButton(menuPopUp.Content, OnContinueButtonClick, ContinueButtonID, ContinueLanguageKey);
         }
 
-        private void OnRestartButtonClick() =>
-            _commandChangeState.ChangeState<ReloadLevelState>();
+        private void OnRestartButtonClick()
+        {
+            _commandSpendEnergy.ProcessSpendEnergy(_popView).Forget();
+        }
 
         private void OnContinueButtonClick() =>
             _commandChangeState.ChangeState<StateProcessGame>();

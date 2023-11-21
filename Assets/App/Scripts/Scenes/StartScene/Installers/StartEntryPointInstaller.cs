@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Infrastructure;
 using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SceneManagement;
@@ -45,7 +45,8 @@ namespace App.Scripts.Scenes.StartScene.Installers
         {
             var loadSceneState = new LoadSceneState(
                 serviceContainer.Get<SceneLoaderController>(),
-                serviceContainer.Get<PopUpController>());
+                serviceContainer.Get<PopUpController>(),
+                serviceContainer.Get<EnergyViewController>());
 
             return loadSceneState;
         }
