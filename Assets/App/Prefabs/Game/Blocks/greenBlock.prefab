@@ -135,11 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: GreenBlock
   _components:
-  - {fileID: 8921238127520132488}
   - {fileID: 3149150453259973653}
+  - {fileID: 2069787769551254389}
+  - {fileID: 8921238127520132488}
   - {fileID: 3596194038501785438}
   - {fileID: 5457237604228795408}
-  - {fileID: 2069787769551254389}
   - {fileID: 2740403821920014173}
 --- !u!114 &8921238127520132488
 MonoBehaviour:

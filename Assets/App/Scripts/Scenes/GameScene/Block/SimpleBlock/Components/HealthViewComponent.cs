@@ -11,10 +11,10 @@ namespace App.Scripts.Scenes.GameScene.Block.SimpleBlock.Components
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private List<SpriteRenderer> _cracks;
 
-        public void Construct()
+        public override void Construct(ComponentContainer componentContainer)
         {
+            base.Construct(componentContainer);
             _healthComponent.OnChangeHealth += ChangeHealth;
-            UpdateCrackSize();
         }
 
         public override void OnRemove()
@@ -25,9 +25,10 @@ namespace App.Scripts.Scenes.GameScene.Block.SimpleBlock.Components
 
         private void ChangeHealth(float health)
         {
+            UpdateCrackSize();
             var step = 1f / _cracks.Count;
             var point = 1f;
-            
+
             for (var i = 0; i < _cracks.Count; i++)
             {
                 _cracks[i].gameObject.SetActive(health < point);

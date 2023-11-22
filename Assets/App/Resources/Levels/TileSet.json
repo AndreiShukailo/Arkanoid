@@ -9,7 +9,7 @@
  "margin":0,
  "name":"TileSet",
  "spacing":0,
- "tilecount":5,
+ "tilecount":9,
  "tiledversion":"1.10.2",
  "tileheight":50,
  "tiles":[
@@ -51,6 +51,34 @@
          "imageheight":50,
          "imagewidth":104,
          "type":"RedBlock"
+        }, 
+        {
+         "id":5,
+         "image":"..\/..\/Media\/Sprites\/Game\/ColorBomb.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"ColorBombBlock"
+        }, 
+        {
+         "id":6,
+         "image":"..\/..\/Media\/Sprites\/Game\/HorizontalTNT.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"HorizontalBombBlock"
+        }, 
+        {
+         "id":7,
+         "image":"..\/..\/Media\/Sprites\/Game\/TNT.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"BombBlock"
+        }, 
+        {
+         "id":8,
+         "image":"..\/..\/Media\/Sprites\/Game\/VerticalTNT.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"VerticalBombBlock"
         }],
  "tilewidth":104,
  "type":"tileset",

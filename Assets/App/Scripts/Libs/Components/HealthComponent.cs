@@ -11,7 +11,7 @@ namespace App.Scripts.Libs.Components
             get => _currentHealth;
             set
             {
-                _currentHealth = value;
+                _currentHealth = Mathf.Clamp(value, 0, _startHealth);
                 OnChangeHealth?.Invoke((float)_currentHealth / _startHealth);
             }
         }
@@ -19,9 +19,9 @@ namespace App.Scripts.Libs.Components
         [SerializeField] private int _startHealth;
         private int _currentHealth;
 
-        public override void OnAdd()
+        public override void Construct(ComponentContainer componentContainer)
         {
-            base.OnAdd();
+            base.Construct(componentContainer);
             CurrentHealth = _startHealth;
         }
     }

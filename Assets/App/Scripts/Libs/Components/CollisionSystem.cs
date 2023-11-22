@@ -1,4 +1,6 @@
-﻿namespace App.Scripts.Libs.Components
+﻿using App.Scripts.Scenes.GameScene.Block.BombsFeature;
+
+namespace App.Scripts.Libs.Components
 {
     public class CollisionSystem : ComponentSystem<CollisionHandlerComponent>
     {
@@ -27,7 +29,8 @@
             if(collidedComponent == null ) return;
 
             collisionContext.CollisionHandlerComponent.ComponentContainer.Get<CorretionAngleComponent>()?.Correct(collision);
-            _systemsContainer.GetSystem<HealthComponent>().Action(collidedComponent.ComponentContainer.Get<HealthComponent>());
+            componentContainer.AddToSystem<HealthComponent>();
+            componentContainer.AddToSystem<BombComponent>();
         }
     }
 }

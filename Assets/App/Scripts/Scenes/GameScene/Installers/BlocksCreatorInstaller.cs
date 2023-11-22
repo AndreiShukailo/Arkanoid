@@ -6,7 +6,6 @@ using App.Scripts.Libs.TiledParser.TileSet;
 using App.Scripts.Scenes.GameScene.Block;
 using App.Scripts.Scenes.GameScene.Block.Container;
 using App.Scripts.Scenes.GameScene.Block.Factory;
-using App.Scripts.Scenes.GameScene.Block.SimpleBlock.Factory;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
 using UnityEngine;
 
@@ -35,8 +34,10 @@ namespace App.Scripts.Scenes.GameScene.Installers
         private BlocksContainer RegisterBlocks(ServiceContainer serviceContainer)
         {
             _blocksContainer.RegisterGroup("Simple",
-                setting => new SimpleBlockFactory(setting, serviceContainer.Get<SystemsContainer>()));
+                setting => new BlockFactory(setting, serviceContainer.Get<SystemsContainer>()));
             _blocksContainer.RegisterGroup("Iron",
+                setting => new BlockFactory(setting, serviceContainer.Get<SystemsContainer>()));
+            _blocksContainer.RegisterGroup("Bombs",
                 setting => new BlockFactory(setting, serviceContainer.Get<SystemsContainer>()));
             return _blocksContainer;
         }

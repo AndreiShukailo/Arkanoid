@@ -7,11 +7,11 @@
             base.OnUpdate(component);
             if(component.CurrentHealth <= 0)
                 component.ComponentContainer.AddToSystem<DeathComponent>();
-        }
-
-        protected override void OnAction(HealthComponent component)
-        {
-            component.CurrentHealth -= 1;
+            else
+            {
+                component.CurrentHealth -= 1;
+                Remove(component);
+            }
         }
     }
 }

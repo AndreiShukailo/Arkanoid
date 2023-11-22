@@ -28,6 +28,7 @@ namespace App.Scripts.Libs.Components
         public void AddToSystem<TComponent>() where TComponent : Component
         {
             var component = Get<TComponent>();
+            if(component == null) return;
             component.OnAdd();
             _systemsContainer.GetSystem<TComponent>().Add(component);
         }

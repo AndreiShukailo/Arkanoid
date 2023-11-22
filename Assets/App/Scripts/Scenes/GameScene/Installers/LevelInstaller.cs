@@ -10,6 +10,7 @@ using App.Scripts.Libs.TiledParser.Tiled;
 using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
+using App.Scripts.Scenes.GameScene.Block.BombsFeature;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
@@ -46,11 +47,22 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var deathSystem = CreateDeathSystem(serviceContainer, levelController);
             serviceContainer.SetService<ISystem, DeathSystem>(deathSystem);
             
+            var bombSystem = CreateBombSystem(serviceContainer, levelController);
+            serviceContainer.SetService<ISystem, BombSystem>(bombSystem);
+            
             var checkLooseBallSystem = CreateLooseBallSystem(serviceContainer, levelController);
             serviceContainer.SetService<ISystem, CheckLooseBallSystem>(checkLooseBallSystem);
             
             InstallPlatformCreator(serviceContainer);
             InstallBallCreator(serviceContainer);
+        }
+
+        private BombSystem CreateBombSystem(ServiceContainer serviceContainer, LevelController levelController)
+        {
+            var commandBombBlocks = new CommandBombBlocks(levelController);
+            var bombSystem = new BombSystem(commandBombBlocks, this);
+            serviceContainer.Get<SystemsContainer>().AddSystem<BombComponent, BombSystem>(bombSystem);
+            return bombSystem;
         }
 
         private LevelCreator CreateLevelCreator(ServiceContainer serviceContainer)

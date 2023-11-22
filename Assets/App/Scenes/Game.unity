@@ -2206,6 +2206,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d02a746c4714637a58977133bf8aa43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1511709887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1511709888}
+  - component: {fileID: 1511709889}
+  m_Layer: 0
+  m_Name: BombsBlockGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1511709888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511709887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1861251283}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1511709889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511709887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cabec7ff4bc47c8b3ec19e7c04d5af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroupKey: Bombs
+  _poolSettings:
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: b3dd0a1fc7af15d4d8492526d79f87a9, type: 3}
+    Container: {fileID: 1402412260}
+    StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: cdcd0ec72464d0b479350f0089e3574c, type: 3}
+    Container: {fileID: 1402412260}
+    StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: 9048674022f9a5049aef9f572060fc37, type: 3}
+    Container: {fileID: 1402412260}
+    StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: 0fb871a8d2f4ad044aac9e135eb70918, type: 3}
+    Container: {fileID: 1402412260}
+    StartSize: 1
 --- !u!1 &1516792275
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,6 +2845,7 @@ Transform:
   m_Children:
   - {fileID: 593857403}
   - {fileID: 675520176}
+  - {fileID: 1511709888}
   m_Father: {fileID: 1613001242}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2806,6 +2865,7 @@ MonoBehaviour:
     Groups:
     - {fileID: 593857404}
     - {fileID: 675520177}
+    - {fileID: 1511709889}
   _tileSetConfig:
     TileSetPath: Levels/TileSet
 --- !u!1 &1865312758
