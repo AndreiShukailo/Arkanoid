@@ -37,6 +37,8 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
                     {
                         track[newStep] = point;
                         points.Add(newStep);
+                        if(track[point] == _nullVector)
+                            break;
                     }
                 }
 
