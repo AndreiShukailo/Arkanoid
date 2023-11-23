@@ -203,7 +203,7 @@ MonoBehaviour:
     rid: 5982668678352338945
   _blockDestroyPathInfo:
     rid: 5982668678352338948
-  _damage: 2
+  _damage: 4
   references:
     version: 2
     RefIds:

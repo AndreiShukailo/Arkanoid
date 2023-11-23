@@ -6,6 +6,6 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
 {
     public interface IBlocksGetter
     {
-        public IEnumerable<CellComponent> GetBlocks(CellComponent cellComponent, Grid grid);
+        public IEnumerable<List<CellComponent>> GetBlocks(CellComponent cellComponent, Grid grid);
     }
 }

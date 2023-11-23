@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using App.Scripts.Libs.Components;
 using App.Scripts.Scenes.GameScene.Block.BombsFeature.Info;
 using UnityEngine;
@@ -11,12 +10,12 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
     {
         private readonly Vector2Int _nullVector = new(-1, -1);
 
-        public IEnumerable<CellComponent> GetBlocks(CellComponent cellComponent, Grid grid)
+        public IEnumerable<List<CellComponent>> GetBlocks(CellComponent cellComponent, Grid grid)
         {
-            var blocks = new List<CellComponent>();
+            var points = new List<Vector2Int>();
             var blockDestroyPathIfo = cellComponent.ComponentContainer.Get<BombComponent>().BlockDestroyPathInfo;
             var firstStep = new Vector2Int(cellComponent.Position.x, cellComponent.Position.y);
-            
+
             var track = new Dictionary<Vector2Int, Vector2Int>
             {
                 [firstStep] = _nullVector
@@ -32,40 +31,35 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
                     var newStep = point + new Vector2Int(blockDestroyPathIfo.X[i], blockDestroyPathIfo.Y[i]);
                     if (track.ContainsKey(newStep)) continue;
 
-                    if (StepIsValid(grid, newStep, cellComponent, blockDestroyPathIfo))
+                    if (StepIsValid(grid, newStep, cellComponent))
                     {
                         track[newStep] = point;
-                        if (blockDestroyPathIfo.IsOneStep) continue;
-                        queue.Enqueue(newStep);
+                        points.Add(newStep);
                     }
                 }
-            }
 
-            foreach (var trackKey in track.Keys)
-            {
-                if (track[trackKey] == _nullVector) continue;
-                var cell = grid.Cells[trackKey.x][trackKey.y].CellComponent;
-                if (cell == null) continue;
-                blocks.Add(cell);
+                if (queue.Count != 0) continue;
+                var blocks = new List<CellComponent>();
+                foreach (var item in points)
+                {
+                    blocks.Add(GetCellComponent(grid, item));
+                    if(blockDestroyPathIfo.IsOneStep) continue;
+                    queue.Enqueue(item);
+                }
+                points.Clear();
+                yield return blocks;
             }
-
-            return blocks;
+        }
+        
+        
+        private CellComponent GetCellComponent(Grid grid, Vector2Int newStep)
+        {
+            return grid.Cells[newStep.x][newStep.y].CellComponent;
         }
 
-        private static bool StepIsValid(Grid grid, Vector2Int stepVector, CellComponent cellComponent,
-            IBlockDestroyPathInfo blockDestroyPathInfo)
+        private bool StepIsValid(Grid grid, Vector2Int stepVector, CellComponent cellComponent)
         {
-            return InFieldRange(grid, stepVector, cellComponent) &&
-                   ColorBlockStepValid(grid, stepVector, blockDestroyPathInfo);
-        }
-
-        private static bool ColorBlockStepValid(Grid grid, Vector2Int stepVector,
-            IBlockDestroyPathInfo blockDestroyPathInfo)
-        {
-            if (!blockDestroyPathInfo.IsColor) return true;
-            var cell = grid.Cells[stepVector.x][stepVector.y].CellComponent;
-            if (cell == null) return false;
-            return cell.ComponentContainer.Get<HealthComponent>() != null;
+            return InFieldRange(grid, stepVector, cellComponent);
         }
 
         private static bool InFieldRange(Grid grid, Vector2Int stepVector, CellComponent cellComponent)

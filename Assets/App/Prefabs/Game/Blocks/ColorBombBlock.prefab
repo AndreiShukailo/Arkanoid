@@ -200,14 +200,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellComponent: {fileID: 3596194038501785438}
   _blocksGetter:
-    rid: 5982668678352338944
+    rid: 5982668697578766340
   _blockDestroyPathInfo:
-    rid: 5982668678352338950
+    rid: 5982668697578766337
   _damage: 2
   references:
     version: 2
     RefIds:
-    - rid: 5982668678352338944
-      type: {class: BombBlocksGetter, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature, asm: Assembly-CSharp}
-    - rid: 5982668678352338950
+    - rid: 5982668697578766337
       type: {class: ColorDestroyPathInfo, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature.Info, asm: Assembly-CSharp}
+    - rid: 5982668697578766340
+      type: {class: ColorBombBlocksGetter, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature, asm: Assembly-CSharp}

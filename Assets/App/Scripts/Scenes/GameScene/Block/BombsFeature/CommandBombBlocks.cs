@@ -10,7 +10,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
     public class CommandBombBlocks
     {
         private const string IronBlockId = "IronBlock";
-        private const float SecondsDelay = 0.1f;
+        private const float SecondsDelay = 0.5f;
         private LevelController _levelController;
 
         public CommandBombBlocks(LevelController levelController)
@@ -20,29 +20,33 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
 
         public IEnumerator Process(BombComponent bombComponent)
         {
-            foreach (var cellComponent in GetComponents(bombComponent))
+            foreach (var cellComponents in GetComponents(bombComponent))
             {
                 yield return new WaitForSeconds(SecondsDelay);
-                if (cellComponent == null) continue;
-                var healthComponent = cellComponent.ComponentContainer.Get<HealthComponent>();
-                if (healthComponent != null)
+                
+                foreach (var cellComponent in cellComponents)
                 {
-                    healthComponent.CurrentHealth -= bombComponent.Damage;
-                    cellComponent.ComponentContainer.AddToSystem<HealthComponent>();
-                    continue;
-                }
+                    if (cellComponent == null) continue;
+                    var healthComponent = cellComponent.ComponentContainer.Get<HealthComponent>();
+                    if (healthComponent != null)
+                    {
+                        healthComponent.CurrentHealth -= bombComponent.Damage;
+                        cellComponent.ComponentContainer.AddToSystem<HealthComponent>();
+                        continue;
+                    }
 
-                if (cellComponent.ComponentContainer.ID == IronBlockId)
-                {
-                    cellComponent.ComponentContainer.AddToSystem<DeathComponent>();
-                    continue;
-                }
+                    if (cellComponent.ComponentContainer.ID == IronBlockId)
+                    {
+                        cellComponent.ComponentContainer.AddToSystem<DeathComponent>();
+                        continue;
+                    }
 
-                cellComponent.ComponentContainer.AddToSystem<BombComponent>();
+                    cellComponent.ComponentContainer.AddToSystem<BombComponent>();
+                }
             }
         }
 
-        private IEnumerable<CellComponent> GetComponents(BombComponent bombComponent)
+        private IEnumerable<List<CellComponent>> GetComponents(BombComponent bombComponent)
         {
             return bombComponent.BlocksGetter.GetBlocks(bombComponent.CellComponent, GetLevelGrid());
         }
