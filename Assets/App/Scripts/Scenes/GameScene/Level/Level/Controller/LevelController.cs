@@ -50,10 +50,10 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 
         public void UpdateLevelProgress()
         {
-            var levelProgress = (float)LevelModel.LevelGrid.BlockCount / _startBlocksCount;
+            var levelProgress = 1f - (float)LevelModel.LevelGrid.BlockCount / _startBlocksCount;
             _levelProgressInfoController.UpdateLevelProgress(levelProgress);
             _speedComplicationSystem.Complicate(levelProgress);
-            if (levelProgress > 0) return;
+            if (levelProgress < 1) return;
             _commandChangeState.ChangeState<VictoryState>();
         }
 
