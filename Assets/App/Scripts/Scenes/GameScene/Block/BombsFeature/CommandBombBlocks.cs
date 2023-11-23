@@ -10,7 +10,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
     public class CommandBombBlocks
     {
         private const string IronBlockId = "IronBlock";
-        private const float SecondsDelay = 0.5f;
+        private const float SecondsDelay = 0.2f;
         private LevelController _levelController;
 
         public CommandBombBlocks(LevelController levelController)

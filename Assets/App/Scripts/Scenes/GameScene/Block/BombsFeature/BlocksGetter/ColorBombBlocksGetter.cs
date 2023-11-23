@@ -77,18 +77,19 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
 
                     if (StepIsValid(grid, newStep, cellComponent))
                     {
-                        track[newStep] = point;
                         var newColor = GetBlockId(grid, newStep);
                         var currentColor = GetBlockId(grid, point);
                         if (track[point] == _nullVector)
                         {
                             colors[newColor] = 1;
                             queue.Enqueue(newStep);
+                            track[newStep] = point;
                         }
 
                         if (newColor != currentColor) continue;
-                        colors[newColor] = colors[newColor]++;
+                        colors[newColor] += 1;
                         queue.Enqueue(newStep);
+                        track[newStep] = point;
                     }
                 }
             }
