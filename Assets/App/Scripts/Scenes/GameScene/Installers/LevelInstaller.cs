@@ -1,4 +1,6 @@
-﻿using App.Scripts.Infrastructure.PackManagement;
+﻿using App.Scripts.Infrastructure.Effects;
+using App.Scripts.Infrastructure.Effects.View;
+using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.AssetProvider;
 using App.Scripts.Libs.Components;
@@ -11,14 +13,14 @@ using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.Block.BombsFeature;
-using App.Scripts.Scenes.GameScene.Block.BombsFeature.View;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostBallSpeed;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
-using App.Scripts.Scenes.GameScene.Level.PackInfoFeature;
+using App.Scripts.Scenes.GameScene.Level.LevelProgressInfo;
 using App.Scripts.Scenes.GameScene.Platform;
 using App.Scripts.Scenes.GameScene.Platform.Config;
 using UnityEngine;
@@ -46,15 +48,11 @@ namespace App.Scripts.Scenes.GameScene.Installers
             
             var levelController = CreateLevelController(serviceContainer);
             serviceContainer.SetServiceSelf(levelController);
-
-            var deathSystem = CreateDeathSystem(serviceContainer, levelController);
-            serviceContainer.SetService<ISystem, DeathSystem>(deathSystem);
             
-            var bombSystem = CreateBombSystem(serviceContainer, levelController);
-            serviceContainer.SetService<ISystem, BombSystem>(bombSystem);
-            
-            var checkLooseBallSystem = CreateLooseBallSystem(serviceContainer, levelController);
-            serviceContainer.SetService<ISystem, CheckLooseBallSystem>(checkLooseBallSystem);
+            serviceContainer.SetService<ISystem, DeathSystem>(CreateDeathSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, BombSystem>(CreateBombSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, CheckLooseBallSystem>(CreateLooseBallSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, BoostBallSpedSystem>(CreateBoostBallSpeedSystem(serviceContainer, levelController));
             
             InstallPlatformCreator(serviceContainer);
             InstallBallCreator(serviceContainer);
@@ -98,6 +96,13 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var deathSystem = new DeathSystem(levelController);
             serviceContainer.Get<SystemsContainer>().AddSystem<DeathComponent, DeathSystem>(deathSystem);
             return deathSystem;
+        }
+        
+        private BoostBallSpedSystem CreateBoostBallSpeedSystem(ServiceContainer serviceContainer, LevelController levelController)
+        {           
+            var boostBallSpeedSystem = new BoostBallSpedSystem(levelController);
+            serviceContainer.Get<SystemsContainer>().AddSystem<BoostBallSpeedComponent, BoostBallSpedSystem>(boostBallSpeedSystem);
+            return boostBallSpeedSystem;
         }
 
         private CheckLooseBallSystem CreateLooseBallSystem(ServiceContainer serviceContainer, LevelController levelController)

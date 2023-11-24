@@ -38,7 +38,7 @@ namespace App.Scripts.Libs.Components
             
         }
 
-        public void Update(float dt)
+        public virtual void Update(float dt)
         {
             for (var i = _components.Count - 1; i >= 0; i--)
             {

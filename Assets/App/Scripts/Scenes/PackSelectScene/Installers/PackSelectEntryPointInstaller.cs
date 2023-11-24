@@ -14,6 +14,7 @@ using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.PackSelectScene.Features;
 using App.Scripts.Scenes.PackSelectScene.Features.ButtonsFeature;
+using App.Scripts.Scenes.PackSelectScene.Features.EnergySetupView;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature;
 using App.Scripts.Scenes.PackSelectScene.PackSelectedStates;
 

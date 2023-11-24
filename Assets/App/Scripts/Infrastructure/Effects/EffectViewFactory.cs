@@ -1,7 +1,8 @@
-﻿using App.Scripts.Libs.Pool;
+﻿using App.Scripts.Infrastructure.Effects.View;
+using App.Scripts.Libs.Pool;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Block.BombsFeature.View
+namespace App.Scripts.Infrastructure.Effects
 {
     public class EffectViewFactory : PoolFactory<EffectView, Vector2>
     {

@@ -10,7 +10,7 @@ namespace App.Scripts.Libs.Components
             CorrectSpeed(component);
         }
 
-        private static void CorrectSpeed(MovingComponent component)
+        private void CorrectSpeed(MovingComponent component)
         {
             if(Math.Abs(component.Rigidbody2D.velocity.magnitude - component.CurrentSpeed) > 0f)
                 component.Rigidbody2D.velocity = component.Rigidbody2D.velocity.normalized * component.CurrentSpeed;

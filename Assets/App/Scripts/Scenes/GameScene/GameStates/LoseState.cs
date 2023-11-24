@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Infrastructure;
+using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
 

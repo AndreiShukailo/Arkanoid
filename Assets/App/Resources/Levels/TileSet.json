@@ -84,61 +84,71 @@
          "id":9,
          "image":"..\/..\/Media\/Sprites\/Game\/AddHealthBlock.png",
          "imageheight":56,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"AddHealthBlock"
         }, 
         {
          "id":10,
          "image":"..\/..\/Media\/Sprites\/Game\/deathBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"RemoveHealthBlock"
         }, 
         {
          "id":11,
          "image":"..\/..\/Media\/Sprites\/Game\/DecreasePlatformBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"DecreasePlatformBlock"
         }, 
         {
          "id":12,
          "image":"..\/..\/Media\/Sprites\/Game\/FireBallBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"FireBallBlock"
         }, 
         {
          "id":13,
          "image":"..\/..\/Media\/Sprites\/Game\/IncreasePlatformBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"IncreasePlatformBlock"
         }, 
         {
          "id":14,
          "image":"..\/..\/Media\/Sprites\/Game\/SlowBallBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"SpeedDownBallBlock"
         }, 
         {
          "id":15,
          "image":"..\/..\/Media\/Sprites\/Game\/slowPlatformBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"SpeedDownPlatformBlock"
+        }, 
+        {
+         "id":16,
+         "image":"..\/..\/Media\/Sprites\/Game\/speedPlatformBlock.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"SpeedUpPlatformBlock"
         }, 
         {
          "id":17,
-         "image":"..\/..\/Media\/Sprites\/Game\/speedPlatformBlock.png",
+         "image":"..\/..\/Media\/Sprites\/Game\/speedBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"SpeedUpBlock"
         }, 
         {
          "id":18,
-         "image":"..\/..\/Media\/Sprites\/Game\/speedBlock.png",
-         "imageheight":50,
-         "imagewidth":104
-        }, 
-        {
-         "id":20,
          "image":"..\/..\/Media\/Sprites\/Game\/2xBallBlock.png",
          "imageheight":50,
-         "imagewidth":104
+         "imagewidth":104,
+         "type":"AddBallBlock"
         }],
  "tilewidth":104,
  "type":"tileset",

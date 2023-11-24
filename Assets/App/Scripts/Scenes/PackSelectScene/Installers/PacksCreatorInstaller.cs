@@ -6,6 +6,7 @@ using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.ServiceLocator;
+using App.Scripts.Scenes.PackSelectScene.Features.EnergySetupView;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.Factory;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View;

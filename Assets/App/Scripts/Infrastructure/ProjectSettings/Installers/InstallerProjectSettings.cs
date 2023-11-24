@@ -1,4 +1,5 @@
 using App.Scripts.Infrastructure.ProjectSettings.Config;
+using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using UnityEngine;

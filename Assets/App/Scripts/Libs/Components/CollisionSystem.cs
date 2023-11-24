@@ -1,16 +1,10 @@
 ﻿using App.Scripts.Scenes.GameScene.Block.BombsFeature;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
 
 namespace App.Scripts.Libs.Components
 {
     public class CollisionSystem : ComponentSystem<CollisionHandlerComponent>
     {
-        private readonly SystemsContainer _systemsContainer;
-
-        public CollisionSystem(SystemsContainer systemsContainer)
-        {
-            _systemsContainer = systemsContainer;
-        }
-
         public override void OnUpdate(CollisionHandlerComponent component)
         {
             base.OnUpdate(component);
@@ -31,6 +25,8 @@ namespace App.Scripts.Libs.Components
             collisionContext.CollisionHandlerComponent.ComponentContainer.Get<CorretionAngleComponent>()?.Correct(collision);
             componentContainer.AddToSystem<HealthComponent>();
             componentContainer.AddToSystem<BombComponent>();
+            componentContainer.AddToSystem<SpawnBoostComponent>();
+            componentContainer.AddToSystem<BoostComponent>();
         }
     }
 }

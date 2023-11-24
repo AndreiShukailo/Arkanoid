@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.EnergyFeature.Config;
 using App.Scripts.Infrastructure.EnergyFeature.Factory;
 using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;

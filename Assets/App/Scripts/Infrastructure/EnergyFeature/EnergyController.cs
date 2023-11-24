@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using App.Scripts.Infrastructure.EnergyFeature.Config;
 using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Infrastructure.SaveLoad.SaveLoadService;
 

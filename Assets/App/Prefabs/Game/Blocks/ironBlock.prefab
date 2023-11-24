@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3596194038501785438}
   - component: {fileID: 5457237604228795408}
   - component: {fileID: 208765596948748575}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IronBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4628557926010301150}
   - component: {fileID: 824786532962932472}
   - component: {fileID: 7254565735212644894}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 8d8fd2f71dbb1fd4f94a8e4f24c9e4c3, type: 2}
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -214,4 +214,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movingComponent: {fileID: 6214060330389227446}
-  _maxSpeed: 10
+  _maxSpeed: 8

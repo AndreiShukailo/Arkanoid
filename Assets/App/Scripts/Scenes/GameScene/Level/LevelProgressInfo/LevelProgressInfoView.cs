@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace App.Scripts.Scenes.GameScene.Level.PackInfoFeature
+namespace App.Scripts.Scenes.GameScene.Level.LevelProgressInfo
 {
     public class LevelProgressInfoView : MonoBehaviour
     {

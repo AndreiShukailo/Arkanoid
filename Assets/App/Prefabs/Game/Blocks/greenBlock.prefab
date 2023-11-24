@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5457237604228795408}
   - component: {fileID: 2069787769551254389}
   - component: {fileID: 2740403821920014173}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greenBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,6 +278,10 @@ PrefabInstance:
       value: Crack1
       objectReference: {fileID: 0}
     - target: {fileID: 4209690612784758902, guid: 6f8b43832c19f48489daf2159827717b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209690612784758902, guid: 6f8b43832c19f48489daf2159827717b, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -349,6 +353,10 @@ PrefabInstance:
       value: Crack3
       objectReference: {fileID: 0}
     - target: {fileID: 8526868936244047889, guid: 2cc532ac5cf644f4a90a5b150607a015, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526868936244047889, guid: 2cc532ac5cf644f4a90a5b150607a015, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -418,6 +426,10 @@ PrefabInstance:
     - target: {fileID: 8526868936244047889, guid: 33ad7921a67546f4d9f8914c6b51460f, type: 3}
       propertyPath: m_Name
       value: Crack2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526868936244047889, guid: 33ad7921a67546f4d9f8914c6b51460f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8526868936244047889, guid: 33ad7921a67546f4d9f8914c6b51460f, type: 3}
       propertyPath: m_IsActive

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Scripts.Infrastructure.EnergyFeature
+namespace App.Scripts.Infrastructure.EnergyFeature.Config
 {
     [Serializable]
     public class EnergyConfig

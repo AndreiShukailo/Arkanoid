@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Infrastructure;
 using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
-using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
+using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
@@ -16,6 +15,7 @@ using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
 using App.Scripts.Scenes.GameScene.Ball;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems;
 using App.Scripts.Scenes.GameScene.GameStates;
 using App.Scripts.Scenes.GameScene.Level;
 using App.Scripts.Scenes.GameScene.Level.Level;
@@ -23,8 +23,8 @@ using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.Handlers;
 using App.Scripts.Scenes.GameScene.Platform;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
+using App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp;
-using App.Scripts.Scenes.StartScene.Language.PopUp;
 
 namespace App.Scripts.Scenes.GameScene.Installers
 {
@@ -160,7 +160,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var handlers = new List<IHandlerSetupScene>
             {
                 serviceContainer.Get<HandlerClearPlatform>(),
-                new HandlerClearLevel(serviceContainer.Get<LevelController>()),
+                new HandlerClearLevel(serviceContainer.Get<LevelController>(),
+                    serviceContainer.Get<DestroyWhenInvisibleSystem>()),
                 serviceContainer.Get<HandlerSetupLevel>(),
                 serviceContainer.Get<HandlerSetupPlatform>()
             };

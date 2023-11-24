@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace App.Scripts.Infrastructure
+namespace App.Scripts.Infrastructure.TimeManagement
 {
     public class TimeManager
     {

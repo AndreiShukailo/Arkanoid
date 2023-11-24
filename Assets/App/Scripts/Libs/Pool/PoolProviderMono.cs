@@ -25,5 +25,15 @@ namespace App.Scripts.Libs.Pool
         public T SpawnableItemMono;
         public Transform Container;
         public int StartSize;
+
+        protected PoolSetting()
+        {
+        }
+
+        public PoolSetting(Transform container, T spawnableItemMono)
+        {
+            Container = container;
+            SpawnableItemMono = spawnableItemMono;
+        }
     }
 }

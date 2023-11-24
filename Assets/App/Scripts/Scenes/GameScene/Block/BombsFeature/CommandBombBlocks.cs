@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using App.Scripts.Infrastructure.Effects;
 using App.Scripts.Libs.Components;
-using App.Scripts.Scenes.GameScene.Block.BombsFeature.View;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using UnityEngine;
 using Grid = App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.Grid;
@@ -48,6 +49,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
                     }
 
                     cellComponent.ComponentContainer.AddToSystem<BombComponent>();
+                    cellComponent.ComponentContainer.AddToSystem<SpawnBoostComponent>();
                 }
             }
         }

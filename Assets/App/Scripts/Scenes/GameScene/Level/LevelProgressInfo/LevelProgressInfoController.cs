@@ -2,7 +2,7 @@
 using App.Scripts.Infrastructure.PackManagement;
 using App.Scripts.Infrastructure.SaveLoad;
 
-namespace App.Scripts.Scenes.GameScene.Level.PackInfoFeature
+namespace App.Scripts.Scenes.GameScene.Level.LevelProgressInfo
 {
     public class LevelProgressInfoController
     {

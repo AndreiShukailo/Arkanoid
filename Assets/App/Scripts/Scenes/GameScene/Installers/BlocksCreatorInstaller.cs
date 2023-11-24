@@ -39,6 +39,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 setting => new BlockFactory(setting, serviceContainer.Get<SystemsContainer>()));
             _blocksContainer.RegisterGroup("Bombs",
                 setting => new BlockFactory(setting, serviceContainer.Get<SystemsContainer>()));
+            _blocksContainer.RegisterGroup("Boosts",
+                setting => new BlockFactory(setting, serviceContainer.Get<SystemsContainer>()));
             return _blocksContainer;
         }
     }

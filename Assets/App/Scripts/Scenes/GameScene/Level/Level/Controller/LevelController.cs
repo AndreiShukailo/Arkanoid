@@ -5,7 +5,7 @@ using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.GameStates;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
-using App.Scripts.Scenes.GameScene.Level.PackInfoFeature;
+using App.Scripts.Scenes.GameScene.Level.LevelProgressInfo;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 {

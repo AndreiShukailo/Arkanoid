@@ -1,15 +1,12 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.Buttons;
-using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.TaskExtensions;
-using App.Scripts.Scenes.GameScene.GameStates;
-using App.Scripts.Scenes.GameScene.PopUpsFeature;
 
-namespace App.Scripts.Scenes.StartScene.Language.PopUp
+namespace App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp
 {
     public class MenuPopupController
     {

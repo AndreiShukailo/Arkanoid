@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5457237604228795408}
   - component: {fileID: 2740403821920014173}
   - component: {fileID: 5909379209390480023}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VerticalBombBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,14 +200,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellComponent: {fileID: 3596194038501785438}
   _blocksGetter:
-    rid: 5982668678352338945
+    rid: 5982668727265525767
   _blockDestroyPathInfo:
-    rid: 5982668678352338949
+    rid: 5982668727265525768
   _damage: 2
   references:
     version: 2
     RefIds:
-    - rid: 5982668678352338945
-      type: {class: BombBlocksGetter, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature, asm: Assembly-CSharp}
-    - rid: 5982668678352338949
+    - rid: 5982668727265525767
+      type: {class: BombBlocksGetter, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature.BlocksGetter, asm: Assembly-CSharp}
+    - rid: 5982668727265525768
       type: {class: VerticalDestroyPathInfo, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature.Info, asm: Assembly-CSharp}

@@ -18,6 +18,7 @@ namespace App.Scripts.Libs.Components
             base.OnUpdate(component);
             var cellComponent = component.ComponentContainer.Get<CellComponent>();
             component.ComponentContainer.Remove();
+            if (cellComponent == null) return;
             _levelController.LevelModel.LevelGrid.Cells[cellComponent.Position.x][cellComponent.Position.y]
                 .RemoveCellComponent();
             _levelController.LevelModel.LevelGrid.RemoveBlock(cellComponent);

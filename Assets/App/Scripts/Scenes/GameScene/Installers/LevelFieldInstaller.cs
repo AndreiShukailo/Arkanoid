@@ -2,9 +2,11 @@
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.Systems;
-using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Components;
+using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.Block;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems;
 using App.Scripts.Scenes.GameScene.Input;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
 using App.Scripts.Scenes.GameScene.Level.LevelField.BlockSize;
@@ -28,6 +30,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var fieldInfo = new FieldProvider(_camera)
                 .CreateField(_levelFieldConfig);
             serviceContainer.SetServiceSelf(fieldInfo);
+            
+            InstallDestroyWhenInvisibleSystem(serviceContainer, fieldInfo);
 
             _cameraBordersContainer.Register(
                 fieldInfo,
@@ -62,6 +66,15 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.Get<SystemsContainer>()
                 .AddSystem<MovingWithPlatformComponent, MovingWithPlatformSystem>(movingWithPlatformSystem);
             serviceContainer.SetService<ISystem, MovingWithPlatformSystem>(movingWithPlatformSystem);
+        }
+
+        private void InstallDestroyWhenInvisibleSystem(ServiceContainer serviceContainer, FieldInfo fieldInfo)
+        {
+            var destroyWhenInvisibleSystem = new DestroyWhenInvisibleSystem(fieldInfo);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<DestroyWhenInvisibleComponent, DestroyWhenInvisibleSystem>(destroyWhenInvisibleSystem);
+            serviceContainer.SetService<ISystem, DestroyWhenInvisibleSystem>(destroyWhenInvisibleSystem);
+            serviceContainer.SetServiceSelf(destroyWhenInvisibleSystem);
         }
     }
 }

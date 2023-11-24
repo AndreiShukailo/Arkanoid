@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.States.SetupState;
 using App.Scripts.Libs.TaskExtensions;
 
-namespace App.Scripts.Scenes.PackSelectScene.Features
+namespace App.Scripts.Scenes.PackSelectScene.Features.EnergySetupView
 {
     public class HandlerSetupEnergy : IHandlerSetupScene
     {

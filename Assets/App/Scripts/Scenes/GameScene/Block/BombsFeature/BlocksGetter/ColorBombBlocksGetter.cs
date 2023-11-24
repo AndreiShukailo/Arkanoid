@@ -4,7 +4,7 @@ using App.Scripts.Scenes.GameScene.Block.BombsFeature.Info;
 using UnityEngine;
 using Grid = App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.Grid;
 
-namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
+namespace App.Scripts.Scenes.GameScene.Block.BombsFeature.BlocksGetter
 {
     public class ColorBombBlocksGetter : IBlocksGetter
     {

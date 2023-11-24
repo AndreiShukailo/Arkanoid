@@ -3,7 +3,7 @@ using App.Scripts.Scenes.GameScene.Ball.Components;
 using App.Scripts.Scenes.GameScene.Input;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.GameScene.Ball
+namespace App.Scripts.Scenes.GameScene.Ball.Systems
 {
     public class MovingWithPlatformSystem : ComponentSystem<MovingWithPlatformComponent>
     {
