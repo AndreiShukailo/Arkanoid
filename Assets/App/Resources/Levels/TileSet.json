@@ -9,9 +9,9 @@
  "margin":0,
  "name":"TileSet",
  "spacing":0,
- "tilecount":9,
+ "tilecount":19,
  "tiledversion":"1.10.2",
- "tileheight":50,
+ "tileheight":56,
  "tiles":[
         {
          "id":0,
@@ -79,6 +79,66 @@
          "imageheight":50,
          "imagewidth":104,
          "type":"VerticalBombBlock"
+        }, 
+        {
+         "id":9,
+         "image":"..\/..\/Media\/Sprites\/Game\/AddHealthBlock.png",
+         "imageheight":56,
+         "imagewidth":104
+        }, 
+        {
+         "id":10,
+         "image":"..\/..\/Media\/Sprites\/Game\/deathBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":11,
+         "image":"..\/..\/Media\/Sprites\/Game\/DecreasePlatformBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":12,
+         "image":"..\/..\/Media\/Sprites\/Game\/FireBallBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":13,
+         "image":"..\/..\/Media\/Sprites\/Game\/IncreasePlatformBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":14,
+         "image":"..\/..\/Media\/Sprites\/Game\/SlowBallBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":15,
+         "image":"..\/..\/Media\/Sprites\/Game\/slowPlatformBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":17,
+         "image":"..\/..\/Media\/Sprites\/Game\/speedPlatformBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":18,
+         "image":"..\/..\/Media\/Sprites\/Game\/speedBlock.png",
+         "imageheight":50,
+         "imagewidth":104
+        }, 
+        {
+         "id":20,
+         "image":"..\/..\/Media\/Sprites\/Game\/2xBallBlock.png",
+         "imageheight":50,
+         "imagewidth":104
         }],
  "tilewidth":104,
  "type":"tileset",

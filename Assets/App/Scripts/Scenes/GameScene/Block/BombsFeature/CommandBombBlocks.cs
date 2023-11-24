@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using App.Scripts.Libs.Components;
+using App.Scripts.Scenes.GameScene.Block.BombsFeature.View;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using UnityEngine;
 using Grid = App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.Grid;
@@ -12,10 +13,12 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
         private const string IronBlockId = "IronBlock";
         private const float SecondsDelay = 0.2f;
         private LevelController _levelController;
+        private readonly EffectViewFactory _effectViewFactory;
 
-        public CommandBombBlocks(LevelController levelController)
+        public CommandBombBlocks(LevelController levelController, EffectViewFactory effectViewFactory)
         {
             _levelController = levelController;
+            _effectViewFactory = effectViewFactory;
         }
 
         public IEnumerator Process(BombComponent bombComponent)
@@ -27,6 +30,9 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
                 foreach (var cellComponent in cellComponents)
                 {
                     if (cellComponent == null) continue;
+                    
+                    _effectViewFactory.Create(cellComponent.transform.position);
+                    
                     var healthComponent = cellComponent.ComponentContainer.Get<HealthComponent>();
                     if (healthComponent != null)
                     {

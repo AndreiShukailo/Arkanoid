@@ -3079,6 +3079,10 @@ MonoBehaviour:
       Container: {fileID: 1725470757}
       StartSize: 1
     BallBottomOffset: 0.65
+  _bombEffectPoolSetting:
+    SpawnableItemMono: {fileID: 7274760396356160345, guid: 350c004eee900714bb61ac3a1e56b560, type: 3}
+    Container: {fileID: 1725470757}
+    StartSize: 5
 --- !u!1 &1898837570
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.Block.BombsFeature;
+using App.Scripts.Scenes.GameScene.Block.BombsFeature.View;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
@@ -33,6 +34,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
         [SerializeField] private PlatformConfig _platformConfig;
         [Header("BallSetting")]
         [SerializeField] private BallConfig _ballConfig;
+        [Header("Other")]
+        [SerializeField] private EffectViewPoolSetting _bombEffectPoolSetting;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -59,7 +62,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private BombSystem CreateBombSystem(ServiceContainer serviceContainer, LevelController levelController)
         {
-            var commandBombBlocks = new CommandBombBlocks(levelController);
+            var commandBombBlocks = new CommandBombBlocks(levelController, new EffectViewFactory(_bombEffectPoolSetting));
             var bombSystem = new BombSystem(commandBombBlocks, this);
             serviceContainer.Get<SystemsContainer>().AddSystem<BombComponent, BombSystem>(bombSystem);
             return bombSystem;

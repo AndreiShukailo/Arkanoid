@@ -12,7 +12,7 @@ namespace App.Scripts.Scenes.GameScene.Ball.Systems
         {
             base.OnUpdate(component);
             if (_complicationFactor == 0) return;
-            component.MovingComponent.SetSpeed(Mathf.Lerp(component.MaxSpeed, component.MovingComponent.StartSpeed,
+            component.MovingComponent.SetSpeed(Mathf.Lerp(component.MovingComponent.StartSpeed, component.MaxSpeed,
                 _complicationFactor));
         }
 
