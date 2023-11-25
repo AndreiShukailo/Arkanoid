@@ -1,6 +1,7 @@
-﻿using App.Scripts.Infrastructure;
+﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.StateMachine;
+using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
 
 namespace App.Scripts.Scenes.GameScene.GameStates
@@ -27,13 +28,12 @@ namespace App.Scripts.Scenes.GameScene.GameStates
         public override void OnExitState()
         {
             base.OnExitState();
-            Exit();
+            Exit().Forget();
         }
 
-        private async void Exit()
+        private async Task Exit()
         {
             await _losePopupController.HidePopUp();
-            _timeManager.SetPause(false);
         }
     }
 }

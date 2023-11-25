@@ -100,7 +100,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var loadSceneState = new LoadSceneState(
                 serviceContainer.Get<SceneLoaderController>(),
                 serviceContainer.Get<PopUpController>(),
-                serviceContainer.Get<EnergyViewController>());
+                serviceContainer.Get<EnergyViewController>(),
+                serviceContainer.Get<TimeManager>());
 
             return loadSceneState;
         }
@@ -110,7 +111,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var systems = serviceContainer.GetServices<ISystem>();
             var gameSystems = new SystemsGroup(systems);
 
-            return new StateProcessGame(gameSystems);
+            return new StateProcessGame(gameSystems, serviceContainer.Get<TimeManager>());
         }
 
         private StateSetupScene CreateSetupState(ServiceContainer serviceContainer)

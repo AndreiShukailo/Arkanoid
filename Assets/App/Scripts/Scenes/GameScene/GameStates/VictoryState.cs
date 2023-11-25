@@ -1,4 +1,4 @@
-﻿using App.Scripts.Infrastructure;
+﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.TaskExtensions;
@@ -30,13 +30,12 @@ namespace App.Scripts.Scenes.GameScene.GameStates
         public override void OnExitState()
         {
             base.OnExitState();
-            OnExit();
+            OnExit().Forget();
         }
 
-        private async void OnExit()
+        private async Task OnExit()
         {
             await _victoryPopUpController.HidePopUp();
-            _timeManager.SetPause(false);
         }
     }
 }

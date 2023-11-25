@@ -14,6 +14,7 @@ namespace App.Scripts.Infrastructure.States
         public void ChangeState<TState>()
         {
             _gameStateMachine?.ChangeState<TState>();
+            _gameStateMachine?.Update();
         }
     }
 }

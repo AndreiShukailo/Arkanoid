@@ -23,7 +23,7 @@ namespace App.Scripts.Infrastructure.SceneManagement.View
         public async Task ProcessHide()
         {
             _animation = DOTween.Sequence();
-            _animation.Append(_canvasGroup.DOFade(0, _animationDuration));
+            _animation.Append(_canvasGroup.DOFade(0, _animationDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
             Remove();
         }
@@ -31,7 +31,7 @@ namespace App.Scripts.Infrastructure.SceneManagement.View
         public async Task ProcessShow()
         {
             _animation = DOTween.Sequence();
-            _animation.Append(_canvasGroup.DOFade(1, _animationDuration));
+            _animation.Append(_canvasGroup.DOFade(1, _animationDuration)).SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
         }
     }

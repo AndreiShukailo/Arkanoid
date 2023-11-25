@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.Container;
-using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.EntryPoint;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
+using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
-using App.Scripts.Scenes.PackSelectScene.Features;
 using App.Scripts.Scenes.PackSelectScene.Features.ButtonsFeature;
 using App.Scripts.Scenes.PackSelectScene.Features.EnergySetupView;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature;
@@ -64,7 +63,8 @@ namespace App.Scripts.Scenes.PackSelectScene.Installers
             var loadSceneState = new LoadSceneState(
                 serviceContainer.Get<SceneLoaderController>(),
                 serviceContainer.Get<PopUpController>(),
-                serviceContainer.Get<EnergyViewController>());
+                serviceContainer.Get<EnergyViewController>(),
+                serviceContainer.Get<TimeManager>());
 
             return loadSceneState;
         }
@@ -94,7 +94,7 @@ namespace App.Scripts.Scenes.PackSelectScene.Installers
             var systems = serviceContainer.GetServices<ISystem>();
             var gameSystems = new SystemsGroup(systems);
 
-            return new StateProcessGame(gameSystems);
+            return new StateProcessGame(gameSystems, serviceContainer.Get<TimeManager>());
         }
     }
 }

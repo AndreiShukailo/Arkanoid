@@ -1,8 +1,8 @@
-﻿using App.Scripts.Infrastructure;
-using App.Scripts.Infrastructure.TimeManagement;
+﻿using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.StateMachine;
+using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp;
-using App.Scripts.Scenes.StartScene.Language.PopUp;
+using Task = System.Threading.Tasks.Task;
 
 namespace App.Scripts.Scenes.GameScene.GameStates
 {
@@ -28,13 +28,12 @@ namespace App.Scripts.Scenes.GameScene.GameStates
         public override void OnExitState()
         {
             base.OnExitState();
-            Exit();
+            Exit().Forget();
         }
 
-        private async void Exit()
+        private async Task Exit()
         {
             await _menuPopupController.HidePopUp();
-            _timeManager.SetPause(false);
         }
     }
 }
