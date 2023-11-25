@@ -40,6 +40,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
         {
             OnActivateAction(component);
             _boostTime = component.BoostTime;
+            _timer = 0;
             _isBoost = true;
         }
 
