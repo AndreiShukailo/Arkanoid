@@ -23,5 +23,13 @@ namespace App.Scripts.Scenes.GameScene.Ball
             var spawnContext = new BallSpawnContext(platform, ballPosition);
             return _ballFactory.Create(spawnContext);
         }
+        
+        public ComponentContainer CreateBall(Vector2 blockPosition)
+        {
+            var ballPosition = blockPosition;
+
+            var spawnContext = new BallSpawnContext(ballPosition);
+            return _ballFactory.Create(spawnContext);
+        }
     }
 }

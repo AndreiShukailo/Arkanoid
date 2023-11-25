@@ -50,6 +50,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
 
                     cellComponent.ComponentContainer.AddToSystem<BombComponent>();
                     cellComponent.ComponentContainer.AddToSystem<SpawnBoostComponent>();
+                    cellComponent.ComponentContainer.AddToSystem<BoostActivatorComponent>();
                 }
             }
         }

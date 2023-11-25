@@ -22,9 +22,12 @@ namespace App.Scripts.Scenes.GameScene.Ball.Factory
             componentContainer.Register(_systemsContainer);
             componentContainer.AddToSystem<CollisionHandlerComponent>();
             componentContainer.AddToSystem<CorretionAngleComponent>();
-            componentContainer.Get<MovingWithPlatformComponent>()
-                .Construct(spawnContext.Platform.Get<ControlMovementComponent>());
-            componentContainer.AddToSystem<MovingWithPlatformComponent>();
+            if (spawnContext.Platform != null)
+            {
+                componentContainer.Get<MovingWithPlatformComponent>()
+                    .Construct(spawnContext.Platform.Get<ControlMovementComponent>());
+                componentContainer.AddToSystem<MovingWithPlatformComponent>();
+            }
             componentContainer.AddToSystem<SpeedComplicationComponent>();
 
             return componentContainer;

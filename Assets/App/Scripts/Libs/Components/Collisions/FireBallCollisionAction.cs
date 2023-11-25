@@ -33,6 +33,7 @@ namespace App.Scripts.Libs.Components
 
             collidedComponent.AddToSystem<BombComponent>();
             collidedComponent.AddToSystem<SpawnBoostComponent>();
+            collidedComponent.AddToSystem<BoostActivatorComponent>();
         }
     }
 }

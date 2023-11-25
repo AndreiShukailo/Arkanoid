@@ -13,6 +13,7 @@ using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.Block.BombsFeature;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostAddBall;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostBallSpeed;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostFireBall;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize;
@@ -60,6 +61,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             
             InstallPlatformCreator(serviceContainer);
             InstallBallCreator(serviceContainer);
+            
+            serviceContainer.SetService<ISystem, BoostAddBallSystem>(CreateBoostAddBallSystem(serviceContainer, levelController));
         }
 
         private BombSystem CreateBombSystem(ServiceContainer serviceContainer, LevelController levelController)
@@ -122,6 +125,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.Get<SystemsContainer>().AddSystem<BoostFireBallComponent, BoostFireBallSystem>(boostFireBallSystem);
             return boostFireBallSystem;
         }
+        
 
         private CheckLooseBallSystem CreateLooseBallSystem(ServiceContainer serviceContainer, LevelController levelController)
         {
@@ -141,6 +145,12 @@ namespace App.Scripts.Scenes.GameScene.Installers
         {
             var ballCreator = new BallCreator(_ballConfig, serviceContainer.Get<SystemsContainer>());
             serviceContainer.SetService<IBallCreator, BallCreator>(ballCreator);
+        }
+        private BoostAddBallSystem CreateBoostAddBallSystem(ServiceContainer serviceContainer, LevelController levelController)
+        {           
+            var boostAddBAllSystem = new BoostAddBallSystem(levelController, serviceContainer.Get<IBallCreator>());
+            serviceContainer.Get<SystemsContainer>().AddSystem<BoostAddBallComponent, BoostAddBallSystem>(boostAddBAllSystem);
+            return boostAddBAllSystem;
         }
     }
 }

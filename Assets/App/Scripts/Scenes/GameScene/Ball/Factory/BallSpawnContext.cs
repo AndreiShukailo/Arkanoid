@@ -13,5 +13,10 @@ namespace App.Scripts.Scenes.GameScene.Ball.Factory
             Platform = platform;
             Position = position;
         }
+        
+        public BallSpawnContext(Vector2 position)
+        {
+            Position = position;
+        }
     }
 }

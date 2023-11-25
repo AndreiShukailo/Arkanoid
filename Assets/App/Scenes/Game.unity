@@ -2201,6 +2201,9 @@ MonoBehaviour:
   - SpawnableItemMono: {fileID: 8163565471284357153, guid: 67dabd4229af1d54baa9fc0f19f9eefd, type: 3}
     Container: {fileID: 1402412260}
     StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: 6215ff0f5a44b494fa09e669e48e5eec, type: 3}
+    Container: {fileID: 1402412260}
+    StartSize: 1
 --- !u!1 &1503600818
 GameObject:
   m_ObjectHideFlags: 0

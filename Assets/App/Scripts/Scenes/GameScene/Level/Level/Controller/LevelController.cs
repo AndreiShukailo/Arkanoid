@@ -78,7 +78,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
             {
                 if (cells[i][j].CellComponent == null) continue;
                 cells[i][j].CellComponent.ComponentContainer.Remove();
-                await Task.Yield();
+                await Task.Delay(5);
             }
 
             LevelModel = null;
