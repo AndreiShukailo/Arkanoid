@@ -18,6 +18,7 @@ using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostBallSpeed;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostFireBall;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSpeed;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.HealthChangeBoost;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
@@ -45,7 +46,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            serviceContainer.SetServiceSelf(new HealthController(_startHealthCount));
+            var healthController = new HealthController(_startHealthCount);
+            serviceContainer.SetServiceSelf(healthController);
             serviceContainer.SetServiceSelf(new LevelProgressInfoController(serviceContainer.Get<PackController>()));
             
             serviceContainer.SetService<ILevelCreator, LevelCreator>(CreateLevelCreator(serviceContainer));
@@ -60,6 +62,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.SetService<ISystem, BoostPlatformSizeSystem>(CreateBoostPlatformSizeSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, BoostFireBallSystem>(CreateBoostFireBallSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, BoostPlatformSpeedSystem>(CreateBoostPlatformSpeedSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, HealthChangeBoostSystem>(CreateChangeHealthSystem(serviceContainer, healthController));
             
             InstallPlatformCreator(serviceContainer);
             InstallBallCreator(serviceContainer);
@@ -135,6 +138,12 @@ namespace App.Scripts.Scenes.GameScene.Installers
             return boostFireBallSystem;
         }
         
+        private HealthChangeBoostSystem CreateChangeHealthSystem(ServiceContainer serviceContainer, HealthController healthController)
+        {
+            var changeHealthBoostSystem = new HealthChangeBoostSystem(healthController);
+            serviceContainer.Get<SystemsContainer>().AddSystem<HealthChangeComponent, HealthChangeBoostSystem>(changeHealthBoostSystem);
+            return changeHealthBoostSystem;
+        }
 
         private CheckLooseBallSystem CreateLooseBallSystem(ServiceContainer serviceContainer, LevelController levelController)
         {

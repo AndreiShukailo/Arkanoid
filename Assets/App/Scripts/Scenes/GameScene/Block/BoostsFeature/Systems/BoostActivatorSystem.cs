@@ -5,6 +5,7 @@ using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostFireBall;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSpeed;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.HealthChangeBoost;
 
 namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
 {
@@ -23,6 +24,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
             component.ComponentContainer.AddToSystem<BoostFireBallComponent>();
             component.ComponentContainer.AddToSystem<BoostAddBallComponent>();
             component.ComponentContainer.AddToSystem<BoostPlatformSpeedComponent>();
+            component.ComponentContainer.AddToSystem<HealthChangeComponent>();
         }
     }
 }

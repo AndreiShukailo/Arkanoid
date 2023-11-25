@@ -16,10 +16,10 @@ namespace App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller
             Health = _startHealthCount;
         }
 
-        public void RemoveHealth()
+        public void ChangeHealth(int count)
         {
-            if (Health <= 0) return;
-            Health--;
+            if(Health + count > _startHealthCount || Health + count < 0) return;
+            Health += count;
             
             OnUpdateHealth?.Invoke();
         }

@@ -26,8 +26,8 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
         public override void OnUpdate(TComponent component)
         {
             base.OnUpdate(component);
-            Activate(component);
             component.ComponentContainer.AddToSystem<DeathComponent>();
+            Activate(component);
         }
 
         protected abstract void OnUpdateAction();

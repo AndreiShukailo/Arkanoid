@@ -2210,6 +2210,12 @@ MonoBehaviour:
   - SpawnableItemMono: {fileID: 8163565471284357153, guid: d7ef687a0f4ce1c46818faa59c0e58ba, type: 3}
     Container: {fileID: 874104373}
     StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: 224c677922d38d74ba176113c31b562d, type: 3}
+    Container: {fileID: 874104373}
+    StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: a3a0f7aab84f5c740b8b7b686aa792d8, type: 3}
+    Container: {fileID: 874104373}
+    StartSize: 1
 --- !u!1 &1503600818
 GameObject:
   m_ObjectHideFlags: 0

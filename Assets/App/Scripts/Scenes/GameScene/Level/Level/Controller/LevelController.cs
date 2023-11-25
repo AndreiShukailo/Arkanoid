@@ -59,7 +59,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 
         public void Lose()
         {
-            _healthController.RemoveHealth();
+            _healthController.ChangeHealth(-1);
 
             if (_healthController.Health > 0)
             {
