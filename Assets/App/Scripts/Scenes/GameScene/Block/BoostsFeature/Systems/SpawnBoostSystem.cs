@@ -23,7 +23,6 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
         {
             base.OnUpdate(component);
             var boost = CreateBoost(component);
-            boost.AddToSystem<MovingComponent>();
             SetDownDirection(boost);
             boost.AddToSystem<DestroyWhenInvisibleComponent>();
             component.ComponentContainer.AddToSystem<DeathComponent>();

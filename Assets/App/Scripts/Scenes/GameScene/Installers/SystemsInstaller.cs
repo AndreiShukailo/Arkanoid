@@ -19,7 +19,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var systemsContainer = new SystemsContainer();
             serviceContainer.SetServiceSelf(systemsContainer);
 
-            var collisionSystem = new CollisionSystem();
+            var collisionSystem = new CollisionSystem(
+                new SimpleCollisionAction(), 
+                new FireBallCollisionAction());
             systemsContainer.AddSystem<CollisionHandlerComponent, CollisionSystem>(collisionSystem);
             serviceContainer.SetService<ISystem, CollisionSystem>(collisionSystem);
             
@@ -30,10 +32,6 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var healthSystem = new HealthSystem();
             systemsContainer.AddSystem<HealthComponent, HealthSystem>(healthSystem);
             serviceContainer.SetService<ISystem, HealthSystem>(healthSystem);
-            
-            var movingSystem = new MovingSystem();
-            systemsContainer.AddSystem<MovingComponent, MovingSystem>(movingSystem);
-            serviceContainer.SetService<ISystem, MovingSystem>(movingSystem);
             
             var speedComplicationSystem = new SpeedComplicationSystem();
             systemsContainer.AddSystem<SpeedComplicationComponent, SpeedComplicationSystem>(speedComplicationSystem);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Libs.Components;
+using App.Scripts.Scenes.GameScene.Ball.Components;
 
 namespace App.Scripts.Scenes.GameScene.Ball
 {
@@ -16,6 +17,15 @@ namespace App.Scripts.Scenes.GameScene.Ball
         {
             Balls.Remove(ballModel);
             ballModel.Remove();
+        }
+
+        public void SetFireBall(bool isFire)
+        {
+            foreach (var ball in Balls)
+            {
+                var ballComponent = ball.Get<BallComponent>();
+                ballComponent.SetFire(isFire);
+            }
         }
 
         public void SetSpeedFactor(float factor)

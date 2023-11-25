@@ -20,7 +20,6 @@ namespace App.Scripts.Scenes.GameScene.Ball.Factory
             var componentContainer = _poolProvider.ObjectPool.Spawn();
             componentContainer.transform.position = spawnContext.Position;
             componentContainer.Register(_systemsContainer);
-            componentContainer.AddToSystem<MovingComponent>();
             componentContainer.AddToSystem<CollisionHandlerComponent>();
             componentContainer.AddToSystem<CorretionAngleComponent>();
             componentContainer.Get<MovingWithPlatformComponent>()

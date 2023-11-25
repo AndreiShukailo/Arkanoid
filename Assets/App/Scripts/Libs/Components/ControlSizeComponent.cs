@@ -10,7 +10,12 @@ namespace App.Scripts.Libs.Components
         public void Construct(Vector2 size)
         {
             _spriteRenderer.size = size;
-            _boxCollider2D.size = size;
+            SetTrigger(false);
+        }
+        
+        public void SetTrigger(bool isTrigger)
+        {
+            _boxCollider2D.isTrigger = isTrigger;
         }
     }
 }

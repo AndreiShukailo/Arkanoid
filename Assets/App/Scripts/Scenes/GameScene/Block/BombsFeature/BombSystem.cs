@@ -21,7 +21,6 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
         {
             base.OnUpdate(component);
             component.ComponentContainer.AddToSystem<DeathComponent>();
-            Remove(component);
             _explosions.Add(_coroutineRunner.StartCoroutine(_commandBombBlocks.Process(component)));
         }
 

@@ -13,9 +13,9 @@ namespace App.Scripts.Libs.Components
         [SerializeField] private float _startSpeed;
         [SerializeField] private Rigidbody2D _rigidbody2D;
 
-        public override void OnAdd()
+        public override void Construct(ComponentContainer componentContainer)
         {
-            base.OnAdd();
+            base.Construct(componentContainer);
             SpeedFactor = 1;
             _currentSpeed = _startSpeed * SpeedFactor;
         }
@@ -28,6 +28,9 @@ namespace App.Scripts.Libs.Components
         public void SetSpeed(float speed)
         {
             _currentSpeed = speed;
+            var velocity = _rigidbody2D.velocity;
+            velocity =  velocity.normalized * CurrentSpeed;
+            _rigidbody2D.velocity = velocity;
         }
     }
 }

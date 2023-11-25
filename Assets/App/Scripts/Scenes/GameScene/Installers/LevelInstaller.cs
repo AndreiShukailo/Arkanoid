@@ -14,6 +14,7 @@ using App.Scripts.Scenes.GameScene.Ball.Config;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.Block.BombsFeature;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostBallSpeed;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostFireBall;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level;
@@ -55,6 +56,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.SetService<ISystem, CheckLooseBallSystem>(CreateLooseBallSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, BoostBallSpedSystem>(CreateBoostBallSpeedSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, BoostPlatformSizeSystem>(CreateBoostPlatformSizeSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, BoostFireBallSystem>(CreateBoostFireBallSystem(serviceContainer, levelController));
             
             InstallPlatformCreator(serviceContainer);
             InstallBallCreator(serviceContainer);
@@ -112,6 +114,13 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var boostPlatformSizeSystem = new BoostPlatformSizeSystem(levelController);
             serviceContainer.Get<SystemsContainer>().AddSystem<BoostPlatformSizeComponent, BoostPlatformSizeSystem>(boostPlatformSizeSystem);
             return boostPlatformSizeSystem;
+        }
+        
+        private BoostFireBallSystem CreateBoostFireBallSystem(ServiceContainer serviceContainer, LevelController levelController)
+        {           
+            var boostFireBallSystem = new BoostFireBallSystem(levelController);
+            serviceContainer.Get<SystemsContainer>().AddSystem<BoostFireBallComponent, BoostFireBallSystem>(boostFireBallSystem);
+            return boostFireBallSystem;
         }
 
         private CheckLooseBallSystem CreateLooseBallSystem(ServiceContainer serviceContainer, LevelController levelController)

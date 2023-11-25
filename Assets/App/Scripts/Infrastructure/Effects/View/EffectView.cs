@@ -10,7 +10,15 @@ namespace App.Scripts.Infrastructure.Effects.View
         public override void OnSpawned()
         {
             base.OnSpawned();
-            _particleSystem.Play();
+            Play(true);
+        }
+
+        public void Play(bool isPlay)
+        {
+            if(isPlay)
+                _particleSystem.Play();
+            else
+                _particleSystem.Stop();
         }
 
         private void OnParticleSystemStopped()

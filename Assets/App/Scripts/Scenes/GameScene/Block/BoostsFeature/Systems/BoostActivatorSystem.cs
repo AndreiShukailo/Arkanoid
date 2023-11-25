@@ -1,5 +1,6 @@
 ﻿using App.Scripts.Libs.Components;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostBallSpeed;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostFireBall;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
 
@@ -17,6 +18,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
         {
             component.ComponentContainer.AddToSystem<BoostBallSpeedComponent>();
             component.ComponentContainer.AddToSystem<BoostPlatformSizeComponent>();
+            component.ComponentContainer.AddToSystem<BoostFireBallComponent>();
         }
     }
 }

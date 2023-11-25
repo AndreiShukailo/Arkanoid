@@ -18,7 +18,6 @@ namespace App.Scripts.Scenes.GameScene.Platform.Factory
             var componentContainer = _poolProvider.ObjectPool.Spawn();
             componentContainer.transform.position = value.Position;
             componentContainer.Register(_systemsContainer);
-            componentContainer.AddToSystem<MovingComponent>();
             componentContainer.AddToSystem<ControlMovementComponent>();
             componentContainer.AddToSystem<CollisionHandlerComponent>();
 

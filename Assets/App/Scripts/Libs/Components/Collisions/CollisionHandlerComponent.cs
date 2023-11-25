@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace App.Scripts.Libs.Components
 {
@@ -8,7 +9,12 @@ namespace App.Scripts.Libs.Components
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            CollisionContext = new CollisionContext(this, other);
+            CollisionContext = new CollisionContext(this, other.gameObject);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            CollisionContext = new CollisionContext(this, other.gameObject);
         }
 
         public void ClearContext()
@@ -20,12 +26,12 @@ namespace App.Scripts.Libs.Components
     public class CollisionContext
     {
         public readonly CollisionHandlerComponent CollisionHandlerComponent;
-        public readonly Collision2D Collision2D;
+        public readonly GameObject CollisionObject;
 
-        public CollisionContext(CollisionHandlerComponent collisionHandlerComponent, Collision2D collision2D)
+        public CollisionContext(CollisionHandlerComponent collisionHandlerComponent, GameObject collision2D)
         {
             CollisionHandlerComponent = collisionHandlerComponent;
-            Collision2D = collision2D;
+            CollisionObject = collision2D;
         }
     }
 }

@@ -7,17 +7,15 @@ namespace App.Scripts.Libs.Components
         public override void OnUpdate(CorretionAngleComponent component)
         {
             base.OnUpdate(component);
-            if(component.Collision2D == null) return;
+            if (component.CollidedGameObject == null) return;
             CorrectAngle(component);
             component.ClearCollision();
         }
 
         private void CorrectAngle(CorretionAngleComponent component)
         {
-            var collision = component.Collision2D;
-            var velocity = collision.relativeVelocity * -1f;
+            var velocity = component.Rigidbody.velocity;
             var minBounceAngle = component.MinBounceAngle;
-            var fallNormalVector = collision.contacts[0].normal;
 
             var angle = Mathf.Atan(velocity.y / velocity.x);
             Vector3 correctVector = velocity;
@@ -31,7 +29,7 @@ namespace App.Scripts.Libs.Components
                 correctVector = GetCorrectVector(90f - minBounceAngle, velocity);
 
             velocity = correctVector;
-            component.Rigidbody.velocity = Vector2.Reflect(velocity, fallNormalVector);
+            component.Rigidbody.velocity = velocity.normalized * component.ComponentContainer.Get<MovingComponent>().CurrentSpeed;
         }
 
         private Vector3 GetCorrectVector(float correctAngle, Vector2 velocity)
