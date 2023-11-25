@@ -2192,6 +2192,12 @@ MonoBehaviour:
   - SpawnableItemMono: {fileID: 8163565471284357153, guid: edf1de98fd185394787dcd19b7e6c7bd, type: 3}
     Container: {fileID: 1402412260}
     StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: 6d686bf521a3cf9489261b7705cb7214, type: 3}
+    Container: {fileID: 1402412260}
+    StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: f5a80941d06f1ad4b9651053f41a7c8f, type: 3}
+    Container: {fileID: 1402412260}
+    StartSize: 1
 --- !u!1 &1503600818
 GameObject:
   m_ObjectHideFlags: 0
@@ -3159,7 +3165,7 @@ MonoBehaviour:
       SpawnableItemMono: {fileID: 220275133911425394, guid: 47cde9d664e422a4e86a616e16a4da2d, type: 3}
       Container: {fileID: 1725470757}
       StartSize: 1
-    PlatformOffsetBottom: 1.66
+    PlatformOffsetBottom: 1.67
   _ballConfig:
     PoolSetting:
       SpawnableItemMono: {fileID: 7917756334170325595, guid: 1d2662a59cf2b7e47951ae15fca5d4b3, type: 3}

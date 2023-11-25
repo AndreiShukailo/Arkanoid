@@ -1,20 +1,22 @@
 ﻿using App.Scripts.Libs.Components;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostBallSpeed;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
 
 namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
 {
-    public class BoostActivatorSystem : ComponentSystem<BoostComponent>
+    public class BoostActivatorSystem : ComponentSystem<BoostActivatorComponent>
     {
-        public override void OnUpdate(BoostComponent component)
+        public override void OnUpdate(BoostActivatorComponent component)
         {
             base.OnUpdate(component);
             ActivateBoost(component);
         }
 
-        private void ActivateBoost(BoostComponent component)
+        private void ActivateBoost(BoostActivatorComponent component)
         {
             component.ComponentContainer.AddToSystem<BoostBallSpeedComponent>();
+            component.ComponentContainer.AddToSystem<BoostPlatformSizeComponent>();
         }
     }
 }

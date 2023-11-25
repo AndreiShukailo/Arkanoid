@@ -71,9 +71,16 @@ namespace App.Scripts.Libs.Components
 
             return null;
         }
+
+        public void CleanupSystems()
+        {
+            foreach (var item in _systemsContainer.Values)
+                item.ClearSystem();
+        }
     }
 
     public interface ISystemsContainer
     {
+        void ClearSystem();
     }
 }

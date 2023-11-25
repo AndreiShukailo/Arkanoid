@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 5457237604228795408}
   - component: {fileID: 2740403821920014173}
   - component: {fileID: 6995011492024068555}
-  - component: {fileID: -7306784869977463949}
   - component: {fileID: 7964472142933583832}
   - component: {fileID: 7123536450084192726}
+  - component: {fileID: 7980397251444291423}
   m_Layer: 3
   m_Name: SpeedUpBlock
   m_TagString: Untagged
@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 5457237604228795408}
   - {fileID: 2740403821920014173}
   - {fileID: 6995011492024068555}
-  - {fileID: -7306784869977463949}
+  - {fileID: 7980397251444291423}
   - {fileID: 7964472142933583832}
   - {fileID: 7123536450084192726}
 --- !u!114 &5457237604228795408
@@ -198,18 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startSpeed: 2
   _rigidbody2D: {fileID: 4199198708821527326}
---- !u!114 &-7306784869977463949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 219612589283821118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb876e3f685b45c8aa137882fa96bb90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7964472142933583832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,3 +225,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 4317628937264147281}
+--- !u!114 &7980397251444291423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219612589283821118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5695452233d54cff819fcf9b433f8385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

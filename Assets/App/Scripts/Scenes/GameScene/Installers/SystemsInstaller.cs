@@ -45,7 +45,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.SetService<ISystem, SpawnBoostSystem>(spawnBoostSystem);
             
             var boostComponent = new BoostActivatorSystem();
-            systemsContainer.AddSystem<BoostComponent, BoostActivatorSystem>(boostComponent);
+            systemsContainer.AddSystem<BoostActivatorComponent, BoostActivatorSystem>(boostComponent);
             serviceContainer.SetService<ISystem, BoostActivatorSystem>(boostComponent);
         }
     }

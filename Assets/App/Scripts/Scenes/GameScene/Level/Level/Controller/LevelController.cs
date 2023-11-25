@@ -12,14 +12,14 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
     public class LevelController
     {
         public LevelModel LevelModel { get; private set; }
-
+        public ComponentContainer Platform { get; private set; }
         public readonly BallContainer BallContainer;
+        
         private readonly HealthController _healthController;
         private readonly CommandChangeState _commandChangeState;
         private readonly LevelProgressInfoController _levelProgressInfoController;
         private readonly SpeedComplicationSystem _speedComplicationSystem;
-
-        private ComponentContainer _platform;
+        
         private int _startBlocksCount;
 
         public LevelController(BallContainer ballContainer, HealthController healthController,
@@ -44,7 +44,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 
         public void SetupPlatform(ComponentContainer platform, ComponentContainer ball)
         {
-            _platform = platform;
+            Platform = platform;
             BallContainer.AddBall(ball);
         }
 
@@ -87,7 +87,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
         public void CleanupPlatform()
         {
             BallContainer.Cleanup();
-            _platform.Remove();
+            Platform.Remove();
         }
     }
 }

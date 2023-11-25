@@ -17,17 +17,6 @@ namespace App.Scripts.Libs.Components
             _components.Remove(component);
         }
 
-        protected virtual void OnAction(TComponent component)
-        {
-            
-        }
-
-        public void Action(TComponent component)
-        {
-            if(component == null) return;
-            OnAction(component);
-        }
-
         public virtual void OnUpdate(TComponent component)
         {
             
@@ -49,6 +38,10 @@ namespace App.Scripts.Libs.Components
         public virtual void Cleanup()
         {
             
+        }
+
+        public virtual void ClearSystem()
+        {
         }
 
         private void UpdateComponent(TComponent component)

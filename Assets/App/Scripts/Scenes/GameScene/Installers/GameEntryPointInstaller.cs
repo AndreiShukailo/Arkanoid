@@ -8,6 +8,7 @@ using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
 using App.Scripts.Infrastructure.TimeManagement;
+using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
@@ -161,7 +162,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             {
                 serviceContainer.Get<HandlerClearPlatform>(),
                 new HandlerClearLevel(serviceContainer.Get<LevelController>(),
-                    serviceContainer.Get<DestroyWhenInvisibleSystem>()),
+                    serviceContainer.Get<SystemsContainer>()),
                 serviceContainer.Get<HandlerSetupLevel>(),
                 serviceContainer.Get<HandlerSetupPlatform>()
             };

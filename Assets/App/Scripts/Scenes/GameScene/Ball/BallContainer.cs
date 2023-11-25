@@ -18,6 +18,15 @@ namespace App.Scripts.Scenes.GameScene.Ball
             ballModel.Remove();
         }
 
+        public void SetSpeedFactor(float factor)
+        {
+            foreach (var ball in Balls)
+            {
+                var moving = ball.Get<MovingComponent>();
+                moving.SetSpeedFactor(factor);
+            }
+        }
+
         public void Cleanup()
         {
             foreach (var ballModel in Balls) 

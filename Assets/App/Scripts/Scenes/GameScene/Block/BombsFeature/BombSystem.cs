@@ -1,5 +1,7 @@
-﻿using App.Scripts.Libs.Components;
+﻿using System.Collections.Generic;
+using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Coroutine;
+using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
 {
@@ -7,6 +9,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
     {
         private readonly CommandBombBlocks _commandBombBlocks;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly List<Coroutine> _explosions = new();
 
         public BombSystem(CommandBombBlocks commandBombBlocks, ICoroutineRunner coroutineRunner)
         {
@@ -19,7 +22,13 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
             base.OnUpdate(component);
             component.ComponentContainer.AddToSystem<DeathComponent>();
             Remove(component);
-            _coroutineRunner.StartCoroutine(_commandBombBlocks.Process(component));
+            _explosions.Add(_coroutineRunner.StartCoroutine(_commandBombBlocks.Process(component)));
+        }
+
+        public override void ClearSystem()
+        {
+            foreach (var explosion in _explosions)
+                _coroutineRunner.StopCoroutine(explosion);
         }
     }
 }

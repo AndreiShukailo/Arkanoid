@@ -26,7 +26,7 @@ namespace App.Scripts.Libs.Components
             componentContainer.AddToSystem<HealthComponent>();
             componentContainer.AddToSystem<BombComponent>();
             componentContainer.AddToSystem<SpawnBoostComponent>();
-            componentContainer.AddToSystem<BoostComponent>();
+            componentContainer.AddToSystem<BoostActivatorComponent>();
         }
     }
 }

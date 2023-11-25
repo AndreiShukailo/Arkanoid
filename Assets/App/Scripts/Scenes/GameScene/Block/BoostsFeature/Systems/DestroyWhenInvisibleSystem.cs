@@ -21,12 +21,10 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
             Remove(component);
         }
 
-        public void ClearBoosts()
+        public override void ClearSystem()
         {
             foreach (var component in _components)
-            {
                 component.ComponentContainer.Remove();
-            }
         }
     }
 }
