@@ -5,6 +5,7 @@ using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.TaskExtensions;
+using App.Scripts.Scenes.GameScene.GameStates;
 
 namespace App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp
 {
@@ -16,6 +17,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp
         private const string RestartLanguageKey = "Restart";
         private const string BaskLanguageKey = "Back";
         private const string ContinueLanguageKey = "Continue";
+        private const string SkipLevelLanguageKey = "SkipLevel";
         private readonly ButtonManager _buttonManager;
         private readonly CommandChangeState _commandChangeState;
         private readonly SceneLoaderController _sceneLoaderController;
@@ -56,6 +58,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp
             _buttonManager.BuildButton(menuPopUp.Content, OnRestartButtonClick, RestartButtonID, RestartLanguageKey);
             _buttonManager.BuildButton(menuPopUp.Content, OnBackButtonClick, BackButtonID, BaskLanguageKey);
             _buttonManager.BuildButton(menuPopUp.Content, OnContinueButtonClick, ContinueButtonID, ContinueLanguageKey);
+            _buttonManager.BuildButton(menuPopUp.Content, OnSkipLevelButtonClick, BackButtonID, SkipLevelLanguageKey);
         }
 
         private void OnRestartButtonClick()
@@ -63,6 +66,11 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp
             _commandSpendEnergy.ProcessSpendEnergy(_popView).Forget();
         }
 
+        private void OnSkipLevelButtonClick()
+        {
+            _commandChangeState.ChangeState<SkipLevelState>();
+        }
+        
         private void OnContinueButtonClick() =>
             _commandChangeState.ChangeState<StateProcessGame>();
 

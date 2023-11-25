@@ -1,7 +1,7 @@
 ﻿Start.PlayButton;Играть
 Language;Язык
 LanguageName.Russian;Русский
-LanguageName.English;Английский
+LanguageName.English;English
 Menu;Меню
 Back;Назад
 Restart;Рестарт
@@ -9,6 +9,7 @@ Continue;Продолжить
 Lose;Вы проиграли!
 Victory;Вы выиграли!
 Next;Далее
+SkipLevel;Пропустить
 NotFound;Не найдена
 Galaxy;Галактика
 Sigara;Сигара

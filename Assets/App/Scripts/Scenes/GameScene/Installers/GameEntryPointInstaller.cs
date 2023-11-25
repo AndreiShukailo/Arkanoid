@@ -51,6 +51,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             gameStateMachine.AddState(CreateReloadPlatformState(serviceContainer));
             gameStateMachine.AddState(CreateReloadLevelState(serviceContainer));
             gameStateMachine.AddState(CreateLoadSceneState(serviceContainer));
+            gameStateMachine.AddState(CreateSkipLevelState(serviceContainer));
 
             serviceContainer.Get<CommandChangeState>().AddStateMachine(gameStateMachine);
 
@@ -62,6 +63,12 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var state = new LoseState(serviceContainer.Get<LosePopUpController>(),
                 serviceContainer.Get<TimeManager>());
 
+            return state;
+        }
+
+        private GameState CreateSkipLevelState(ServiceContainer serviceContainer)
+        {
+            var state = new SkipLevelState(new HandlerProcessSkipLevel(serviceContainer.Get<LevelController>()));
             return state;
         }
 

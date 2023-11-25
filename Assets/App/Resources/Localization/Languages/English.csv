@@ -1,13 +1,14 @@
 ﻿Start.PlayButton;Play
 Language;Language
 LanguageName.English;English
-LanguageName.Russian;Russian
+LanguageName.Russian;Русский
 Back;Back
 Menu;Menu
 Restart;Restart
 Continue;Continue
 Lose;You lose!
 Next;Next
+SkipLevel;Skip
 Victory;You won!
 NotFound;Not found
 Galaxy;Galaxy
