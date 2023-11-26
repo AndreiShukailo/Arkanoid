@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using App.Scripts.Libs.PopUp.Container;
 using App.Scripts.Libs.PopUp.View;
+using UnityEngine;
 
 namespace App.Scripts.Libs.PopUp
 {
@@ -10,10 +11,17 @@ namespace App.Scripts.Libs.PopUp
     {
         private readonly PopUpContainer _popUpContainer;
         private readonly Dictionary<Type, PopUpView> _openedPopUps = new ();
+        private RectTransform _popupParent;
+        private bool _isBlockedUI;
         
         public PopUpController(PopUpContainer popUpContainer)
         {
             _popUpContainer = popUpContainer;
+        }
+
+        public void BlockUI(bool isBlocked)
+        {
+            _isBlockedUI = isBlocked;
         }
 
         public TPopUpView Show<TPopUpView>() where TPopUpView : PopUpView
@@ -21,6 +29,8 @@ namespace App.Scripts.Libs.PopUp
             var factory = _popUpContainer.GetPopup<TPopUpView>();
             var popup = factory.Create();
             _openedPopUps.Add(typeof(TPopUpView), popup);
+            if (_popupParent == null)
+                _popupParent = popup.Container;
             
             return popup as TPopUpView;
         }
@@ -30,6 +40,8 @@ namespace App.Scripts.Libs.PopUp
             var popUpType = typeof(TPopUpView);
             await _openedPopUps[popUpType].ProcessHide();
             _openedPopUps.Remove(popUpType);
+            if (_isBlockedUI && _popupParent != null)
+                _popupParent.gameObject.SetActive(true);
         }
 
         public async Task HideAllPopups()
@@ -41,7 +53,9 @@ namespace App.Scripts.Libs.PopUp
                 tasks[counter] = popup.ProcessHide();
                 counter++;
             }
-
+            
+            _openedPopUps.Clear();
+            _popupParent = null;
             await Task.WhenAll(tasks);
             _popUpContainer.RemovePopups();
         }

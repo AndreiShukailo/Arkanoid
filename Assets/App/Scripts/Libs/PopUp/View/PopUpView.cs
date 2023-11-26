@@ -13,6 +13,7 @@ namespace App.Scripts.Libs.PopUp.View
     {
         public Transform EnergyContainer => _energyContainer;
         public Transform Content => _content;
+        public RectTransform Container => _parent;
         
         [SerializeField] protected Transform _energyContainer;
         [SerializeField] protected Transform _content;

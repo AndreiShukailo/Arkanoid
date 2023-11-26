@@ -88,6 +88,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
         {
             BallContainer.Cleanup();
             Platform.Remove();
+            Platform = null;
         }
     }
 }

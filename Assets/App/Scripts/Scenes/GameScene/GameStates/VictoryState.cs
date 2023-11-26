@@ -12,25 +12,34 @@ namespace App.Scripts.Scenes.GameScene.GameStates
         private readonly HandlerProcessVictory _handlerProcessVictory;
         private readonly VictoryPopUpController _victoryPopUpController;
         private readonly TimeManager _timeManager;
+        private readonly HandlerTransitToVictory _handlerTransitToVictory;
 
-        public VictoryState(HandlerProcessVictory handlerProcessVictory, VictoryPopUpController victoryPopUpController, TimeManager timeManager)
+        public VictoryState(HandlerProcessVictory handlerProcessVictory, VictoryPopUpController victoryPopUpController,
+            TimeManager timeManager, HandlerTransitToVictory handlerTransitToVictory)
         {
             _handlerProcessVictory = handlerProcessVictory;
             _victoryPopUpController = victoryPopUpController;
             _timeManager = timeManager;
+            _handlerTransitToVictory = handlerTransitToVictory;
         }
 
         public override void OnEnterState()
         {
             base.OnEnterState();
-            _timeManager.SetPause(true);
-            _handlerProcessVictory.Process().Forget();
+            OnEnter().Forget();
         }
 
         public override void OnExitState()
         {
             base.OnExitState();
             OnExit().Forget();
+        }
+
+        private async Task OnEnter()
+        {
+            await _handlerTransitToVictory.Process();
+            _timeManager.SetPause(true);
+            await _handlerProcessVictory.Process();
         }
 
         private async Task OnExit()

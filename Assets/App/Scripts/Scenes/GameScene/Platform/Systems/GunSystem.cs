@@ -30,11 +30,10 @@ namespace App.Scripts.Scenes.GameScene.Platform.Systems
 
         private void Shoot(GunComponent gunComponent)
         {
+            _timer = 0;
             var speed = gunComponent.Speed;
             CreateBullet(speed, gunComponent.LeftSpawnPoint);
             CreateBullet(speed, gunComponent.RightSpawnPoint);
-
-            _timer = 0;
         }
 
         private void CreateBullet(float speed, Vector2 position)

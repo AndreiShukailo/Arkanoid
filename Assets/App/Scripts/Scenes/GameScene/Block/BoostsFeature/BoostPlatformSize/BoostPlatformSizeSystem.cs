@@ -16,6 +16,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize
 
         protected override void OnUpdateAction()
         {
+            if(_levelController.Platform == null) return;
             _levelController.Platform.Get<PlatformSizeComponent>().Resize(_sizeFactor);
         }
 

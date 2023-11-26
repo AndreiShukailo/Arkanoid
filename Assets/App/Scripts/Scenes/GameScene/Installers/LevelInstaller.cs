@@ -27,6 +27,7 @@ using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder;
 using App.Scripts.Scenes.GameScene.Level.LevelField.Field;
 using App.Scripts.Scenes.GameScene.Level.LevelProgressInfo;
+using App.Scripts.Scenes.GameScene.Level.View;
 using App.Scripts.Scenes.GameScene.Platform;
 using App.Scripts.Scenes.GameScene.Platform.Config;
 using UnityEngine;
@@ -44,6 +45,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
         [SerializeField] private BallConfig _ballConfig;
         [Header("Other")]
         [SerializeField] private EffectViewPoolSetting _bombEffectPoolSetting;
+
+        [SerializeField] private ConfettiEffectView _confettiEffectView;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -70,6 +73,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
             InstallBallCreator(serviceContainer);
             
             serviceContainer.SetService<ISystem, BoostAddBallSystem>(CreateBoostAddBallSystem(serviceContainer, levelController));
+            _confettiEffectView.Construct(serviceContainer.Get<FieldInfo>());
+            serviceContainer.SetServiceSelf(_confettiEffectView);
         }
 
         private BombSystem CreateBombSystem(ServiceContainer serviceContainer, LevelController levelController)

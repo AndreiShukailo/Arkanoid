@@ -1,18 +1,22 @@
 { "compressionlevel":-1,
- "height":3,
+ "height":7,
  "infinite":false,
  "layers":[
         {
-         "data":[2, 2, 3,
-            2, 6, 3,
-            2, 0, 0],
-         "height":3,
+         "data":[5, 5, 5, 5, 5, 5, 5,
+            4, 4, 4, 4, 4, 4, 4,
+            2, 1, 1, 6, 3, 3, 3,
+            2, 9, 2, 5, 5, 7, 3,
+            4, 8, 4, 2, 4, 9, 4,
+            1, 12, 2, 16, 2, 18, 2,
+            13, 15, 11, 20, 17, 10, 19],
+         "height":7,
          "id":1,
          "name":"\u0421\u043b\u043e\u0439 \u0442\u0430\u0439\u043b\u043e\u0432 1",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":3,
+         "width":7,
          "x":0,
          "y":0
         }],
@@ -30,5 +34,5 @@
  "tilewidth":104,
  "type":"map",
  "version":"1.10",
- "width":3
+ "width":7
 }

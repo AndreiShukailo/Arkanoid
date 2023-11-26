@@ -21,6 +21,7 @@ using App.Scripts.Scenes.GameScene.Level;
 using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.Handlers;
+using App.Scripts.Scenes.GameScene.Level.View;
 using App.Scripts.Scenes.GameScene.Platform;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp;
@@ -68,7 +69,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private GameState CreateSkipLevelState(ServiceContainer serviceContainer)
         {
-            var state = new SkipLevelState(new HandlerProcessSkipLevel(serviceContainer.Get<LevelController>()));
+            var state = new SkipLevelState(new HandlerProcessSkipLevel(serviceContainer.Get<LevelController>(),
+                serviceContainer.Get<PopUpController>()));
             return state;
         }
 
@@ -82,7 +84,11 @@ namespace App.Scripts.Scenes.GameScene.Installers
                     serviceContainer.Get<LocalizationController>(),
                     serviceContainer.Get<EnergyViewController>()),
                 victoryPopUpController,
-                serviceContainer.Get<TimeManager>());
+                serviceContainer.Get<TimeManager>(),
+                new HandlerTransitToVictory(serviceContainer.Get<LevelController>(),
+                    serviceContainer.Get<ConfettiEffectView>(),
+                    serviceContainer.Get<PopUpController>(), 
+                    serviceContainer.Get<SystemsContainer>()));
             return state;
         }
 
@@ -110,6 +116,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
         {
             var systems = serviceContainer.GetServices<ISystem>();
             var gameSystems = new SystemsGroup(systems);
+            serviceContainer.SetServiceSelf(gameSystems);
 
             return new StateProcessGame(gameSystems, serviceContainer.Get<TimeManager>());
         }
@@ -150,7 +157,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private GameState CreateReloadPlatformState(ServiceContainer serviceContainer)
         {
-            var handlerClearPlatform = new HandlerClearPlatform(serviceContainer.Get<LevelController>());
+            var handlerClearPlatform = new HandlerClearPlatform(serviceContainer.Get<LevelController>(),
+                serviceContainer.Get<SystemsGroup>());
             serviceContainer.SetServiceSelf(handlerClearPlatform);
 
             var handlers = new List<IHandlerSetupScene>
