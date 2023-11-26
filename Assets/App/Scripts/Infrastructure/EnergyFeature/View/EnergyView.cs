@@ -15,6 +15,7 @@ namespace App.Scripts.Infrastructure.EnergyFeature.View
         [SerializeField] private RotatedEffectView _rotatedEffectView;
         [SerializeField] private TMP_Text _energyCount;
         [SerializeField] private TMP_Text _maxEnergy;
+        [SerializeField] private TMP_Text _timer;
 
         private Transform _parent;
 
@@ -40,7 +41,7 @@ namespace App.Scripts.Infrastructure.EnergyFeature.View
             var sequence = DOTween.Sequence();
             var startCount = int.Parse(_energyCount.text);
             sequence.Append(_energyCount.DOCounter(startCount, currentEnergy, 0.5f))
-                    .SetUpdate(true);
+                .SetUpdate(true);
             await sequence.AsyncWaitForCompletion();
         }
 
@@ -62,6 +63,12 @@ namespace App.Scripts.Infrastructure.EnergyFeature.View
             base.OnDespawned();
             transform.SetParent(_parent);
             _rotatedEffectView.StopAnimation();
+        }
+
+        public void UpdateTimer(int time)
+        {
+            var ts = TimeSpan.FromSeconds(time);
+            _timer.text = $"{ts.Minutes:d2}:{ts.Seconds:d2}";
         }
     }
 }

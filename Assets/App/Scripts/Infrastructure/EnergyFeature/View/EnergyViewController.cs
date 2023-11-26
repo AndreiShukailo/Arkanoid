@@ -27,12 +27,18 @@ namespace App.Scripts.Infrastructure.EnergyFeature.View
         public async Task UpdateEnergy()
         {
             if(_energyView == null) return;
+            UpdateTimer(_energyController.TimeLeft);
             await _energyView.UpdateEnergy(_energyController.CurrentEnergy, _energyController.MaxEnergy);
+        }
+
+        public void UpdateTimer(int timeLeft)
+        {
+            if(_energyView == null) return;
+            _energyView.UpdateTimer(timeLeft);
         }
 
         public void CreateEnergy(Transform container)
         {
-            _energyController.UpdateEnergy();
             _energyView = _energyViewFactory.Create();
             _energyView.Construct(_energyController.CurrentEnergy, _energyController.MaxEnergy, container);
         }

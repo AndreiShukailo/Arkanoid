@@ -8,8 +8,10 @@ namespace App.Scripts.Infrastructure.EnergyFeature
 {
     public class EnergyController
     {
+        public int TimeLeft { get; private set; }
         public int CurrentEnergy => _playerEnergy.Energy;
         public int MaxEnergy => _energyConfig.MaxEnergy;
+        public int TimeToUpdate => _energyConfig.TimeToRecoverInMinutes;
 
         private readonly SaveLoadService _saveLoadService;
         private readonly EnergyConfig _energyConfig;
@@ -20,7 +22,7 @@ namespace App.Scripts.Infrastructure.EnergyFeature
             _saveLoadService = saveLoadService;
             _energyConfig = energyConfig;
             _playerEnergy = GetPlayerEnergy();
-            UpdateEnergyByTime();
+            UpdateEnergy();
         }
 
         public bool StartLevel()
@@ -43,28 +45,30 @@ namespace App.Scripts.Infrastructure.EnergyFeature
             SaveEnergy();
         }
 
+        public void SetTimeLeft(int timeLeft)
+        {
+            TimeLeft = timeLeft;
+        }
+
         private void UpdateEnergyByTime()
         {
-            if (_playerEnergy.Energy >= MaxEnergy)
-            {
-                UpdateEnergyTime();
-                return;
-            }
-            var minutes = GetSpendedTimeInMinutes();
-            var addEnergy = minutes / _energyConfig.TimeToRecoverInMinutes;
+            var seconds = GetSpendedTimeInSeconds();
+            TimeLeft = TimeToUpdate * 60 - seconds  % (_energyConfig.TimeToRecoverInMinutes * 60);
+            var addEnergy = seconds / (_energyConfig.TimeToRecoverInMinutes * 60);
             if (addEnergy == 0) return;
             UpdateEnergyTime();
+            if (_playerEnergy.Energy >= MaxEnergy) return;
             _playerEnergy.Energy += addEnergy;
             _playerEnergy.Energy = Math.Clamp(_playerEnergy.Energy, 0, MaxEnergy);
         }
-
-        private int GetSpendedTimeInMinutes()
+        
+        private int GetSpendedTimeInSeconds()
         {
             var savedTime = DateTime.Parse(_playerEnergy.LastTime);
             var currentTime = DateTime.UtcNow;
             var timeDifference = currentTime.Subtract(savedTime);
-            var minutes = timeDifference.Minutes;
-            return minutes;
+            var seconds = timeDifference.TotalSeconds;
+            return (int)seconds;
         }
 
         private void UpdateEnergyTime()

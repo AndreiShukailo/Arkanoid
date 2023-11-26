@@ -20,6 +20,8 @@ namespace App.Scripts.Infrastructure.EnergyFeature
             serviceContainer.SetServiceSelf(energyController);
             var energyViewController = new EnergyViewController(energyController, _energyPollSetting,
                 serviceContainer.Get<ButtonsViewContainer>().Container);
+            var energyTimerSystem = new EnergyTimerSystem(energyController, energyViewController);
+            energyTimerSystem.StartTimer();
             serviceContainer.SetServiceSelf(energyViewController);
         }
     }
