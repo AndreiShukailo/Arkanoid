@@ -9,9 +9,9 @@
  "margin":0,
  "name":"TileSet",
  "spacing":0,
- "tilecount":19,
+ "tilecount":20,
  "tiledversion":"1.10.2",
- "tileheight":56,
+ "tileheight":50,
  "tiles":[
         {
          "id":0,
@@ -81,11 +81,15 @@
          "type":"VerticalBombBlock"
         }, 
         {
+         "height":50,
          "id":9,
          "image":"..\/..\/Media\/Sprites\/Game\/AddHealthBlock.png",
          "imageheight":56,
          "imagewidth":104,
-         "type":"AddHealthBlock"
+         "type":"AddHealthBlock",
+         "width":104,
+         "x":0,
+         "y":0
         }, 
         {
          "id":10,
@@ -149,6 +153,13 @@
          "imageheight":50,
          "imagewidth":104,
          "type":"AddBallBlock"
+        }, 
+        {
+         "id":19,
+         "image":"..\/..\/Media\/Sprites\/Game\/GunBoostBlock.png",
+         "imageheight":50,
+         "imagewidth":104,
+         "type":"GunBoostBlock"
         }],
  "tilewidth":104,
  "type":"tileset",

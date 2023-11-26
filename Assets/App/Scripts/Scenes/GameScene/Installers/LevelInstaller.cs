@@ -18,6 +18,7 @@ using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostBallSpeed;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostFireBall;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSize;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostPlatformSpeed;
+using App.Scripts.Scenes.GameScene.Block.BoostsFeature.GunBoost;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.HealthChangeBoost;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level;
@@ -63,6 +64,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.SetService<ISystem, BoostFireBallSystem>(CreateBoostFireBallSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, BoostPlatformSpeedSystem>(CreateBoostPlatformSpeedSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, HealthChangeBoostSystem>(CreateChangeHealthSystem(serviceContainer, healthController));
+            serviceContainer.SetService<ISystem, GunBoosSystem>(CreateGunBoostSystem(serviceContainer, levelController));
             
             InstallPlatformCreator(serviceContainer);
             InstallBallCreator(serviceContainer);
@@ -108,6 +110,13 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var deathSystem = new DeathSystem(levelController);
             serviceContainer.Get<SystemsContainer>().AddSystem<DeathComponent, DeathSystem>(deathSystem);
             return deathSystem;
+        }
+        
+        private GunBoosSystem CreateGunBoostSystem(ServiceContainer serviceContainer, LevelController levelController)
+        {           
+            var gunBoostSystem = new GunBoosSystem(levelController);
+            serviceContainer.Get<SystemsContainer>().AddSystem<GunBoostComponent, GunBoosSystem>(gunBoostSystem);
+            return gunBoostSystem;
         }
         
         private BoostBallSpedSystem CreateBoostBallSpeedSystem(ServiceContainer serviceContainer, LevelController levelController)

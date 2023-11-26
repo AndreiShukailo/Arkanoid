@@ -1904,6 +1904,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boosts: {fileID: 874104373}
+  _bulletPoolSetting:
+    SpawnableItemMono: {fileID: 220275133911425394, guid: 6aaa794705d3f7340b12ce5f6c902cfd, type: 3}
+    Container: {fileID: 1725470757}
+    StartSize: 5
 --- !u!1 &1270312123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,6 +2218,9 @@ MonoBehaviour:
     Container: {fileID: 874104373}
     StartSize: 1
   - SpawnableItemMono: {fileID: 8163565471284357153, guid: a3a0f7aab84f5c740b8b7b686aa792d8, type: 3}
+    Container: {fileID: 874104373}
+    StartSize: 1
+  - SpawnableItemMono: {fileID: 8163565471284357153, guid: ace481cd5005b17408934c3dbc9286c7, type: 3}
     Container: {fileID: 874104373}
     StartSize: 1
 --- !u!1 &1503600818

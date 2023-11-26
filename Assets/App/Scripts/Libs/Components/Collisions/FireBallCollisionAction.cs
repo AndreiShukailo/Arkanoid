@@ -1,5 +1,4 @@
-﻿using App.Scripts.Scenes.GameScene.Ball.Components;
-using App.Scripts.Scenes.GameScene.Block.BombsFeature;
+﻿using App.Scripts.Scenes.GameScene.Block.BombsFeature;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
 
 namespace App.Scripts.Libs.Components

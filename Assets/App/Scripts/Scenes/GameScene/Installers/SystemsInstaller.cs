@@ -6,6 +6,8 @@ using App.Scripts.Scenes.GameScene.Ball.Components;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems;
+using App.Scripts.Scenes.GameScene.Platform.Components;
+using App.Scripts.Scenes.GameScene.Platform.Systems;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers
@@ -13,6 +15,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
     public class SystemsInstaller : MonoInstaller
     {
         [SerializeField] private Transform _boosts;
+        [SerializeField] private ComponentContainerPoolSetting _bulletPoolSetting;
         
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -21,13 +24,18 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
             var collisionSystem = new CollisionSystem(
                 new SimpleCollisionAction(), 
-                new FireBallCollisionAction());
+                new FireBallCollisionAction(),
+                new BulletCollisionAction());
             systemsContainer.AddSystem<CollisionHandlerComponent, CollisionSystem>(collisionSystem);
             serviceContainer.SetService<ISystem, CollisionSystem>(collisionSystem);
             
             var correctAngle = new CorrectAngleSystem();
             systemsContainer.AddSystem<CorretionAngleComponent, CorrectAngleSystem>(correctAngle);
             serviceContainer.SetService<ISystem, CorrectAngleSystem>(correctAngle);
+            
+            var gunSystem = new GunSystem(new BulletFactory(_bulletPoolSetting, systemsContainer));
+            systemsContainer.AddSystem<GunComponent, GunSystem>(gunSystem);
+            serviceContainer.SetService<ISystem, GunSystem>(gunSystem);
             
             var healthSystem = new HealthSystem();
             systemsContainer.AddSystem<HealthComponent, HealthSystem>(healthSystem);

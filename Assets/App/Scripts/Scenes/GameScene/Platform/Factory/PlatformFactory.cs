@@ -20,6 +20,7 @@ namespace App.Scripts.Scenes.GameScene.Platform.Factory
             componentContainer.Register(_systemsContainer);
             componentContainer.AddToSystem<ControlMovementComponent>();
             componentContainer.AddToSystem<CollisionHandlerComponent>();
+            componentContainer.AddToSystem<GunComponent>();
 
             return componentContainer;
         }
