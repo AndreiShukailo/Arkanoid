@@ -7,6 +7,7 @@ using App.Scripts.Infrastructure.SaveLoad;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.Factory;
 using App.Scripts.Scenes.PackSelectScene.Features.PacksFeature.View;
+using App.Scripts.Scenes.PackSelectScene.Features.PopUpFeature;
 using App.Scripts.Scenes.PackSelectScene.PackSelectedStates;
 
 namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
@@ -20,15 +21,17 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
         private readonly PackFactory _packFactory;
         private readonly PackViewContainer _packViewContainer;
         private readonly CommandChangeState _commandChangeState;
+        private readonly NoEnergyPopUpController _noEnergyPopUpController;
         private List<ButtonView> _packButtons = new();
 
         public PacksCreator(PackController packController, PackFactory packFactory, PackViewContainer packViewContainer,
-            CommandChangeState commandChangeState)
+            CommandChangeState commandChangeState, NoEnergyPopUpController noEnergyPopUpController)
         {
             _packController = packController;
             _packFactory = packFactory;
             _packViewContainer = packViewContainer;
             _commandChangeState = commandChangeState;
+            _noEnergyPopUpController = noEnergyPopUpController;
             _packViewContainer.Register();
         }
 
@@ -36,7 +39,7 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
         {
             foreach (var packButton in _packButtons)
             {
-                if(packButton == null) return;
+                if (packButton == null) return;
                 packButton.Unsubscribe();
             }
         }
@@ -92,8 +95,10 @@ namespace App.Scripts.Scenes.PackSelectScene.Features.PacksFeature
 
             return () =>
             {
-                if (!_packController.SetPack(packInfo)) return;
-                _commandChangeState.ChangeState<TransitOnGameSceneState>();
+                if (!_packController.SetPack(packInfo))
+                    _noEnergyPopUpController.ShowPopUp();
+                else
+                    _commandChangeState.ChangeState<TransitOnGameSceneState>();
             };
         }
     }

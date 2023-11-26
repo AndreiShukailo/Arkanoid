@@ -15,7 +15,6 @@ using App.Scripts.Scenes.GameScene.PopUpsFeature;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp;
-using App.Scripts.Scenes.StartScene.Language.PopUp;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.GameScene.Installers
