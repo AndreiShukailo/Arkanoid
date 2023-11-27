@@ -1,8 +1,8 @@
-﻿using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
+﻿using App.Scripts.Libs.Components;
 
 namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostAddBall
 {
-    public class BoostAddBallComponent : BoostComponent
+    public class BoostAddBallComponent : Component
     {
     }
 }

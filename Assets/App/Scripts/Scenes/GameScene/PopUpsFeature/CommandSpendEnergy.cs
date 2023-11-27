@@ -7,30 +7,31 @@ using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.PopUp.View;
 using App.Scripts.Scenes.GameScene.GameStates;
 using App.Scripts.Scenes.GameScene.HudFeature.HealthBar.Controller;
+using App.Scripts.Scenes.PackSelectScene.Features.PopUpFeature;
 
 namespace App.Scripts.Scenes.GameScene.PopUpsFeature
 {
     public class CommandSpendEnergy
     {
-        private EnergyController _energyController;
-        private EnergyViewController _energyViewController;
-        private CommandChangeState _commandChangeState;
-        private SceneLoaderController _sceneLoaderController;
+        private readonly EnergyController _energyController;
+        private readonly EnergyViewController _energyViewController;
+        private readonly CommandChangeState _commandChangeState;
         private readonly HealthController _healthController;
+        private readonly NoEnergyPopUpController _noEnergyPopUpController;
 
         public CommandSpendEnergy(EnergyController energyController, EnergyViewController energyViewController,
-            CommandChangeState commandChangeState, SceneLoaderController sceneLoaderController, HealthController healthController)
+            CommandChangeState commandChangeState,
+            HealthController healthController, NoEnergyPopUpController noEnergyPopUpController)
         {
             _energyController = energyController;
             _energyViewController = energyViewController;
             _commandChangeState = commandChangeState;
-            _sceneLoaderController = sceneLoaderController;
             _healthController = healthController;
+            _noEnergyPopUpController = noEnergyPopUpController;
         }
 
         public async Task ProcessSpendEnergy(PopUpView popUpView)
         {
-            popUpView.SetBlock(true);
             if (_energyController.StartLevel())
             {
                 await _energyViewController.UpdateEnergy();
@@ -38,13 +39,12 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature
             }
             else
             {
-                _sceneLoaderController.SetNextScene(_sceneLoaderController.ScenesConfig.PackSelectedScene);
+                _noEnergyPopUpController.ShowPopUp();
             }
         }
 
         public async Task ProcessByHealth(PopUpView popUpView)
         {
-            popUpView.SetBlock(true);
             if (_energyController.ByHealth())
             {
                 _healthController.ChangeHealth(1);
@@ -53,7 +53,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature
             }
             else
             {
-                popUpView.SetBlock(false);
+                _noEnergyPopUpController.ShowPopUp();
             }
         }
     }

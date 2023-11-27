@@ -1,6 +1,4 @@
 ﻿using App.Scripts.Infrastructure.Buttons;
-using App.Scripts.Infrastructure.Buttons.Container;
-using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
@@ -22,8 +20,7 @@ namespace App.Scripts.Scenes.StartScene.Installers
             var languagePopUpController = new LanguagePopupController(
                 serviceContainer.Get<ButtonManager>(),
                 serviceContainer.Get<PopUpController>(),
-                serviceContainer.Get<LocalizationController>(),
-                serviceContainer.Get<ButtonsContainer>());
+                serviceContainer.Get<LocalizationController>());
             serviceContainer.SetServiceSelf(languagePopUpController);
         }
     }

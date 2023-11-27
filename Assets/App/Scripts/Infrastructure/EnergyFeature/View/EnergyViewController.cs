@@ -34,7 +34,8 @@ namespace App.Scripts.Infrastructure.EnergyFeature.View
         public void UpdateTimer(int timeLeft)
         {
             if(_energyView == null) return;
-            _energyView.UpdateTimer(timeLeft);
+            var isVisible = _energyController.CurrentEnergy < _energyController.MaxEnergy;
+            _energyView.UpdateTimer(timeLeft, isVisible);
         }
 
         public void CreateEnergy(Transform container)

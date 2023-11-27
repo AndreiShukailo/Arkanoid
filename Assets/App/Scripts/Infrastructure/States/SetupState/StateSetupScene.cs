@@ -24,6 +24,11 @@ namespace App.Scripts.Infrastructure.States.SetupState
             ProcessSetupLevel().Forget();
         }
 
+        public override Task OnExitState()
+        {
+            return Task.CompletedTask;
+        }
+
         private async Task ProcessSetupLevel()
         {
             _buttonManager.UpdateCamera();

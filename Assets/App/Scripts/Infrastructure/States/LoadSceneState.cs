@@ -30,6 +30,11 @@ namespace App.Scripts.Infrastructure.States
             ProcessCloseScene().Forget();
         }
 
+        public override Task OnExitState()
+        {
+            return Task.CompletedTask;
+        }
+
         private async Task ProcessCloseScene()
         {
             await _popUpController.HideAllPopups();

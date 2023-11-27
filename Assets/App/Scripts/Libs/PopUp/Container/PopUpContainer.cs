@@ -20,10 +20,15 @@ namespace App.Scripts.Libs.PopUp.Container
         public PopUpFactory GetPopup<TPopupView>() where TPopupView : PopUpView =>
             _popupContainer[typeof(TPopupView)];
 
-        public void AddPopUp<TPopupView>(PoolSetting<PopUpView> popupPoolSetting) where TPopupView : PopUpView =>
+        public void AddPopUp<TPopupView>(PoolSetting<PopUpView> popupPoolSetting) where TPopupView : PopUpView
+        {
             _popupContainer[typeof(TPopupView)] = new PopUpFactory(popupPoolSetting, _localizationController);
+        }
 
-        public void RemovePopups() =>
+        public void RemovePopups()
+        {
             _popupContainer.Clear();
+        }
+
     }
 }

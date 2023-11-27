@@ -8,6 +8,7 @@ using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Infrastructure.States.SetupState;
 using App.Scripts.Infrastructure.TimeManagement;
+using App.Scripts.Infrastructure.UIMenegement;
 using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.Localization;
@@ -69,15 +70,15 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private GameState CreateSkipLevelState(ServiceContainer serviceContainer)
         {
-            var state = new SkipLevelState(new HandlerProcessSkipLevel(serviceContainer.Get<LevelController>(),
-                serviceContainer.Get<PopUpController>()));
+            var state = new SkipLevelState(
+                new HandlerProcessSkipLevel(serviceContainer.Get<LevelController>()), 
+                serviceContainer.Get<BlockUIController>());
             return state;
         }
 
         private GameState CreateVictoryState(ServiceContainer serviceContainer)
         {
             var victoryPopUpController = serviceContainer.Get<VictoryPopUpController>();
-
             var state = new VictoryState(
                 new HandlerProcessVictory(serviceContainer.Get<PackController>(),
                     victoryPopUpController,
@@ -87,8 +88,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 serviceContainer.Get<TimeManager>(),
                 new HandlerTransitToVictory(serviceContainer.Get<LevelController>(),
                     serviceContainer.Get<ConfettiEffectView>(),
-                    serviceContainer.Get<PopUpController>(), 
-                    serviceContainer.Get<SystemsContainer>()));
+                    serviceContainer.Get<SystemsContainer>()),
+                serviceContainer.Get<BlockUIController>());
+
             return state;
         }
 

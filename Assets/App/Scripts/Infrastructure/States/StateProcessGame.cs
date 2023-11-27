@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.Systems;
@@ -27,9 +28,10 @@ namespace App.Scripts.Infrastructure.States
             _gameSystems.Update(Time.deltaTime);
         }
 
-        public override void OnExitState()
+        public override Task OnExitState()
         {
             _gameSystems.Cleanup();
+            return Task.CompletedTask;
         }
     }
 }

@@ -25,13 +25,7 @@ namespace App.Scripts.Scenes.GameScene.GameStates
             _menuPopupController.ShowPopUp();
         }
 
-        public override void OnExitState()
-        {
-            base.OnExitState();
-            Exit().Forget();
-        }
-
-        private async Task Exit()
+        public override async Task OnExitState()
         {
             await _menuPopupController.HidePopUp();
         }

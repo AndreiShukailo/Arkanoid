@@ -1,12 +1,10 @@
+using System.Threading.Tasks;
+
 namespace App.Scripts.Libs.StateMachine
 {
     public abstract class GameState
     {
         public GameStateMachine StateMachine { get; set; }
-
-        public virtual void OnExitState()
-        {
-        }
 
         public virtual void OnEnterState()
         {
@@ -15,5 +13,7 @@ namespace App.Scripts.Libs.StateMachine
         public virtual void Update()
         {
         }
+
+        public abstract Task OnExitState();
     }
 }

@@ -37,17 +37,6 @@ namespace App.Scripts.Scenes.GameScene.Ball
             }
         }
 
-        public void LeftOneBall()
-        {
-            if(Balls.Count < 2) return;
-
-            for (int i = Balls.Count - 1 ; i >= 1; i--)
-            {
-                Balls[i].Remove();
-                Balls.Remove(Balls[i]);
-            }
-        }
-
         public void Cleanup()
         {
             foreach (var ballModel in Balls) 

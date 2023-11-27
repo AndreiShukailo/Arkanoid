@@ -1,7 +1,6 @@
 ﻿using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.TaskExtensions;
-using App.Scripts.Scenes.StartScene.Language.PopUp;
 
 namespace App.Scripts.Scenes.PackSelectScene.Features.PopUpFeature
 {

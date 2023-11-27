@@ -11,18 +11,14 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
     public class HandlerProcessSkipLevel : IHandlerSetupScene
     {
         private readonly LevelController _levelController;
-        private readonly PopUpController _popUpController;
 
-        public HandlerProcessSkipLevel(LevelController levelController, PopUpController popUpController)
+        public HandlerProcessSkipLevel(LevelController levelController)
         {
             _levelController = levelController;
-            _popUpController = popUpController;
         }
 
         public async Task Process()
         {
-            _popUpController.BlockUI(true);
-            
             foreach (var gridCell in _levelController.LevelModel.LevelGrid.Cells)
             {
                 foreach (var cell in gridCell)

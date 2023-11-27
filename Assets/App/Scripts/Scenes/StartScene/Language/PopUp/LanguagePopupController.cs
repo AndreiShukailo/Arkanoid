@@ -1,5 +1,5 @@
 ﻿using App.Scripts.Infrastructure.Buttons;
-using App.Scripts.Infrastructure.Buttons.Container;
+using App.Scripts.Infrastructure.Buttons.View;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.TaskExtensions;
@@ -10,19 +10,16 @@ namespace App.Scripts.Scenes.StartScene.Language.PopUp
     {
         private const string ButtonID = "VioletButton";
         private const string LanguageKey = "LanguageName.";
-        private const string PopUpButtonName = "LanguagePopUpClose";
         private readonly PopUpController _popUpController;
         private readonly LocalizationController _localizationController;
-        private readonly ButtonsContainer _buttonsContainer;
         private readonly ButtonManager _buttonManager;
 
         public LanguagePopupController(ButtonManager buttonManager, PopUpController popUpController,
-            LocalizationController localizationController, ButtonsContainer buttonsContainer)
+            LocalizationController localizationController)
         {
             _buttonManager = buttonManager;
             _popUpController = popUpController;
             _localizationController = localizationController;
-            _buttonsContainer = buttonsContainer;
         }
 
         public async void ShowPopUp()
@@ -36,19 +33,16 @@ namespace App.Scripts.Scenes.StartScene.Language.PopUp
             }
 
             await popUp.ProcessShow();
-            _buttonsContainer.SubscribeButton(PopUpButtonName, CloseLanguagePopup);
+            popUp.CloseLocalizationPopUp.Subscribe(() => Close(popUp.CloseLocalizationPopUp));
         }
 
-        private void Close()
+        private void Close(ButtonView buttonView)
         {
-            _buttonsContainer.UnsubscribeButton(PopUpButtonName);
+            buttonView.Unsubscribe();
             _popUpController.Hide<LanguagePopUp>().Forget();
         }
 
         private void OnButtonClick(string language) =>
             _localizationController.UpdateLocalization(language);
-
-        private void CloseLanguagePopup() =>
-            Close();
     }
 }

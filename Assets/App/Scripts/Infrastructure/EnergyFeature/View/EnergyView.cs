@@ -16,6 +16,7 @@ namespace App.Scripts.Infrastructure.EnergyFeature.View
         [SerializeField] private TMP_Text _energyCount;
         [SerializeField] private TMP_Text _maxEnergy;
         [SerializeField] private TMP_Text _timer;
+        [SerializeField] private GameObject _timerContainer;
 
         private Transform _parent;
 
@@ -65,8 +66,10 @@ namespace App.Scripts.Infrastructure.EnergyFeature.View
             _rotatedEffectView.StopAnimation();
         }
 
-        public void UpdateTimer(int time)
+        public void UpdateTimer(int time, bool isVisible)
         {
+            _timerContainer.SetActive(isVisible);
+            if(!isVisible) return;
             var ts = TimeSpan.FromSeconds(time);
             _timer.text = $"{ts.Minutes:d2}:{ts.Seconds:d2}";
         }

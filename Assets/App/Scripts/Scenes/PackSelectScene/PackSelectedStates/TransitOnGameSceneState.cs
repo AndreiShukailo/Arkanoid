@@ -32,6 +32,11 @@ namespace App.Scripts.Scenes.PackSelectScene.PackSelectedStates
             ProcessOpenScene().Forget();
         }
 
+        public override Task OnExitState()
+        {
+            return Task.CompletedTask;
+        }
+
         private async Task ProcessOpenScene()
         {
             _packCreator.Cleanup();

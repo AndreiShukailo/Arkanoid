@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using App.Scripts.Infrastructure.Buttons;
 using App.Scripts.Infrastructure.Buttons.View;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.Pool;
@@ -13,29 +12,29 @@ namespace App.Scripts.Libs.PopUp.View
     {
         public Transform EnergyContainer => _energyContainer;
         public Transform Content => _content;
-        public RectTransform Container => _parent;
         
         [SerializeField] protected Transform _energyContainer;
         [SerializeField] protected Transform _content;
         [SerializeField] protected Image _block;
         [SerializeField] protected RectTransform _rectTransform;
         [SerializeField] protected LocalizedText _lable;
+        [SerializeField] private RectTransform _parent;
+        [SerializeField] private CanvasGroup _backGround;
 
         private float _showDuration = 0.5f;
         private float _hideDuration = 0.3f;
 
-        private RectTransform _parent;
         private Sequence _animation;
         private Vector2 _startPosition;
 
         public override void OnCreated(IObjectPool objectPool)
         {
             base.OnCreated(objectPool);
-            _parent = _rectTransform.parent as RectTransform;
             _rectTransform.anchoredPosition =
                 new Vector2(0, GetYPosition());
             _startPosition = _rectTransform.anchoredPosition;
             _block.raycastTarget = true;
+            _backGround.alpha = 0;
         }
 
         public override void OnDespawned()
@@ -54,21 +53,33 @@ namespace App.Scripts.Libs.PopUp.View
 
         public async Task ProcessShow()
         {
-            _parent.gameObject.SetActive(true);
-            _animation = DOTween.Sequence();
-            _animation.Append(_rectTransform.DOAnchorPosY(0f, _showDuration)).SetUpdate(true);
-            await _animation.AsyncWaitForCompletion();
+            var popUpAnimation = PopUpAnimation(0, _showDuration);
+            var backGroundAnimation = BackGroundAnimation(1, _showDuration);
+            await Task.WhenAll(popUpAnimation, backGroundAnimation);
             SetBlock(false);
         }
 
         public async Task ProcessHide()
         {
             SetBlock(true);
-            _animation = DOTween.Sequence();
-            _animation.Append(_rectTransform.DOAnchorPosY(_startPosition.y, _hideDuration)).SetUpdate(true);
-            await _animation.AsyncWaitForCompletion();
-            _parent.gameObject.SetActive(false);
+            var popUpAnimation = PopUpAnimation(_startPosition.y, _hideDuration);
+            var backGroundAnimation = BackGroundAnimation(0, _hideDuration);
+            await Task.WhenAll(popUpAnimation, backGroundAnimation);
             Remove();
+        }
+
+        private Task BackGroundAnimation(float alpha, float duration)
+        {
+            _animation = DOTween.Sequence();
+            _animation.Append(_backGround.DOFade(alpha, duration)).SetUpdate(true);
+            return _animation.AsyncWaitForCompletion();
+        }
+
+        private Task PopUpAnimation(float yPos, float duration)
+        {
+            _animation = DOTween.Sequence();
+            _animation.Append(_rectTransform.DOAnchorPosY(yPos, duration)).SetUpdate(true);
+            return _animation.AsyncWaitForCompletion();
         }
 
         public void SetBlock(bool isBlock)

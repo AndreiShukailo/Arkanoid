@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.TimeManagement;
+using App.Scripts.Infrastructure.UIMenegement;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.Level.Level.Handlers;
@@ -13,26 +14,29 @@ namespace App.Scripts.Scenes.GameScene.GameStates
         private readonly VictoryPopUpController _victoryPopUpController;
         private readonly TimeManager _timeManager;
         private readonly HandlerTransitToVictory _handlerTransitToVictory;
+        private readonly BlockUIController _blockUIController;
 
         public VictoryState(HandlerProcessVictory handlerProcessVictory, VictoryPopUpController victoryPopUpController,
-            TimeManager timeManager, HandlerTransitToVictory handlerTransitToVictory)
+            TimeManager timeManager, HandlerTransitToVictory handlerTransitToVictory, BlockUIController blockUIController)
         {
             _handlerProcessVictory = handlerProcessVictory;
             _victoryPopUpController = victoryPopUpController;
             _timeManager = timeManager;
             _handlerTransitToVictory = handlerTransitToVictory;
+            _blockUIController = blockUIController;
         }
 
         public override void OnEnterState()
         {
             base.OnEnterState();
+            _blockUIController.SetBlocked(true);
             OnEnter().Forget();
         }
 
-        public override void OnExitState()
+        public override async Task OnExitState()
         {
-            base.OnExitState();
-            OnExit().Forget();
+            await _victoryPopUpController.HidePopUp();
+            _blockUIController.SetBlocked(false);
         }
 
         private async Task OnEnter()
@@ -40,11 +44,6 @@ namespace App.Scripts.Scenes.GameScene.GameStates
             await _handlerTransitToVictory.Process();
             _timeManager.SetPause(true);
             await _handlerProcessVictory.Process();
-        }
-
-        private async Task OnExit()
-        {
-            await _victoryPopUpController.HidePopUp();
         }
     }
 }

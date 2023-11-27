@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86103dc70e7463b84a591eef1bb7e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startSpeed: 4
+  _startSpeed: 6
   _rigidbody2D: {fileID: 4668046050492155933}
 --- !u!114 &7478875743314430611
 MonoBehaviour:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44343c171fd4db78620e9fa23e183d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minBounceAngle: 15
+  _minBounceAngle: 10
   _rigidbody: {fileID: 4668046050492155933}
 --- !u!114 &824786532962932472
 MonoBehaviour:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movingComponent: {fileID: 6214060330389227446}
-  _maxSpeed: 8
+  _maxSpeed: 10
 --- !u!114 &8673297756351361299
 MonoBehaviour:
   m_ObjectHideFlags: 0

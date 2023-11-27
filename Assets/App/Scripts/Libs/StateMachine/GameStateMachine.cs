@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace App.Scripts.Libs.StateMachine
 {
@@ -8,6 +9,7 @@ namespace App.Scripts.Libs.StateMachine
         private readonly Dictionary<Type, GameState> _states = new();
         private GameState _currentState;
         private GameState _stateToChange;
+        private Task _changeSwitchState;
 
         public void AddState(GameState state)
         {
@@ -23,34 +25,35 @@ namespace App.Scripts.Libs.StateMachine
 
         public void Update()
         {
-            CheckSwitchState();
+            if(_changeSwitchState == null || _changeSwitchState.IsCompleted)
+                _changeSwitchState = CheckSwitchState();
 
             _currentState?.Update();
         }
 
-        private void CheckSwitchState()
+        private async Task CheckSwitchState()
         {
             if (_stateToChange is null) return;
 
             var nextState = _stateToChange;
             _stateToChange = null;
 
-            ProcessChangeState(nextState);
+            await ProcessChangeState(nextState);
         }
 
-        private void ProcessChangeState(GameState value)
+        private async Task ProcessChangeState(GameState value)
         {
-            ExitState();
+            await ExitState();
 
             _currentState = value;
             _currentState.OnEnterState();
         }
 
-        private void ExitState()
+        private async Task ExitState()
         {
             if (_currentState is null) return;
 
-            _currentState.OnExitState();
+            await _currentState.OnExitState();
         }
     }
 }

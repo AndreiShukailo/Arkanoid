@@ -3,6 +3,7 @@ using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.EnergyFeature.View;
 using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
+using App.Scripts.Infrastructure.UIMenegement;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.PopUp.Container;
@@ -15,7 +16,9 @@ using App.Scripts.Scenes.GameScene.PopUpsFeature;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp;
+using App.Scripts.Scenes.PackSelectScene.Features.PopUpFeature;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace App.Scripts.Scenes.GameScene.Installers
 {
@@ -31,19 +34,37 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         [Header("LosePopUp")] [SerializeField] private LosePopUpPoolSetting _losePopUpPoolSetting;
 
+        [Header("NoEnergyPopUp")] [SerializeField]
+        private NoEnergyPopUpPoolSetting _noEnergyPopUpPoolSetting;
+
+        [Header("BlockedUI")] [SerializeField] private GraphicRaycaster _blockedUI;
+
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
+            serviceContainer.SetServiceSelf(new BlockUIController(_blockedUI));
+
             var commandSpendEnergy = new CommandSpendEnergy(
                 serviceContainer.Get<EnergyController>(),
                 serviceContainer.Get<EnergyViewController>(),
                 serviceContainer.Get<CommandChangeState>(),
-                serviceContainer.Get<SceneLoaderController>(),
-                serviceContainer.Get<HealthController>());
-            InstallMenuPopup(serviceContainer, commandSpendEnergy);
+                serviceContainer.Get<HealthController>(),
+                InstallNoEnergyPopUp(serviceContainer));
+
             InstallLosePopup(serviceContainer, commandSpendEnergy);
+            InstallMenuPopup(serviceContainer, commandSpendEnergy);
             InstallVictoryPopUp(serviceContainer, commandSpendEnergy);
             InstallHealthBarView(serviceContainer);
             InstallLevelProgressInfoView(serviceContainer);
+        }
+
+        private NoEnergyPopUpController InstallNoEnergyPopUp(ServiceContainer serviceContainer)
+        {
+            var noEnergyPopUp = new NoEnergyPopUpController(
+                serviceContainer.Get<PopUpController>(), serviceContainer.Get<ButtonManager>());
+
+            var popUpContainer = serviceContainer.Get<PopUpContainer>();
+            popUpContainer.AddPopUp<NoEnergyPopUp>(_noEnergyPopUpPoolSetting);
+            return noEnergyPopUp;
         }
 
         private void InstallLosePopup(ServiceContainer serviceContainer, CommandSpendEnergy commandSpendEnergy)
@@ -51,7 +72,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.SetServiceSelf(new LosePopUpController(
                 serviceContainer.Get<ButtonManager>(),
                 serviceContainer.Get<PopUpController>(),
-                serviceContainer.Get<EnergyViewController>(), commandSpendEnergy));
+                serviceContainer.Get<EnergyViewController>(),
+                commandSpendEnergy,
+                serviceContainer.Get<SceneLoaderController>()));
 
             var popUpContainer = serviceContainer.Get<PopUpContainer>();
             popUpContainer.AddPopUp<LosePopup>(_losePopUpPoolSetting);

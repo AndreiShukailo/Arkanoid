@@ -1442,8 +1442,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2091094349}
+  m_Children: []
   m_Father: {fileID: 406330346}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1749,16 +1748,21 @@ MonoBehaviour:
   LevelProgressInfoView: {fileID: 1854242459}
   _menuPupUpPoolSetting:
     SpawnableItemMono: {fileID: 7149709009862915758, guid: 6b7be8d73571c7f4584af7cc2c31a04a, type: 3}
-    Container: {fileID: 2091094349}
+    Container: {fileID: 638624086}
     StartSize: 1
   _victoryPopUpPoolSetting:
     SpawnableItemMono: {fileID: 6764847580340660928, guid: bc7c42dc4f6c90f4ca27b7088f45a781, type: 3}
-    Container: {fileID: 2091094349}
+    Container: {fileID: 638624086}
     StartSize: 1
   _losePopUpPoolSetting:
     SpawnableItemMono: {fileID: 6449445996286176282, guid: 696edb159b6bc164eaeb7996570f57c7, type: 3}
-    Container: {fileID: 2091094349}
+    Container: {fileID: 638624086}
     StartSize: 1
+  _noEnergyPopUpPoolSetting:
+    SpawnableItemMono: {fileID: 6528423671854897920, guid: 68d55b05024b3d643a4afc655e4f9727, type: 3}
+    Container: {fileID: 638624086}
+    StartSize: 1
+  _blockedUI: {fileID: 1603112123}
 --- !u!1 &1111511244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,82 +3440,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015083528}
-  m_CullTransparentMesh: 1
---- !u!1 &2091094348
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2091094349}
-  - component: {fileID: 2091094351}
-  - component: {fileID: 2091094350}
-  m_Layer: 0
-  m_Name: PopupContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &2091094349
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091094348}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 638624086}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2091094350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091094348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &2091094351
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091094348}
   m_CullTransparentMesh: 1
 --- !u!1 &2108819825
 GameObject:

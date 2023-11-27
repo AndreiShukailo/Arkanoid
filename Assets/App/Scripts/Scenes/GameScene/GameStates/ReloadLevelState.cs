@@ -20,6 +20,11 @@ namespace App.Scripts.Scenes.GameScene.GameStates
             ProcessSetupLevel().Forget();
         }
 
+        public override Task OnExitState()
+        {
+            return Task.CompletedTask;
+        }
+
         private async Task ProcessSetupLevel()
         {
             await _handlerSetup.Process();
