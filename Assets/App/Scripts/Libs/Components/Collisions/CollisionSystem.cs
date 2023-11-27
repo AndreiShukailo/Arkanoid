@@ -1,4 +1,5 @@
-﻿using App.Scripts.Scenes.GameScene.Ball.Components;
+﻿using System.Linq;
+using App.Scripts.Scenes.GameScene.Ball.Components;
 using App.Scripts.Scenes.GameScene.Platform.Components;
 
 namespace App.Scripts.Libs.Components
@@ -20,9 +21,10 @@ namespace App.Scripts.Libs.Components
         public override void OnUpdate(CollisionHandlerComponent component)
         {
             base.OnUpdate(component);
-            if (component.CollisionContext == null) return;
-            Collision(component.CollisionContext);
-            component.ClearContext();
+            if(component.CollisionContexts.Count == 0) return;
+            var collisionContext = component.CollisionContexts[0];
+            Collision(collisionContext);
+            component.ClearContext(collisionContext);
         }
 
         private void Collision(CollisionContext collisionContext)
