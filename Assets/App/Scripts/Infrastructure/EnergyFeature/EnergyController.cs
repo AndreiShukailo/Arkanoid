@@ -25,6 +25,14 @@ namespace App.Scripts.Infrastructure.EnergyFeature
             UpdateEnergy();
         }
 
+        public bool ByHealth()
+        {
+            if (_playerEnergy.Energy < _energyConfig.HealthCoast) return false;
+            _playerEnergy.Energy -= _energyConfig.HealthCoast;
+            SaveEnergy();
+            return true;
+        }
+        
         public bool StartLevel()
         {
             if (_playerEnergy.Energy < _energyConfig.RestartLevelCoast) return false;

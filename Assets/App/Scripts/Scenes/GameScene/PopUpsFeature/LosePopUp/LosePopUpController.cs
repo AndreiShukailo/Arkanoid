@@ -1,9 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.Buttons;
-using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.EnergyFeature.View;
-using App.Scripts.Infrastructure.SceneManagement;
-using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.TaskExtensions;
 
@@ -33,6 +30,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp
             _popUpView = _popUpController.Show<LosePopup>();
             _energyViewController.CreateEnergy(_popUpView.EnergyContainer);
             _buttonManager.BuildButton(_popUpView.Content, OnRestartButtonClick, RestartButtonID, RestartLanguageKey);
+            _popUpView.ByHealthButtonView.Subscribe(OnByHealthButtonClick);
 
             await _popUpView.ProcessShow();
         }
@@ -41,11 +39,17 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp
         {
             await _popUpController.Hide<LosePopup>();
             _energyViewController.Remove();
+            _popUpView.ByHealthButtonView.Unsubscribe();
         }
 
         private void OnRestartButtonClick()
         {
             _commandSpendEnergy.ProcessSpendEnergy(_popUpView).Forget();
+        }
+
+        private void OnByHealthButtonClick()
+        {
+            _commandSpendEnergy.ProcessByHealth(_popUpView).Forget();
         }
     }
 }

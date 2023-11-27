@@ -37,7 +37,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 serviceContainer.Get<EnergyController>(),
                 serviceContainer.Get<EnergyViewController>(),
                 serviceContainer.Get<CommandChangeState>(),
-                serviceContainer.Get<SceneLoaderController>());
+                serviceContainer.Get<SceneLoaderController>(),
+                serviceContainer.Get<HealthController>());
             InstallMenuPopup(serviceContainer, commandSpendEnergy);
             InstallLosePopup(serviceContainer, commandSpendEnergy);
             InstallVictoryPopUp(serviceContainer, commandSpendEnergy);
