@@ -53,7 +53,7 @@ namespace App.Scripts.Scenes.StartScene.Installers
             return loadSceneState;
         }
 
-        private StateSetupScene CreateSetupState(ServiceContainer serviceContainer)
+        private GameState CreateSetupState(ServiceContainer serviceContainer)
         {
             var sceneLoader = serviceContainer.Get<SceneLoaderController>();
 

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5457237604228795408}
   - component: {fileID: 2740403821920014173}
   - component: {fileID: 5909379209390480023}
+  - component: {fileID: -4797659670906130393}
   m_Layer: 7
   m_Name: ColorBombBlock
   m_TagString: Untagged
@@ -136,6 +137,7 @@ MonoBehaviour:
   - {fileID: 5457237604228795408}
   - {fileID: 2740403821920014173}
   - {fileID: 5909379209390480023}
+  - {fileID: -4797659670906130393}
 --- !u!114 &3149150453259973653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,3 +213,15 @@ MonoBehaviour:
       type: {class: ColorBombBlocksGetter, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature.BlocksGetter, asm: Assembly-CSharp}
     - rid: 5982668727265525761
       type: {class: ColorDestroyPathInfo, ns: App.Scripts.Scenes.GameScene.Block.BombsFeature.Info, asm: Assembly-CSharp}
+--- !u!114 &-4797659670906130393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219612589283821118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d2859345374e48919c2731f4bae656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

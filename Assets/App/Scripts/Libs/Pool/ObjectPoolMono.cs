@@ -22,6 +22,7 @@ namespace App.Scripts.Libs.Pool
 
         protected override void OnItemSpawned(T item)
         {
+            if(item == null) return;
             base.OnItemSpawned(item);
             item.gameObject.SetActive(true);
             item.OnSpawned();

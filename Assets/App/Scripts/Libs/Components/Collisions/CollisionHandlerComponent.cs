@@ -5,7 +5,7 @@ namespace App.Scripts.Libs.Components
 {
     public class CollisionHandlerComponent : Component
     {
-        public List<CollisionContext> CollisionContexts { get; private set; } = new ();
+        public List<CollisionContext> CollisionContexts { get; } = new ();
 
         private void OnCollisionEnter2D(Collision2D other)
         {

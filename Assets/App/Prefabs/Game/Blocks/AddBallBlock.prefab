@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2740403821920014173}
   - component: {fileID: 9094952357572368133}
   - component: {fileID: 4498165921500751520}
+  - component: {fileID: 5589860774986143416}
   m_Layer: 7
   m_Name: AddBallBlock
   m_TagString: Untagged
@@ -138,6 +139,7 @@ MonoBehaviour:
   - {fileID: 2740403821920014173}
   - {fileID: 9094952357572368133}
   - {fileID: 4498165921500751520}
+  - {fileID: 5589860774986143416}
 --- !u!114 &3149150453259973653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,4 +214,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f07e8101324e60bfd7ea7dd26a66f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boostTime: 15
+--- !u!114 &5589860774986143416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219612589283821118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d2859345374e48919c2731f4bae656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

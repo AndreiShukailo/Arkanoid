@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3596194038501785438}
   - component: {fileID: 5457237604228795408}
   - component: {fileID: 208765596948748575}
+  - component: {fileID: 5027624480434988564}
   m_Layer: 7
   m_Name: IronBlock
   m_TagString: Untagged
@@ -134,6 +135,7 @@ MonoBehaviour:
   - {fileID: 3596194038501785438}
   - {fileID: 5457237604228795408}
   - {fileID: 208765596948748575}
+  - {fileID: 5027624480434988564}
 --- !u!114 &3149150453259973653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,5 +184,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ec9e4174e64046ab759c28159c0c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5027624480434988564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219612589283821118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d2859345374e48919c2731f4bae656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

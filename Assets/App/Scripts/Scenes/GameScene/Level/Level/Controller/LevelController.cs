@@ -72,6 +72,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 
         public async Task CleanupLevel()
         {
+            if(LevelModel == null) return; 
             var cells = LevelModel.LevelGrid.Cells;
             for (int i = 0; i < cells.Length; i++)
             for (int j = 0; j < cells[i].Length; j++)
@@ -87,6 +88,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
         public void CleanupPlatform()
         {
             BallContainer.Cleanup();
+            if(Platform == null) return;
             Platform.Remove();
             Platform = null;
         }

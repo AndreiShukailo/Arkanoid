@@ -136,6 +136,7 @@ MonoBehaviour:
   _left: {fileID: 3814237515737131367}
   _right: {fileID: 3590621837881970698}
   _defaultSize: 0.8
+  _resizeDuration: 0.5
 --- !u!114 &2306945140967341975
 MonoBehaviour:
   m_ObjectHideFlags: 0

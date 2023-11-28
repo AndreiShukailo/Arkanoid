@@ -185,7 +185,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 
-            return new ReloadLevelState(handlerSetupSceneContainer);
+            return new ReloadLevelState(handlerSetupSceneContainer, serviceContainer.Get<BlockUIController>());
         }
     }
 }

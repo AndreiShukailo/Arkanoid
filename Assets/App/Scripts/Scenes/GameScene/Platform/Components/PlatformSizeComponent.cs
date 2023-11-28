@@ -1,7 +1,6 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Component = App.Scripts.Libs.Components.Component;
 
 namespace App.Scripts.Scenes.GameScene.Platform.Components

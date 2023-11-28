@@ -1,4 +1,5 @@
-﻿using App.Scripts.Libs.Components;
+﻿using System.Threading.Tasks;
+using App.Scripts.Libs.Components;
 using App.Scripts.Libs.TiledParser.Level;
 using App.Scripts.Scenes.GameScene.Block;
 using App.Scripts.Scenes.GameScene.Level.LevelField.BlockSize;
@@ -10,6 +11,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder
     class LevelGridBuilder : ILevelGridBuilder
     {
         private const string IronBlockKey = "IronBlock";
+        private const float AnimationLenght = 2f;
         private readonly IBlockSizeInfoProvider _blockSizeInfoProvider;
         private readonly IBlockCreator _blockCreator;
         private readonly FieldInfo _fieldInfo;
@@ -22,8 +24,9 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder
             _fieldInfo = fieldInfo;
         }
 
-        public Grid BuildGrid(LevelInfo levelInfo)
+        public async Task<Grid> BuildGrid(LevelInfo levelInfo)
         {
+            var animationDuration = AnimationLenght / levelInfo.TotalElements;
             var blockSizeInfo = _blockSizeInfoProvider.CreateBlockSizeInfo(levelInfo.Width);
             var spacing = blockSizeInfo.Spacing;
 
@@ -47,23 +50,26 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder
                     if (j != 0)
                         lastPositionHorizontal = AddHorizontalPosition(lastPositionHorizontal, blockSize, spacing);
 
-                    var cellComponent = CreateCellComponent(blocksId, i, j, lastPositionHorizontal, blockSize);
+                    var cellComponent = CreateCellComponent(blocksId, i, j, lastPositionHorizontal, blockSize, animationDuration);
+
+                    await cellComponent;
                     
-                    cells[i][j] = new Cell(cellComponent);
+                    cells[i][j] = new Cell(cellComponent.Result);
                     
-                    blockCount = AddBlockCount(cellComponent, blockCount);
+                    blockCount = AddBlockCount(cellComponent.Result, blockCount);
                 }
             }
 
             return new Grid(cells, blockCount);
         }
 
-        private CellComponent CreateCellComponent(int[][] blocksId, int i, int j, Vector2 lastPositionHorizontal,
-            Vector2 blockSize)
+        private async Task<CellComponent> CreateCellComponent(int[][] blocksId, int i, int j, Vector2 lastPositionHorizontal,
+            Vector2 blockSize, float animationTime)
         {
-            var cellComponent = _blockCreator.Create(blocksId[i][j], new Vector2Int(i, j),
-                lastPositionHorizontal, blockSize);
-            return cellComponent;
+            var task = _blockCreator.Create(blocksId[i][j], new Vector2Int(i, j),
+                lastPositionHorizontal, blockSize, animationTime);
+            await task;
+            return task.Result;
         }
 
         private int AddBlockCount(CellComponent cellComponent, int blockCount)

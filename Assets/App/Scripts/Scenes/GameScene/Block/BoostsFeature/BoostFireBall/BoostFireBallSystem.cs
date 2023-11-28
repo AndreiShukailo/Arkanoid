@@ -27,6 +27,7 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostFireBall
 
         private void SetTrigger(bool isTrigger)
         {
+            if(_levelController.LevelModel == null) return;
             foreach (var gridCell in _levelController.LevelModel.LevelGrid.Cells)
             {
                 foreach (var cell in gridCell)

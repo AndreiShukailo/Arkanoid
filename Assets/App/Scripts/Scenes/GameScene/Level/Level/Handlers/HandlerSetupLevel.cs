@@ -19,19 +19,19 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
             _packController = packController;
         }
 
-        public Task Process()
+        public async Task Process()
         {
-            SetupLevel();
-            return Task.CompletedTask;
+            await SetupLevel();
         }
 
-        private void SetupLevel()
+        private async Task SetupLevel()
         {
             if (_packController.CurrentPack == null)
                 _packController.SetLastPack();
 
-            var levelModel = _levelCreator.CreateLevel(_packController.CurrentPack, _levelController);
-            _levelController.SetupLevel(levelModel);
+            var levelModelTask = _levelCreator.CreateLevel(_packController.CurrentPack, _levelController);
+            await levelModelTask;
+            _levelController.SetupLevel(levelModelTask.Result);
         }
     }
 }

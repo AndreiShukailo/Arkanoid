@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using App.Scripts.Libs.Components;
 using App.Scripts.Libs.TiledParser.Data;
 using App.Scripts.Libs.TiledParser.TileSet;
+using App.Scripts.Scenes.GameScene.Block.Animations;
 using App.Scripts.Scenes.GameScene.Block.Container;
 using App.Scripts.Scenes.GameScene.Block.Factory;
 using App.Scripts.Scenes.GameScene.Level.Level.Config;
@@ -20,12 +22,19 @@ namespace App.Scripts.Scenes.GameScene.Block
             _tileSet = tileSetProvider.CreateTiledTileSet(tileSetConfig);
         }
 
-        public CellComponent Create(int blockId, Vector2Int gridPosition, Vector2 position, Vector2 size)
+        public async Task<CellComponent> Create(int blockId, Vector2Int gridPosition, Vector2 position, Vector2 size, float animationDuration)
         {
-            if (blockId == 0) return null;
+            if (blockId == 0)
+            {
+                await Task.Delay((int)animationDuration / 1000);
+                return null;
+            }
+
             var type = GetBlockType(blockId);
             var factory = _blocksContainer.GetFactory(type);
-            return factory.Create(new BlockContext(gridPosition, position, size)).Get<CellComponent>();
+            var block = factory.Create(new BlockContext(gridPosition, position, size));
+            await block.Get<SpawnBlockAnimation>().PlayAnimation(animationDuration);
+            return block.Get<CellComponent>();
         }
 
         private string GetBlockType(int id)
