@@ -3200,7 +3200,7 @@ MonoBehaviour:
       SpawnableItemMono: {fileID: 220275133911425394, guid: 47cde9d664e422a4e86a616e16a4da2d, type: 3}
       Container: {fileID: 1725470757}
       StartSize: 1
-    PlatformOffsetBottom: 1.67
+    PlatformOffsetBottom: 1.72
   _ballConfig:
     PoolSetting:
       SpawnableItemMono: {fileID: 7917756334170325595, guid: 1d2662a59cf2b7e47951ae15fca5d4b3, type: 3}

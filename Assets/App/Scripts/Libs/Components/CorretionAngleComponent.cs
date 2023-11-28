@@ -4,7 +4,7 @@ namespace App.Scripts.Libs.Components
 {
     public class CorretionAngleComponent : Component
     {
-        public GameObject CollidedGameObject { get; private set; }
+        public Collision2D CollidedGameObject { get; private set; }
         public Rigidbody2D Rigidbody => _rigidbody;
         public float MinBounceAngle => _minBounceAngle;
         
@@ -17,9 +17,9 @@ namespace App.Scripts.Libs.Components
             ClearCollision();
         }
 
-        public void Correct(GameObject collision)
+        public void Correct(Collision2D collision2D)
         {
-            CollidedGameObject = collision;
+            CollidedGameObject = collision2D;
         }
 
         public void ClearCollision()

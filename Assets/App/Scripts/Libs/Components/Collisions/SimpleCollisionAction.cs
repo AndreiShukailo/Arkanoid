@@ -7,7 +7,7 @@ namespace App.Scripts.Libs.Components
     {
         public void Collision(CollisionContext collisionContext, ComponentContainer collidedComponent)
         {
-            collisionContext.CollisionHandlerComponent.ComponentContainer.Get<CorretionAngleComponent>()?.Correct(collisionContext.CollisionObject);
+            collisionContext.CollisionHandlerComponent.ComponentContainer.Get<CorretionAngleComponent>()?.Correct(collisionContext.Collision);
             collidedComponent.AddToSystem<HealthComponent>();
             collidedComponent.AddToSystem<BombComponent>();
             collidedComponent.AddToSystem<SpawnBoostComponent>();

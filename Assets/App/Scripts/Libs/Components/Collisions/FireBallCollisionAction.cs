@@ -12,7 +12,7 @@ namespace App.Scripts.Libs.Components
         {
             if (collidedComponent.ID == BorderId)
             {
-                collisionContext.CollisionHandlerComponent.ComponentContainer.Get<CorretionAngleComponent>()?.Correct(collisionContext.CollisionObject);
+                collisionContext.CollisionHandlerComponent.ComponentContainer.Get<CorretionAngleComponent>()?.Correct(collisionContext.Collision);
                 return;
             }
             

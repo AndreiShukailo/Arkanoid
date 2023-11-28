@@ -7,7 +7,7 @@ namespace App.Scripts.Scenes.GameScene.Platform.Systems
     public class GunSystem : ComponentSystem<GunComponent>
     {
         private readonly BulletFactory _bulletFactory;
-        private const float ShootDelay = 0.3f;
+        private const float ShootDelay = 0.2f;
         private float _timer;
 
         public GunSystem(BulletFactory bulletFactory)

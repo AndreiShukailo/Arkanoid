@@ -9,12 +9,12 @@ namespace App.Scripts.Libs.Components
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            CollisionContexts.Add(new CollisionContext(this, other.gameObject));
+            CollisionContexts.Add(new CollisionContext(this, other));
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            CollisionContexts.Add(new CollisionContext(this, other.gameObject));
+            CollisionContexts.Add(new CollisionContext(this, other));
         }
 
         public void ClearContext(CollisionContext collisionContext)
@@ -27,11 +27,20 @@ namespace App.Scripts.Libs.Components
     {
         public readonly CollisionHandlerComponent CollisionHandlerComponent;
         public readonly GameObject CollisionObject;
+        public readonly Collision2D Collision;
 
-        public CollisionContext(CollisionHandlerComponent collisionHandlerComponent, GameObject collision2D)
+        public CollisionContext(CollisionHandlerComponent collisionHandlerComponent, Collision2D other)
         {
             CollisionHandlerComponent = collisionHandlerComponent;
-            CollisionObject = collision2D;
+            CollisionObject = other.gameObject;
+            Collision = other;
+        }
+        
+        public CollisionContext(CollisionHandlerComponent collisionHandlerComponent, Collider2D other)
+        {
+            CollisionHandlerComponent = collisionHandlerComponent;
+            CollisionObject = other.gameObject;
+            Collision = null;
         }
     }
 }

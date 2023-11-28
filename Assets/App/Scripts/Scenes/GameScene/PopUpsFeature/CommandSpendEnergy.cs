@@ -1,8 +1,6 @@
-﻿using System.Runtime.Remoting.Messaging;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.EnergyFeature;
 using App.Scripts.Infrastructure.EnergyFeature.View;
-using App.Scripts.Infrastructure.SceneManagement;
 using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.PopUp.View;
 using App.Scripts.Scenes.GameScene.GameStates;
@@ -34,6 +32,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature
         {
             if (_energyController.StartLevel())
             {
+                popUpView.SetBlock(true);
                 await _energyViewController.UpdateEnergy();
                 _commandChangeState.ChangeState<ReloadLevelState>();
             }
@@ -47,6 +46,7 @@ namespace App.Scripts.Scenes.GameScene.PopUpsFeature
         {
             if (_energyController.ByHealth())
             {
+                popUpView.SetBlock(true);
                 _healthController.ChangeHealth(1);
                 await _energyViewController.UpdateEnergy();
                 _commandChangeState.ChangeState<ReloadPlatformState>();

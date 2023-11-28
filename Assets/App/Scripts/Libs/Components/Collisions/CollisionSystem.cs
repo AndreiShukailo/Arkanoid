@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using App.Scripts.Scenes.GameScene.Ball.Components;
+﻿using App.Scripts.Scenes.GameScene.Ball.Components;
 using App.Scripts.Scenes.GameScene.Platform.Components;
 
 namespace App.Scripts.Libs.Components

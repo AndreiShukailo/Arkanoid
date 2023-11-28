@@ -17,7 +17,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
             _systemsGroup = systemsGroup;
         }
 
-        public Task Process()
+        public Task  Process()
         {
             _levelController.CleanupPlatform();
             _systemsGroup.Update(Time.deltaTime);

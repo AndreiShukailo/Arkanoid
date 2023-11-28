@@ -8,7 +8,6 @@ using App.Scripts.Infrastructure.States;
 using App.Scripts.Libs.Localization;
 using App.Scripts.Libs.PopUp;
 using App.Scripts.Libs.TaskExtensions;
-using App.Scripts.Scenes.GameScene.GameStates;
 
 namespace App.Scripts.Scenes.GameScene.PopUpsFeature.VictoryPopUp
 {

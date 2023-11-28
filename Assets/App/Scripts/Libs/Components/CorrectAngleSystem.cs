@@ -14,7 +14,8 @@ namespace App.Scripts.Libs.Components
 
         private void CorrectAngle(CorretionAngleComponent component)
         {
-            var velocity = component.Rigidbody.velocity;
+            var moving = component.ComponentContainer.Get<MovingComponent>();
+            var velocity = moving.Rigidbody2D.velocity;
             var minBounceAngle = component.MinBounceAngle;
 
             var angle = Mathf.Atan(velocity.y / velocity.x);
@@ -29,7 +30,8 @@ namespace App.Scripts.Libs.Components
                 correctVector = GetCorrectVector(90f - minBounceAngle, velocity);
 
             velocity = correctVector;
-            component.Rigidbody.velocity = velocity.normalized * component.ComponentContainer.Get<MovingComponent>().CurrentSpeed;
+            component.Rigidbody.velocity =
+                velocity.normalized * moving.CurrentSpeed;
         }
 
         private Vector3 GetCorrectVector(float correctAngle, Vector2 velocity)
