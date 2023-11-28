@@ -8,7 +8,8 @@ namespace App.Scripts.Scenes.GameScene.Platform.Factory
     {
         private readonly SystemsContainer _systemsContainer;
 
-        public PlatformFactory(PoolSetting<ComponentContainer> poolSetting, SystemsContainer systemsContainer) : base(poolSetting)
+        public PlatformFactory(PoolSetting<ComponentContainer> poolSetting, SystemsContainer systemsContainer) : base(
+            poolSetting)
         {
             _systemsContainer = systemsContainer;
         }

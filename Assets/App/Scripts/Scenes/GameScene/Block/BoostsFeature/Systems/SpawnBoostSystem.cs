@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using App.Scripts.Infrastructure.Effects;
 using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Pool;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
@@ -11,22 +12,25 @@ namespace App.Scripts.Scenes.GameScene.Block.BoostsFeature.Systems
         private Dictionary<string, BoostFactory> _keyFactory = new ();
         private readonly SystemsContainer _systemsContainer;
         private readonly Transform _container;
-        
+        private readonly EffectViewFactory _effectViewFactory;
 
-        public SpawnBoostSystem(SystemsContainer systemsContainer, Transform container)
+
+        public SpawnBoostSystem(SystemsContainer systemsContainer, Transform container, EffectViewFactory effectViewFactory)
         {
             _systemsContainer = systemsContainer;
             _container = container;
+            _effectViewFactory = effectViewFactory;
         }
 
         public override void OnUpdate(SpawnBoostComponent component)
         {
             base.OnUpdate(component);
             var boost = CreateBoost(component);
-            SetDownDirection(boost);
-            boost.AddToSystem<DestroyWhenInvisibleComponent>();
             component.ComponentContainer.AddToSystem<DeathComponent>();
             Remove(component);
+            _effectViewFactory.Create(component.transform.position);
+            SetDownDirection(boost);
+            boost.AddToSystem<DestroyWhenInvisibleComponent>();
         }
 
         private void SetDownDirection(ComponentContainer component)

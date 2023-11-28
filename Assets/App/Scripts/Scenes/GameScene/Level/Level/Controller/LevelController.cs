@@ -42,9 +42,13 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
             _healthController.ReloadHealth();
         }
 
-        public void SetupPlatform(ComponentContainer platform, ComponentContainer ball)
+        public void SetupPlatform(ComponentContainer platform)
         {
             Platform = platform;
+        }
+
+        public void SetupBall(ComponentContainer ball)
+        {
             BallContainer.AddBall(ball);
         }
 
@@ -84,13 +88,17 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
 
             LevelModel = null;
         }
-
+        
         public void CleanupPlatform()
         {
-            BallContainer.Cleanup();
             if(Platform == null) return;
             Platform.Remove();
             Platform = null;
+        }
+
+        public void CleanupBall()
+        {
+            BallContainer.Cleanup();
         }
     }
 }

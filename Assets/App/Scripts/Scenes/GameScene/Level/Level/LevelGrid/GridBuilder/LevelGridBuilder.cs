@@ -11,7 +11,7 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.LevelGrid.GridBuilder
     class LevelGridBuilder : ILevelGridBuilder
     {
         private const string IronBlockKey = "IronBlock";
-        private const float AnimationLenght = 2f;
+        private const float AnimationLenght = 1f;
         private readonly IBlockSizeInfoProvider _blockSizeInfoProvider;
         private readonly IBlockCreator _blockCreator;
         private readonly FieldInfo _fieldInfo;

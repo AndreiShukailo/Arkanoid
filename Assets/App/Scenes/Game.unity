@@ -916,6 +916,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -992,6 +993,22 @@ Transform:
   m_Father: {fileID: 406330346}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3360beb7503748d8ad7ccfe26e2d2e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.1
+  _strength: 1
+  _vibrato: 10
+  _randomness: 90
 --- !u!1 &521724032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,6 +1930,14 @@ MonoBehaviour:
     SpawnableItemMono: {fileID: 220275133911425394, guid: 6aaa794705d3f7340b12ce5f6c902cfd, type: 3}
     Container: {fileID: 1725470757}
     StartSize: 5
+  _boostEffectPool:
+    SpawnableItemMono: {fileID: 4446837728880702598, guid: 43de76be898c67e4da8c58be5e8328b9, type: 3}
+    Container: {fileID: 874104373}
+    StartSize: 0
+  _hitImmortalEffectPoolSetting:
+    SpawnableItemMono: {fileID: 8304124099122376269, guid: 0a7d09c0e6a951a45b96eafcbe4ed6b4, type: 3}
+    Container: {fileID: 1725470757}
+    StartSize: 0
 --- !u!4 &1239962213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7112570807640102166, guid: 8af15f2e47c15fc4d92a5c83858d8a80, type: 3}
@@ -3200,7 +3225,7 @@ MonoBehaviour:
       SpawnableItemMono: {fileID: 220275133911425394, guid: 47cde9d664e422a4e86a616e16a4da2d, type: 3}
       Container: {fileID: 1725470757}
       StartSize: 1
-    PlatformOffsetBottom: 1.72
+    PlatformOffsetBottom: 1.74
   _ballConfig:
     PoolSetting:
       SpawnableItemMono: {fileID: 7917756334170325595, guid: 1d2662a59cf2b7e47951ae15fca5d4b3, type: 3}
@@ -3211,7 +3236,12 @@ MonoBehaviour:
     SpawnableItemMono: {fileID: 7274760396356160345, guid: 350c004eee900714bb61ac3a1e56b560, type: 3}
     Container: {fileID: 1725470757}
     StartSize: 5
+  _looseBallEffectPoolSetting:
+    SpawnableItemMono: {fileID: 417249002155775872, guid: 16fb4b95a6b8609418e2b803e8c74ac3, type: 3}
+    Container: {fileID: 1725470757}
+    StartSize: 0
   _confettiEffectView: {fileID: 7112570808573871988}
+  _cameraShakeAnimation: {fileID: 519420033}
 --- !u!1 &1898837570
 GameObject:
   m_ObjectHideFlags: 0

@@ -130,13 +130,13 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var handlerSetupLevel = new HandlerSetupLevel(
                 serviceContainer.Get<LevelController>(),
                 serviceContainer.Get<ILevelCreator>(),
-                serviceContainer.Get<PackController>());
+                serviceContainer.Get<PackController>(),
+                serviceContainer.Get<IPlatformCreator>());
             serviceContainer.SetServiceSelf(handlerSetupLevel);
 
-            var handlerSetupPlatform = new HandlerSetupPlatform(
+            var handlerSetupPlatform = new HandlerSetupBall(
                 serviceContainer.Get<LevelController>(),
-                serviceContainer.Get<IBallCreator>(),
-                serviceContainer.Get<IPlatformCreator>());
+                serviceContainer.Get<IBallCreator>());
             serviceContainer.SetServiceSelf(handlerSetupPlatform);
 
 
@@ -159,14 +159,14 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
         private GameState CreateReloadPlatformState(ServiceContainer serviceContainer)
         {
-            var handlerClearPlatform = new HandlerClearPlatform(serviceContainer.Get<LevelController>(),
+            var handlerClearPlatform = new HandlerClearBall(serviceContainer.Get<LevelController>(),
                 serviceContainer.Get<SystemsGroup>());
             serviceContainer.SetServiceSelf(handlerClearPlatform);
 
             var handlers = new List<IHandlerSetupScene>
             {
                 handlerClearPlatform,
-                serviceContainer.Get<HandlerSetupPlatform>()
+                serviceContainer.Get<HandlerSetupBall>()
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 
@@ -177,11 +177,12 @@ namespace App.Scripts.Scenes.GameScene.Installers
         {
             var handlers = new List<IHandlerSetupScene>
             {
-                serviceContainer.Get<HandlerClearPlatform>(),
+                serviceContainer.Get<HandlerClearBall>(),
                 new HandlerClearLevel(serviceContainer.Get<LevelController>(),
-                    serviceContainer.Get<SystemsContainer>()),
+                    serviceContainer.Get<SystemsContainer>(), 
+                    serviceContainer.Get<SystemsGroup>()),
                 serviceContainer.Get<HandlerSetupLevel>(),
-                serviceContainer.Get<HandlerSetupPlatform>()
+                serviceContainer.Get<HandlerSetupBall>()
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 

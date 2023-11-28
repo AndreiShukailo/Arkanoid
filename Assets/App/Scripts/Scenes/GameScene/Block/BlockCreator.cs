@@ -26,7 +26,7 @@ namespace App.Scripts.Scenes.GameScene.Block
         {
             if (blockId == 0)
             {
-                await Task.Delay((int)animationDuration / 1000);
+                await Task.Delay(Mathf.RoundToInt(1000 * animationDuration));
                 return null;
             }
 

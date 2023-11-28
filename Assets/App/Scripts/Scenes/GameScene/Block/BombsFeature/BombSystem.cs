@@ -27,7 +27,11 @@ namespace App.Scripts.Scenes.GameScene.Block.BombsFeature
         public override void ClearSystem()
         {
             foreach (var explosion in _explosions)
-                _coroutineRunner.StopCoroutine(explosion);
+            {
+                if(explosion != null)
+                    _coroutineRunner.StopCoroutine(explosion);
+            }
+
         }
     }
 }

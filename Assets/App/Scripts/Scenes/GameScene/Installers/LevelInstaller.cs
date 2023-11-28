@@ -11,6 +11,7 @@ using App.Scripts.Libs.TiledParser.Level;
 using App.Scripts.Libs.TiledParser.Tiled;
 using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Ball.Config;
+using App.Scripts.Scenes.GameScene.Ball.Effects;
 using App.Scripts.Scenes.GameScene.Ball.Systems;
 using App.Scripts.Scenes.GameScene.Block.BombsFeature;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.BoostAddBall;
@@ -31,6 +32,7 @@ using App.Scripts.Scenes.GameScene.Level.View;
 using App.Scripts.Scenes.GameScene.Platform;
 using App.Scripts.Scenes.GameScene.Platform.Config;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace App.Scripts.Scenes.GameScene.Installers
 {
@@ -38,48 +40,62 @@ namespace App.Scripts.Scenes.GameScene.Installers
     {
         [SerializeField] private int _startHealthCount = 4;
         [SerializeField] private LevelsConfig _levelsConfig;
-        
-        [Header("PlatformSetting")]
-        [SerializeField] private PlatformConfig _platformConfig;
-        [Header("BallSetting")]
-        [SerializeField] private BallConfig _ballConfig;
-        [Header("Other")]
-        [SerializeField] private EffectViewPoolSetting _bombEffectPoolSetting;
+
+        [Header("PlatformSetting")] [SerializeField]
+        private PlatformConfig _platformConfig;
+
+        [Header("BallSetting")] [SerializeField]
+        private BallConfig _ballConfig;
+
+        [Header("Other")] [SerializeField] private EffectViewPoolSetting _bombEffectPoolSetting;
+
+        [FormerlySerializedAs("_looseBallEffectpoolSetting")] [SerializeField]
+        private EffectViewPoolSetting _looseBallEffectPoolSetting;
 
         [SerializeField] private ConfettiEffectView _confettiEffectView;
+        [SerializeField] private CameraShakeAnimation _cameraShakeAnimation;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             var healthController = new HealthController(_startHealthCount);
             serviceContainer.SetServiceSelf(healthController);
             serviceContainer.SetServiceSelf(new LevelProgressInfoController(serviceContainer.Get<PackController>()));
-            
+
             serviceContainer.SetService<ILevelCreator, LevelCreator>(CreateLevelCreator(serviceContainer));
-            
+
             var levelController = CreateLevelController(serviceContainer);
             serviceContainer.SetServiceSelf(levelController);
-            
+
             serviceContainer.SetService<ISystem, DeathSystem>(CreateDeathSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, BombSystem>(CreateBombSystem(serviceContainer, levelController));
-            serviceContainer.SetService<ISystem, CheckLooseBallSystem>(CreateLooseBallSystem(serviceContainer, levelController));
-            serviceContainer.SetService<ISystem, BoostBallSpedSystem>(CreateBoostBallSpeedSystem(serviceContainer, levelController));
-            serviceContainer.SetService<ISystem, BoostPlatformSizeSystem>(CreateBoostPlatformSizeSystem(serviceContainer, levelController));
-            serviceContainer.SetService<ISystem, BoostFireBallSystem>(CreateBoostFireBallSystem(serviceContainer, levelController));
-            serviceContainer.SetService<ISystem, BoostPlatformSpeedSystem>(CreateBoostPlatformSpeedSystem(serviceContainer, levelController));
-            serviceContainer.SetService<ISystem, HealthChangeBoostSystem>(CreateChangeHealthSystem(serviceContainer, healthController));
-            serviceContainer.SetService<ISystem, GunBoosSystem>(CreateGunBoostSystem(serviceContainer, levelController));
-            
+            serviceContainer.SetService<ISystem, CheckLooseBallSystem>(CreateLooseBallSystem(serviceContainer,
+                levelController));
+            serviceContainer.SetService<ISystem, BoostBallSpedSystem>(
+                CreateBoostBallSpeedSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, BoostPlatformSizeSystem>(
+                CreateBoostPlatformSizeSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, BoostFireBallSystem>(
+                CreateBoostFireBallSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, BoostPlatformSpeedSystem>(
+                CreateBoostPlatformSpeedSystem(serviceContainer, levelController));
+            serviceContainer.SetService<ISystem, HealthChangeBoostSystem>(
+                CreateChangeHealthSystem(serviceContainer, healthController));
+            serviceContainer.SetService<ISystem, GunBoosSystem>(CreateGunBoostSystem(serviceContainer,
+                levelController));
+
             InstallPlatformCreator(serviceContainer);
             InstallBallCreator(serviceContainer);
-            
-            serviceContainer.SetService<ISystem, BoostAddBallSystem>(CreateBoostAddBallSystem(serviceContainer, levelController));
+
+            serviceContainer.SetService<ISystem, BoostAddBallSystem>(
+                CreateBoostAddBallSystem(serviceContainer, levelController));
             _confettiEffectView.Construct(serviceContainer.Get<FieldInfo>());
             serviceContainer.SetServiceSelf(_confettiEffectView);
         }
 
         private BombSystem CreateBombSystem(ServiceContainer serviceContainer, LevelController levelController)
         {
-            var commandBombBlocks = new CommandBombBlocks(levelController, new EffectViewFactory(_bombEffectPoolSetting));
+            var commandBombBlocks =
+                new CommandBombBlocks(levelController, new EffectViewFactory(_bombEffectPoolSetting));
             var bombSystem = new BombSystem(commandBombBlocks, this);
             serviceContainer.Get<SystemsContainer>().AddSystem<BombComponent, BombSystem>(bombSystem);
             return bombSystem;
@@ -97,11 +113,11 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 levelParser,
                 levelPathCreator);
         }
-        
+
         private LevelController CreateLevelController(ServiceContainer serviceContainer)
         {
             var levelController = new LevelController(
-                new BallContainer(), 
+                new BallContainer(),
                 serviceContainer.Get<HealthController>(),
                 serviceContainer.Get<CommandChangeState>(),
                 serviceContainer.Get<LevelProgressInfoController>(),
@@ -111,57 +127,69 @@ namespace App.Scripts.Scenes.GameScene.Installers
         }
 
         private DeathSystem CreateDeathSystem(ServiceContainer serviceContainer, LevelController levelController)
-        {           
+        {
             var deathSystem = new DeathSystem(levelController);
             serviceContainer.Get<SystemsContainer>().AddSystem<DeathComponent, DeathSystem>(deathSystem);
             return deathSystem;
         }
-        
+
         private GunBoosSystem CreateGunBoostSystem(ServiceContainer serviceContainer, LevelController levelController)
-        {           
+        {
             var gunBoostSystem = new GunBoosSystem(levelController);
             serviceContainer.Get<SystemsContainer>().AddSystem<GunBoostComponent, GunBoosSystem>(gunBoostSystem);
             return gunBoostSystem;
         }
-        
-        private BoostBallSpedSystem CreateBoostBallSpeedSystem(ServiceContainer serviceContainer, LevelController levelController)
-        {           
+
+        private BoostBallSpedSystem CreateBoostBallSpeedSystem(ServiceContainer serviceContainer,
+            LevelController levelController)
+        {
             var boostBallSpeedSystem = new BoostBallSpedSystem(levelController);
-            serviceContainer.Get<SystemsContainer>().AddSystem<BoostBallSpeedComponent, BoostBallSpedSystem>(boostBallSpeedSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<BoostBallSpeedComponent, BoostBallSpedSystem>(boostBallSpeedSystem);
             return boostBallSpeedSystem;
         }
-        
-        private BoostPlatformSpeedSystem CreateBoostPlatformSpeedSystem(ServiceContainer serviceContainer, LevelController levelController)
-        {           
+
+        private BoostPlatformSpeedSystem CreateBoostPlatformSpeedSystem(ServiceContainer serviceContainer,
+            LevelController levelController)
+        {
             var boostPlatformSpeedSystem = new BoostPlatformSpeedSystem(levelController);
-            serviceContainer.Get<SystemsContainer>().AddSystem<BoostPlatformSpeedComponent, BoostPlatformSpeedSystem>(boostPlatformSpeedSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<BoostPlatformSpeedComponent, BoostPlatformSpeedSystem>(boostPlatformSpeedSystem);
             return boostPlatformSpeedSystem;
         }
-        
-        private BoostPlatformSizeSystem CreateBoostPlatformSizeSystem(ServiceContainer serviceContainer, LevelController levelController)
-        {           
+
+        private BoostPlatformSizeSystem CreateBoostPlatformSizeSystem(ServiceContainer serviceContainer,
+            LevelController levelController)
+        {
             var boostPlatformSizeSystem = new BoostPlatformSizeSystem(levelController);
-            serviceContainer.Get<SystemsContainer>().AddSystem<BoostPlatformSizeComponent, BoostPlatformSizeSystem>(boostPlatformSizeSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<BoostPlatformSizeComponent, BoostPlatformSizeSystem>(boostPlatformSizeSystem);
             return boostPlatformSizeSystem;
         }
-        
-        private BoostFireBallSystem CreateBoostFireBallSystem(ServiceContainer serviceContainer, LevelController levelController)
-        {           
+
+        private BoostFireBallSystem CreateBoostFireBallSystem(ServiceContainer serviceContainer,
+            LevelController levelController)
+        {
             var boostFireBallSystem = new BoostFireBallSystem(levelController);
-            serviceContainer.Get<SystemsContainer>().AddSystem<BoostFireBallComponent, BoostFireBallSystem>(boostFireBallSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<BoostFireBallComponent, BoostFireBallSystem>(boostFireBallSystem);
             return boostFireBallSystem;
         }
-        
-        private HealthChangeBoostSystem CreateChangeHealthSystem(ServiceContainer serviceContainer, HealthController healthController)
+
+        private HealthChangeBoostSystem CreateChangeHealthSystem(ServiceContainer serviceContainer,
+            HealthController healthController)
         {
             var changeHealthBoostSystem = new HealthChangeBoostSystem(healthController);
-            serviceContainer.Get<SystemsContainer>().AddSystem<HealthChangeComponent, HealthChangeBoostSystem>(changeHealthBoostSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<HealthChangeComponent, HealthChangeBoostSystem>(changeHealthBoostSystem);
             return changeHealthBoostSystem;
         }
 
-        private CheckLooseBallSystem CreateLooseBallSystem(ServiceContainer serviceContainer, LevelController levelController)
+        private CheckLooseBallSystem CreateLooseBallSystem(ServiceContainer serviceContainer,
+            LevelController levelController)
         {
-            return new CheckLooseBallSystem(levelController, serviceContainer.Get<FieldInfo>());
+            return new CheckLooseBallSystem(levelController, serviceContainer.Get<FieldInfo>(),
+                new LooseBallEffector(_cameraShakeAnimation, new EffectViewFactory(_looseBallEffectPoolSetting)));
         }
 
         private void InstallPlatformCreator(ServiceContainer serviceContainer)
@@ -178,10 +206,13 @@ namespace App.Scripts.Scenes.GameScene.Installers
             var ballCreator = new BallCreator(_ballConfig, serviceContainer.Get<SystemsContainer>());
             serviceContainer.SetService<IBallCreator, BallCreator>(ballCreator);
         }
-        private BoostAddBallSystem CreateBoostAddBallSystem(ServiceContainer serviceContainer, LevelController levelController)
-        {           
+
+        private BoostAddBallSystem CreateBoostAddBallSystem(ServiceContainer serviceContainer,
+            LevelController levelController)
+        {
             var boostAddBAllSystem = new BoostAddBallSystem(levelController, serviceContainer.Get<IBallCreator>());
-            serviceContainer.Get<SystemsContainer>().AddSystem<BoostAddBallComponent, BoostAddBallSystem>(boostAddBAllSystem);
+            serviceContainer.Get<SystemsContainer>()
+                .AddSystem<BoostAddBallComponent, BoostAddBallSystem>(boostAddBAllSystem);
             return boostAddBAllSystem;
         }
     }

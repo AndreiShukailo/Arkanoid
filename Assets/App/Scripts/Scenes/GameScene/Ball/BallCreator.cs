@@ -18,7 +18,8 @@ namespace App.Scripts.Scenes.GameScene.Ball
 
         public ComponentContainer CreateBall(ComponentContainer platform)
         {
-            var ballPosition = new Vector2(0, platform.transform.position.y + _ballConfig.BallBottomOffset);
+            var position = platform.transform.position;
+            var ballPosition = new Vector2(position.x, position.y + _ballConfig.BallBottomOffset);
 
             var spawnContext = new BallSpawnContext(platform, ballPosition);
             return _ballFactory.Create(spawnContext);

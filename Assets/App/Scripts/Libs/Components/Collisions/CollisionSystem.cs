@@ -1,4 +1,6 @@
-﻿using App.Scripts.Scenes.GameScene.Ball.Components;
+﻿using App.Scripts.Libs.TaskExtensions;
+using App.Scripts.Scenes.GameScene.Ball.Components;
+using App.Scripts.Scenes.GameScene.Platform.Animations;
 using App.Scripts.Scenes.GameScene.Platform.Components;
 
 namespace App.Scripts.Libs.Components
@@ -31,6 +33,8 @@ namespace App.Scripts.Libs.Components
             var collision = collisionContext.CollisionObject;
 
             if (!collision.TryGetComponent<ComponentContainer>(out var componentContainer)) return;
+            PlatformHitAnimation(componentContainer);
+
             var collidedComponent = componentContainer.Get<CollidedComponent>();
             if (collidedComponent == null) return;
 
@@ -47,6 +51,13 @@ namespace App.Scripts.Libs.Components
             }
 
             _simpleCollisionAction.Collision(collisionContext, componentContainer);
+        }
+
+        private static void PlatformHitAnimation(ComponentContainer componentContainer)
+        {
+            var platformAnimation = componentContainer.Get<HitPlatformAnimation>();
+            if (platformAnimation != null)
+                platformAnimation.StartAnimation().Forget();
         }
     }
 }

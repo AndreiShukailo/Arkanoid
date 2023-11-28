@@ -1,4 +1,6 @@
-﻿using App.Scripts.Libs.Components;
+﻿using App.Scripts.Infrastructure.Effects;
+using App.Scripts.Infrastructure.Effects.View;
+using App.Scripts.Libs.Components;
 using App.Scripts.Libs.Installer;
 using App.Scripts.Libs.ServiceLocator;
 using App.Scripts.Libs.Systems;
@@ -16,40 +18,43 @@ namespace App.Scripts.Scenes.GameScene.Installers
     {
         [SerializeField] private Transform _boosts;
         [SerializeField] private ComponentContainerPoolSetting _bulletPoolSetting;
-        
+        [SerializeField] private EffectViewPoolSetting _boostEffectPool;
+        [SerializeField] private EffectViewPoolSetting _hitImmortalEffectPoolSetting;
+
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             var systemsContainer = new SystemsContainer();
             serviceContainer.SetServiceSelf(systemsContainer);
 
             var collisionSystem = new CollisionSystem(
-                new SimpleCollisionAction(), 
+                new SimpleCollisionAction(new EffectViewFactory(_hitImmortalEffectPoolSetting)),
                 new FireBallCollisionAction(),
                 new BulletCollisionAction());
             systemsContainer.AddSystem<CollisionHandlerComponent, CollisionSystem>(collisionSystem);
             serviceContainer.SetService<ISystem, CollisionSystem>(collisionSystem);
-            
+
             var correctAngle = new CorrectAngleSystem();
             systemsContainer.AddSystem<CorretionAngleComponent, CorrectAngleSystem>(correctAngle);
             serviceContainer.SetService<ISystem, CorrectAngleSystem>(correctAngle);
-            
+
             var gunSystem = new GunSystem(new BulletFactory(_bulletPoolSetting, systemsContainer));
             systemsContainer.AddSystem<GunComponent, GunSystem>(gunSystem);
             serviceContainer.SetService<ISystem, GunSystem>(gunSystem);
-            
+
             var healthSystem = new HealthSystem();
             systemsContainer.AddSystem<HealthComponent, HealthSystem>(healthSystem);
             serviceContainer.SetService<ISystem, HealthSystem>(healthSystem);
-            
+
             var speedComplicationSystem = new SpeedComplicationSystem();
             systemsContainer.AddSystem<SpeedComplicationComponent, SpeedComplicationSystem>(speedComplicationSystem);
             serviceContainer.SetService<ISystem, SpeedComplicationSystem>(speedComplicationSystem);
             serviceContainer.SetServiceSelf(speedComplicationSystem);
-            
-            var spawnBoostSystem = new SpawnBoostSystem(systemsContainer, _boosts);
+
+            var spawnBoostSystem =
+                new SpawnBoostSystem(systemsContainer, _boosts, new EffectViewFactory(_boostEffectPool));
             systemsContainer.AddSystem<SpawnBoostComponent, SpawnBoostSystem>(spawnBoostSystem);
             serviceContainer.SetService<ISystem, SpawnBoostSystem>(spawnBoostSystem);
-            
+
             var boostComponent = new BoostActivatorSystem();
             systemsContainer.AddSystem<BoostActivatorComponent, BoostActivatorSystem>(boostComponent);
             serviceContainer.SetService<ISystem, BoostActivatorSystem>(boostComponent);

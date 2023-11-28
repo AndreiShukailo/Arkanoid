@@ -2,29 +2,26 @@
 using App.Scripts.Infrastructure.States.SetupState;
 using App.Scripts.Scenes.GameScene.Ball;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
-using App.Scripts.Scenes.GameScene.Platform;
 
 namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
 {
-    public class HandlerSetupPlatform : IHandlerSetupScene
+    public class HandlerSetupBall : IHandlerSetupScene
     {
         private readonly LevelController _levelController;
         private readonly IBallCreator _ballCreator;
-        private readonly IPlatformCreator _platformCreator;
 
-        public HandlerSetupPlatform(LevelController levelController, IBallCreator ballCreator, IPlatformCreator platformCreator)
+        public HandlerSetupBall(LevelController levelController, IBallCreator ballCreator)
         {
             _levelController = levelController;
             _ballCreator = ballCreator;
-            _platformCreator = platformCreator;
         }
 
         public Task Process()
         {
-            var platform = _platformCreator.CreatePlatform();
+            var platform = _levelController.Platform;
             var ball = _ballCreator.CreateBall(platform);
             
-            _levelController.SetupPlatform(platform, ball);
+            _levelController.SetupBall(ball);
             
             return Task.CompletedTask;
         }
