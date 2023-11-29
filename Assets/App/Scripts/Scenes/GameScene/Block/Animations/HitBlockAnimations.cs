@@ -9,7 +9,7 @@ namespace App.Scripts.Scenes.GameScene.Block.Animations
     {
         [SerializeField] private float _duration;
 
-        public override async Task StartAnimation()
+        public override async Task StartAsyncAnimation()
         {
             _animation = DOTween.Sequence();
             _animation.Append(transform.DOScale(Vector3.one * 0.9f, _duration * 0.8f))

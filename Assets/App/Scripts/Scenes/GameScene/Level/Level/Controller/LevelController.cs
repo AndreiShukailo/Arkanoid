@@ -37,7 +37,6 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Controller
         {
             LevelModel = levelModel;
             _startBlocksCount = LevelModel.LevelGrid.BlockCount;
-            _levelProgressInfoController.UpdatePackInfo();
             UpdateLevelProgress();
             _healthController.ReloadHealth();
         }

@@ -18,7 +18,7 @@ namespace App.Scripts.Scenes.GameScene.Ball.Effects
         public async Task PlayEffect(Vector2 position)
         {
             _effectViewFactory.Create(position);
-            await _cameraShakeAnimation.StartAnimation();
+            await _cameraShakeAnimation.StartAsyncAnimation();
         }
     }
 }

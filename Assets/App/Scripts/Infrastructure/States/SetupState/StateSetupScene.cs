@@ -34,8 +34,13 @@ namespace App.Scripts.Infrastructure.States.SetupState
             _buttonManager.UpdateCamera();
             await _handlerSetup.Process();
             await _sceneLoaderController.ProcessOpenCurrentScene();
-            
+            await SetupAfterCurtains();
             StateMachine.ChangeState<StateProcessGame>();
+        }
+
+        protected virtual Task SetupAfterCurtains()
+        {
+            return Task.CompletedTask;
         }
     }
 }

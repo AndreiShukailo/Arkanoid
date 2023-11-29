@@ -9,7 +9,7 @@ namespace App.Scripts.Libs.Components
         {
             base.OnUpdate(component);
             component.CurrentHealth -= 1;
-            component.ComponentContainer.Get<HitBlockAnimations>().StartAnimation().Forget();
+            component.ComponentContainer.Get<HitBlockAnimations>().StartAsyncAnimation().Forget();
             Remove(component);
             if (component.CurrentHealth <= 0)
                 component.ComponentContainer.AddToSystem<DeathComponent>();

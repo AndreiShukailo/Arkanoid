@@ -12,10 +12,10 @@ namespace App.Scripts.Scenes.GameScene.Block.Animations
         public async Task PlayAnimation(float duration)
         {
             _duration = duration;
-            await StartAnimation();
+            await StartAsyncAnimation();
         }
 
-        public override async Task StartAnimation()
+        public override async Task StartAsyncAnimation()
         {
             _animation = DOTween.Sequence();
             gameObject.transform.localScale = Vector3.zero;

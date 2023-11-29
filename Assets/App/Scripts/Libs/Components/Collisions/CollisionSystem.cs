@@ -57,7 +57,7 @@ namespace App.Scripts.Libs.Components
         {
             var platformAnimation = componentContainer.Get<HitPlatformAnimation>();
             if (platformAnimation != null)
-                platformAnimation.StartAnimation().Forget();
+                platformAnimation.StartAsyncAnimation().Forget();
         }
     }
 }

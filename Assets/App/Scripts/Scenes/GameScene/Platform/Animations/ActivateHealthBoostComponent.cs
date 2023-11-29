@@ -15,10 +15,10 @@ namespace App.Scripts.Scenes.GameScene.Platform.Animations
         public async Task PlayAnimation(Color color)
         {
             _color = color;
-            await StartAnimation();
+            await StartAsyncAnimation();
         }
 
-        public override async Task StartAnimation()
+        public override async Task StartAsyncAnimation()
         {
             _animation = DOTween.Sequence();
             _animation.Append(_left.DOColor(_color, _duration * 0.5f))

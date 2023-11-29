@@ -23,6 +23,7 @@ namespace App.Scripts.Scenes.GameScene.Level.LevelProgressInfo
             _levelCount.text =
                 $"{_levelProgressInfoController.CurrentPackInfo.LastLevel - 1}/{_levelProgressInfoController.CurrentPack.LevelsCount}";
             _levelIcon.sprite = _levelProgressInfoController.CurrentPack.Icon;
+            _levelIcon.color = Color.white;
         }
 
         private void UpdateLevelProgressInfo()

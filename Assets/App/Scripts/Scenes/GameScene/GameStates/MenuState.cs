@@ -1,6 +1,5 @@
 ﻿using App.Scripts.Infrastructure.TimeManagement;
 using App.Scripts.Libs.StateMachine;
-using App.Scripts.Libs.TaskExtensions;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.MenuPopUp;
 using Task = System.Threading.Tasks.Task;
 

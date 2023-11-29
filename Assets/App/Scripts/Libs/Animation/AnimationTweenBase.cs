@@ -8,9 +8,9 @@ namespace App.Scripts.Scenes.SceneGame.Features.Animation
     {
         protected Sequence _animation;
 
-        public abstract Task StartAnimation();
+        public abstract Task StartAsyncAnimation();
 
-        public void StopAnimation() =>
+        protected virtual void StopAnimation() =>
             _animation.Kill();
 
         private void OnDestroy() =>

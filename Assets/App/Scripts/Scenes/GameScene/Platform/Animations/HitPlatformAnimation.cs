@@ -11,7 +11,7 @@ namespace App.Scripts.Scenes.GameScene.Platform.Animations
         [SerializeField] private GameObject _right;
         [SerializeField] private float _duration;
 
-        public override async Task StartAnimation()
+        public override async Task StartAsyncAnimation()
         {
             _animation = DOTween.Sequence();
             _animation.Append(_left.transform.DOLocalMoveY(-0.1f, _duration * 0.5f))

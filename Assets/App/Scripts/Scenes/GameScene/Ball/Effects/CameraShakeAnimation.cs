@@ -12,7 +12,7 @@ namespace App.Scripts.Scenes.GameScene.Ball.Effects
         [SerializeField] private int _vibrato = 10;
         [SerializeField] private float _randomness = 90f;
         
-        public override async Task StartAnimation()
+        public override async Task StartAsyncAnimation()
         {
             _animation = DOTween.Sequence();
             _animation.Append(transform.DOShakePosition(_duration, _strength, _vibrato, _randomness));

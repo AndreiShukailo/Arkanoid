@@ -22,6 +22,7 @@ using App.Scripts.Scenes.GameScene.Level;
 using App.Scripts.Scenes.GameScene.Level.Level;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
 using App.Scripts.Scenes.GameScene.Level.Level.Handlers;
+using App.Scripts.Scenes.GameScene.Level.LevelProgressInfo;
 using App.Scripts.Scenes.GameScene.Level.View;
 using App.Scripts.Scenes.GameScene.Platform;
 using App.Scripts.Scenes.GameScene.PopUpsFeature.LosePopUp;
@@ -35,10 +36,10 @@ namespace App.Scripts.Scenes.GameScene.Installers
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             var gameStateMachine = BuildStateMachine(serviceContainer);
-            var controllerEntryPoint = new ControllerEntryPoint<StateSetupScene>(gameStateMachine);
+            var controllerEntryPoint = new ControllerEntryPoint<StateSetupGameScene>(gameStateMachine);
 
-            serviceContainer.SetService<IInitializable, ControllerEntryPoint<StateSetupScene>>(controllerEntryPoint);
-            serviceContainer.SetService<IUpdatable, ControllerEntryPoint<StateSetupScene>>(controllerEntryPoint);
+            serviceContainer.SetService<IInitializable, ControllerEntryPoint<StateSetupGameScene>>(controllerEntryPoint);
+            serviceContainer.SetService<IUpdatable, ControllerEntryPoint<StateSetupGameScene>>(controllerEntryPoint);
         }
 
         private GameStateMachine BuildStateMachine(ServiceContainer serviceContainer)
@@ -123,7 +124,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             return new StateProcessGame(gameSystems, serviceContainer.Get<TimeManager>());
         }
 
-        private StateSetupScene CreateSetupState(ServiceContainer serviceContainer)
+        private StateSetupGameScene CreateSetupState(ServiceContainer serviceContainer)
         {
             var sceneLoader = serviceContainer.Get<SceneLoaderController>();
 
@@ -131,7 +132,8 @@ namespace App.Scripts.Scenes.GameScene.Installers
                 serviceContainer.Get<LevelController>(),
                 serviceContainer.Get<ILevelCreator>(),
                 serviceContainer.Get<PackController>(),
-                serviceContainer.Get<IPlatformCreator>());
+                serviceContainer.Get<IPlatformCreator>(),
+                serviceContainer.Get<LevelProgressInfoController>());
             serviceContainer.SetServiceSelf(handlerSetupLevel);
 
             var handlerSetupPlatform = new HandlerSetupBall(
@@ -142,8 +144,6 @@ namespace App.Scripts.Scenes.GameScene.Installers
 
             var handlers = new List<IHandlerSetupScene>
             {
-                handlerSetupLevel,
-                handlerSetupPlatform,
                 new HandlerSetupButtonsGameScene(
                     serviceContainer.Get<ButtonsContainer>(),
                     sceneLoader,
@@ -151,10 +151,19 @@ namespace App.Scripts.Scenes.GameScene.Installers
             };
             var handlerSetupSceneContainer = new HandlerSetupSceneContainer(handlers);
 
-            return new StateSetupScene(
+            var handlersAfterCurtain = new List<IHandlerSetupScene>
+            {
+                handlerSetupLevel,
+                handlerSetupPlatform
+            };
+            var handlerSetupAfterCurtainContainer = new HandlerSetupSceneContainer(handlersAfterCurtain);
+            
+            return new StateSetupGameScene(
                 handlerSetupSceneContainer,
                 sceneLoader,
-                serviceContainer.Get<ButtonManager>());
+                serviceContainer.Get<ButtonManager>(),
+                handlerSetupAfterCurtainContainer,
+                serviceContainer.Get<BlockUIController>());
         }
 
         private GameState CreateReloadPlatformState(ServiceContainer serviceContainer)
