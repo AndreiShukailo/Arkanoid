@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 7386f5a384bf6be4985b9c56e31b5e6b, type: 3}
   Key: Sombrero
-  LevelsCount: 1
+  LevelsCount: 3

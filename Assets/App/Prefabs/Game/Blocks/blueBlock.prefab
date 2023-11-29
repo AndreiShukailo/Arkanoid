@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2903320644282269965, guid: ec7caaa6091a94441b1dbc024e0ac44c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4317628937264147281, guid: ec7caaa6091a94441b1dbc024e0ac44c, type: 3}
       propertyPath: m_Sprite
@@ -90,6 +90,10 @@ PrefabInstance:
     - target: {fileID: 8377409019759922773, guid: ec7caaa6091a94441b1dbc024e0ac44c, type: 3}
       propertyPath: _blockKey
       value: BlueBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 8921238127520132488, guid: ec7caaa6091a94441b1dbc024e0ac44c, type: 3}
+      propertyPath: _startHealth
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8377409019759922773, guid: ec7caaa6091a94441b1dbc024e0ac44c, type: 3}
