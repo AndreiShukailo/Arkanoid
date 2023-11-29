@@ -20,6 +20,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
         [SerializeField] private ComponentContainerPoolSetting _bulletPoolSetting;
         [SerializeField] private EffectViewPoolSetting _boostEffectPool;
         [SerializeField] private EffectViewPoolSetting _hitImmortalEffectPoolSetting;
+        [SerializeField] private EffectViewPoolSetting _boostActivateEffectPoolSetting;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -55,7 +56,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             systemsContainer.AddSystem<SpawnBoostComponent, SpawnBoostSystem>(spawnBoostSystem);
             serviceContainer.SetService<ISystem, SpawnBoostSystem>(spawnBoostSystem);
 
-            var boostComponent = new BoostActivatorSystem();
+            var boostComponent = new BoostActivatorSystem(new EffectViewFactory(_boostActivateEffectPoolSetting));
             systemsContainer.AddSystem<BoostActivatorComponent, BoostActivatorSystem>(boostComponent);
             serviceContainer.SetService<ISystem, BoostActivatorSystem>(boostComponent);
         }

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Infrastructure.States.SetupState;
 using App.Scripts.Libs.Components;
-using App.Scripts.Libs.PopUp;
 using App.Scripts.Scenes.GameScene.Block.BombsFeature;
 using App.Scripts.Scenes.GameScene.Block.BoostsFeature.Components;
 using App.Scripts.Scenes.GameScene.Level.Level.Controller;
@@ -21,12 +20,12 @@ namespace App.Scripts.Scenes.GameScene.Level.Level.Handlers
         {
             foreach (var gridCell in _levelController.LevelModel.LevelGrid.Cells)
             {
+                await Task.Yield();
                 foreach (var cell in gridCell)
                 {
                     var cellComponent = cell.CellComponent;
                     if (cellComponent == null) continue;
                     
-                    await Task.Delay(50);
                     var healthComponent = cellComponent.ComponentContainer.Get<HealthComponent>();
                     if (healthComponent != null)
                     {

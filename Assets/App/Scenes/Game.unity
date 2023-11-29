@@ -1938,6 +1938,10 @@ MonoBehaviour:
     SpawnableItemMono: {fileID: 8304124099122376269, guid: 0a7d09c0e6a951a45b96eafcbe4ed6b4, type: 3}
     Container: {fileID: 1725470757}
     StartSize: 0
+  _boostActivateEffectPoolSetting:
+    SpawnableItemMono: {fileID: 7570346321396940029, guid: d650c55ee8bb56549b6fa140b36cd15e, type: 3}
+    Container: {fileID: 874104373}
+    StartSize: 0
 --- !u!4 &1239962213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7112570807640102166, guid: 8af15f2e47c15fc4d92a5c83858d8a80, type: 3}
@@ -2909,7 +2913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -61.980103}
+  m_AnchoredPosition: {x: 0, y: -61.97998}
   m_SizeDelta: {x: 114, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1854242457

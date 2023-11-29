@@ -79,7 +79,7 @@ namespace App.Scripts.Scenes.GameScene.Installers
             serviceContainer.SetService<ISystem, BoostPlatformSpeedSystem>(
                 CreateBoostPlatformSpeedSystem(serviceContainer, levelController));
             serviceContainer.SetService<ISystem, HealthChangeBoostSystem>(
-                CreateChangeHealthSystem(serviceContainer, healthController));
+                CreateChangeHealthSystem(serviceContainer, healthController, levelController));
             serviceContainer.SetService<ISystem, GunBoosSystem>(CreateGunBoostSystem(serviceContainer,
                 levelController));
 
@@ -177,9 +177,9 @@ namespace App.Scripts.Scenes.GameScene.Installers
         }
 
         private HealthChangeBoostSystem CreateChangeHealthSystem(ServiceContainer serviceContainer,
-            HealthController healthController)
+            HealthController healthController, LevelController levelController)
         {
-            var changeHealthBoostSystem = new HealthChangeBoostSystem(healthController);
+            var changeHealthBoostSystem = new HealthChangeBoostSystem(healthController, levelController);
             serviceContainer.Get<SystemsContainer>()
                 .AddSystem<HealthChangeComponent, HealthChangeBoostSystem>(changeHealthBoostSystem);
             return changeHealthBoostSystem;
