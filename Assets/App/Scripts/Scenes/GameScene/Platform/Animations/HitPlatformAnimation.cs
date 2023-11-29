@@ -17,7 +17,8 @@ namespace App.Scripts.Scenes.GameScene.Platform.Animations
             _animation.Append(_left.transform.DOLocalMoveY(-0.1f, _duration * 0.5f))
                 .Join(_right.transform.DOLocalMoveY(-0.1f, _duration * 0.5f))
                 .Append(_left.transform.DOLocalMoveY(0, _duration * 0.5f))
-                .Join(_right.transform.DOLocalMoveY(0, _duration * 0.5f));
+                .Join(_right.transform.DOLocalMoveY(0, _duration * 0.5f))
+                .SetUpdate(true);
 
             await _animation.AsyncWaitForCompletion();
         }

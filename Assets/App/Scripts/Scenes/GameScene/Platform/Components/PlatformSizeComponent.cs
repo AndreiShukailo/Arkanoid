@@ -15,7 +15,7 @@ namespace App.Scripts.Scenes.GameScene.Platform.Components
         [SerializeField] private SpriteRenderer _right;
         [SerializeField] private float _defaultSize = 0.8f;
         [SerializeField] private float _resizeDuration = 0.5f;
-        private float _lastFactor;
+        private float _lastFactor = 1f;
 
 
         private readonly Vector2[] _default =

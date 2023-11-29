@@ -24,7 +24,8 @@ namespace App.Scripts.Scenes.GameScene.Platform.Animations
             _animation.Append(_left.DOColor(_color, _duration * 0.5f))
                 .Join(_right.DOColor(_color, _duration * 0.5f))
                 .Append(_left.DOColor(Color.white, _duration * 0.5f))
-                .Join(_right.DOColor(Color.white, _duration * 0.5f));
+                .Join(_right.DOColor(Color.white, _duration * 0.5f))
+                .SetUpdate(true);
             await _animation.AsyncWaitForCompletion();
         }
     }
